@@ -41,7 +41,7 @@ in
     stateVersion = lib.mkDefault "22.11";
     sessionPath = [ "$HOME/.local/bin" ];
     persistence = {
-      "/persist/home/misterio" = {
+      "/persist/home/sjcobb" = {
         directories = [
           "Documents"
           "Downloads"
