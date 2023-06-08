@@ -14,7 +14,7 @@
   ];
 
   # TODO: theme "greeter" user GTK instead of using misterio to login
-  services.greetd.settings.default_session.user = "sjcobb";
+  # services.greetd.settings.default_session.user = "sjcobb";
 
   networking = {
     hostName = "slaptop";
