@@ -8,7 +8,7 @@
     ../common/global
     ../common/users/sjcobb
 
-    ../common/optional/greetd.nix
+    # ../common/optional/greetd.nix
     ../common/optional/grub.nix
     ../common/optional/pipewire.nix
   ];
