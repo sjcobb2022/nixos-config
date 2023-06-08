@@ -14,7 +14,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/66c43a19-1034-48da-b174-62972ad75edf";
+    { device = "/dev/disk/by-uuid/11fba5ff-c75c-45fb-a494-57167326fbd7";
       fsType = "ext4";
     };
 
@@ -36,5 +36,5 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
-  # hardware.video.hidpi.enable = lib.mkDefault true;
+  hardware.video.hidpi.enable = lib.mkDefault true;
 }

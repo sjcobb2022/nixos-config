@@ -8,7 +8,7 @@
       #  efiSysMountPoint = "/boot/efi";
       # };
       grub = {
-        configurationLimit = 5;
+        configurationLimit = 10;
         enable = true;
         efiSupport = true;
         # efiInstallAsRemovable = true;  # grub will use efibootmgr

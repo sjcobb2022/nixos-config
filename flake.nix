@@ -50,33 +50,10 @@
 
       nixosConfigurations = {
         slaptop = mkNixos [ ./hosts/slaptop ];
-        # Desktops
-        #atlas = mkNixos [ ./hosts/atlas ];
-        #maia = mkNixos [ ./hosts/maia ];
-        # Laptops
-        #pleione = mkNixos [ ./hosts/pleione ];
-        #electra = mkNixos [ ./hosts/electra ];
-        # Servers
-        #alcyone = mkNixos [ ./hosts/alcyone ]; # Vultr VM (critical stuff)
-        #merope = mkNixos [ ./hosts/merope ]; # Raspberry Pi (media)
-        #celaeno = mkNixos [ ./hosts/celaeno ]; # Free Oracle VM (builds)
       };
 
       homeConfigurations = {
-        # Desktops
         "sjcobb@slaptop" = mkHome [ ./home-manager/sjcobb/slaptop.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        #"misterio@atlas" = mkHome [ ./home/misterio/atlas.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        #"misterio@maia" = mkHome [ ./home/misterio/maia.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        # Laptops
-        #"misterio@pleione" = mkHome [ ./home/misterio/pleione.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        #"misterio@electra" = mkHome [ ./home/misterio/electra.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        # Servers
-        #"misterio@alcyone" = mkHome [ ./home/misterio/alcyone.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        #"misterio@merope" = mkHome [ ./home/misterio/merope.nix ] nixpkgs.legacyPackages."aarch64-linux";
-        #"misterio@celaeno" = mkHome [ ./home/misterio/celaeno.nix ] nixpkgs.legacyPackages."aarch64-linux";
-
-        # Portable minimum configuration
-        #"misterio@generic" = mkHome [ ./home/misterio/generic.nix ] nixpkgs.legacyPackages."x86_64-linux";
       };
     };
 }
