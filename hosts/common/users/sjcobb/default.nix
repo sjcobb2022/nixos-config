@@ -4,8 +4,7 @@ in
 {
   # users.mutableUsers = false;
   users.users.sjcobb = {
-    password = "Nixcob150159os";
-    initialPassword = "thisisatest";
+    initialPassword = "nixos";
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups = [
