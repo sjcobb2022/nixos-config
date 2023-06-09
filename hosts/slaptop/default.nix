@@ -41,7 +41,7 @@
       systemd-boot.enable = false;
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
+        efiSysMountPoint = "/boot";
       };
     };
     plymouth.enable = false;
@@ -53,5 +53,5 @@
     kdeconnect.enable = true;
   };
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 } 

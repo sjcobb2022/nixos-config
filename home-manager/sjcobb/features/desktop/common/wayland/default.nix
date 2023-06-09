@@ -3,12 +3,13 @@
   imports = [
     #./hyprland-vnc.nix
     #./kitty.nix
-    #./mako.nix
+    ./wezterm.nix
+    ./mako.nix
     #./swayidle.nix
     #./swaylock.nix
     #./waybar.nix
-    #./wofi.nix
-    #./zathura.nix
+    ./wofi.nix
+    ./zathura.nix
   ];
 
   home.packages = with pkgs; [

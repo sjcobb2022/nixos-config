@@ -38,7 +38,7 @@ in
   home = {
     username = lib.mkDefault "sjcobb";
     homeDirectory = lib.mkDefault "/home-manager/${config.home.username}";
-    stateVersion = lib.mkDefault "22.11";
+    stateVersion = lib.mkDefault "23.05";
     sessionPath = [ "$HOME/.local/bin" ];
     #persistence = {
     #  "/persist/home/sjcobb" = {
