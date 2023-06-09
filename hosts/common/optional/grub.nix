@@ -2,11 +2,6 @@
   boot = {
     loader = {
       systemd-boot.enable = false;
-      # TODO: move this
-      # efi = {
-      #  canTouchEfiVariables = true;
-      #  efiSysMountPoint = "/boot/efi";
-      # };
       grub = {
         configurationLimit = 10;
         enable = true;
@@ -16,7 +11,5 @@
         useOSProber = true;
       };
     };
-    # TODO: move this
-    # plymouth.enable = false;
   };
 }

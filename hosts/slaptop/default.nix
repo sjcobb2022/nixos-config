@@ -20,7 +20,16 @@
     hostName = "slaptop";
     networkmanager.enable = true;
   };
-  
+
+  i18n.defaultLocale = "en_GB.UTF-8";
+
+  # Configure keymap in X11
+  # use US keyboard because laptop is in US keyboard layout 
+  services.xserver = {
+    layout = "us";
+    xkbVariant = "";
+  };
+
   # nvidia bullshit
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
@@ -29,13 +38,14 @@
 
   services.openssh = {
     enable = true;
-    # Forbid root login through SSH.
-    permitRootLogin = "no";
-    # Use keys only. Remove if you want to SSH using password (not recommended)
-    passwordAuthentication = false;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+    };
   };
 
   boot = {
+    # we love grub!
     binfmt.emulatedSystems = [ "aarch64-linux" ];
     loader = {
       systemd-boot.enable = false;
@@ -48,7 +58,6 @@
   };
 
   programs = {
-    # adb.enable = true;
     dconf.enable = true;
     kdeconnect.enable = true;
   };
