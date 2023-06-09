@@ -2,6 +2,7 @@
   boot = {
     loader = {
       systemd-boot.enable = false;
+      timeout = 15;
       grub = {
         configurationLimit = 10;
         enable = true;
@@ -10,20 +11,20 @@
         # efiInstallAsRemovable = true;  # grub will use efibootmgr
         device = "nodev";  # "/dev/sdx", or "nodev" for efi only
         useOSProber = true;
-	timeout = 15;
 	extraEntriesBeforeNixOS = true;
 	extraEntries = ''
-	  menuentry 'UEFI Firmware Settings' {
-	    fwsetup
-	  }
-
-	  menuentry 'Reboot' {
-	    reboot
-	  }
 
 	  menuentry 'Shutdown' {
 	    halt
 	  } 
+	  
+	  menuentry 'Reboot' {
+	    reboot
+	  }
+	  
+	  menuentry 'UEFI Firmware Settings' {
+	    fwsetup
+	  }
 	'';
       };
     };
