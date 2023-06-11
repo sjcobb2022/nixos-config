@@ -14,6 +14,6 @@ in
     ];
     operation = "switch";
     # TODO: make this the github
-    # flake = "";
+    flake = "github:sjcobb2022/nixos-config";
   };
 }

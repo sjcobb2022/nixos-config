@@ -1,10 +1,9 @@
 { config, pkgs, ... }:
-let
-  color = pkgs.writeText "color.vim" (import ./theme.nix config.colorscheme);
-in
 {
-  home.sessionVariables.EDITOR = "nvim";
-
+  # home.sessionVariables.EDITOR = "nvim";
+  imports = [
+    ./neovide.nix
+  ];
   programs.neovim = {
     enable = true;
   };
