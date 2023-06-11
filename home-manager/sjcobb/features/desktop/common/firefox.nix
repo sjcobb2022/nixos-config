@@ -33,9 +33,9 @@ in
 
   home = {
     sessionVariables.BROWSER = "firefox";
-    #persistence = {
-    #  "/persist/home/misterio".directories = [ ".mozilla/firefox" ];
-    #};
+    persistence = {
+      "/persist/home/sjcobb".directories = [ ".mozilla/firefox" ];
+    };
   };
 
   xdg.mimeApps.defaultApplications = {

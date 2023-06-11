@@ -13,6 +13,7 @@ in
       "audio"
     ] ++ ifTheyExist [
       "network"
+      "networkmanager"
       "wireshark"
       "git"
       "libvirtd"

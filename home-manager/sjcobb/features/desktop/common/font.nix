@@ -1,4 +1,7 @@
 { pkgs, ... }: {
+  #home.packages = [
+  #  (pkgs.nerdfonts.override { fonts = [ "ProggyClean" "JetBrainsMono" "BigBlueTerminal" "Gohu" "FiraCode" ]; })
+  # ];
   fontProfiles = {
     enable = true;
     monospace = {

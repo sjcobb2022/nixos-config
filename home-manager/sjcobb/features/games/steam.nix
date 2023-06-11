@@ -21,12 +21,12 @@ in
     gamescope
     protontricks
   ];
- # home.persistence = {
- #   "/persist/home/sjcobb" = {
- #     allowOther = true;
- #     directories = [
- #       #TODO: find game directories
- #     ];
- #   };
- #  };
+   home.persistence = {
+     "/persist/home/sjcobb" = {
+       allowOther = true;
+       directories = [
+         #TODO: find game directories
+       ];
+     };
+    };
 }

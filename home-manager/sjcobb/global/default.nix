@@ -40,18 +40,17 @@ in
     homeDirectory = lib.mkDefault "/home-manager/${config.home.username}";
     stateVersion = lib.mkDefault "23.05";
     sessionPath = [ "$HOME/.local/bin" ];
-    #persistence = {
-    #  "/persist/home/sjcobb" = {
-    #    directories = [
-    #      "Documents"
-    #      "Downloads"
-    #      "Pictures"
-    #      "Videos"
-    #      ".local/bin"
-    #    ];
-    #    allowOther = true;
-    #  };
-    #};
+    persistence = {
+      "/persist/home/sjcobb" = {
+        directories = [
+          "Documents"
+          "Pictures"
+          "Videos"
+          ".local/bin"
+        ];
+        allowOther = true;
+      };
+    };
   };
 
   colorscheme = lib.mkDefault colorSchemes.dracula;

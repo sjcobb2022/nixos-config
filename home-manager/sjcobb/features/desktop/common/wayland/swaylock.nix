@@ -7,6 +7,8 @@ in
     enable = true;
     package = pkgs.swaylock-effects;
     settings = {
+      clock = true;
+
       effect-blur = "20x3";
       fade-in = 0.1;
 

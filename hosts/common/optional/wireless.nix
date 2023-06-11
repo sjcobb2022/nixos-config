@@ -1,26 +1,27 @@
 { config, lib, ... }: {
   # Wireless secrets stored through sops
-  sops.secrets.wireless = {
-    sopsFile = ../secrets.yaml;
-    neededForUsers = true;
-  };
+  #sops.secrets.wireless = {
+  #  sopsFile = ../secrets.yaml;
+  #  neededForUsers = true;
+  #};
+  networking.networkmanager.enable = false;
 
   networking.wireless = {
     enable = true;
     fallbackToWPA2 = false;
     # Declarative
-    environmentFile = config.sops.secrets.wireless.path;
-    networks = {
+    # environmentFile = config.sops.secrets.wireless.path;
+    networks = { 
       "eduroam" = {
         # TODO: get the right identity / pswd and use sops
         auth = ''
           key_mgmt=WPA-EAP
           pairwise=CCMP
           auth_alg=OPEN
-          eap=PEAP
-          ca_cert="......."
-          identity="10856803@usp.br"
-          password="@EDUROAM@"
+          # eap=PEAP
+          # ca_cert="......."
+          identity="cosc3@lboro.ac.uk"
+          password="JwkCl674"
           phase2="auth=MSCHAPV2"
         '';
       };

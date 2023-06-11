@@ -4,8 +4,8 @@
     ./auto-upgrade.nix
     ./fish.nix
     ./nix.nix
-    # ./optin-persistence.nix
-    #./systemd-initrd.nix
+    ./optin-persistence.nix
+    ./systemd-initrd.nix
   ] ++ (builtins.attrValues outputs.nixosModules);
 
   home-manager.extraSpecialArgs = { inherit inputs outputs; };

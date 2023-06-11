@@ -5,13 +5,14 @@
       trusted-users = [ "root" "@wheel" ];
       auto-optimise-store = lib.mkDefault true;
       experimental-features = [ "nix-command" "flakes" ];
+      warn-dirty = false;
       system-features = [ "big-parallel" "nixos-test" ];
     };
     gc = {
       automatic = true;
       dates = "daily";
       # Delete older generations too
-      options = "--delete-older-than 1d";
+      options = "--delete-older-than 1w";
     };
 
     # Add each flake input as a registry

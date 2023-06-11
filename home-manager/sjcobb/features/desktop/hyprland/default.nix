@@ -5,60 +5,40 @@
     inputs.hyprland.homeManagerModules.default
   ];
 
- # programs = {
- #   fish.loginShellInit = ''
- #     if test (tty) = "/dev/tty1"
- #       exec Hyprland &> /dev/null
- #     end
- #   '';
- #   zsh.loginExtra = ''
- #     if [ "$(tty)" = "/dev/tty1" ]; then
- #       exec Hyprland &> /dev/null
- #     fi
- #   '';
- #   zsh.profileExtra = ''
- #     if [ "$(tty)" = "/dev/tty1" ]; then
- #       exec Hyprland &> /dev/null
- #     fi
- #   '';
- # };
-
   home.packages = with pkgs; [
     inputs.hyprwm-contrib.packages.${system}.grimblast
     swaybg
     swayidle
   ];
 
-  # programs.waybar.package = pkgs.waybar.overrideAttrs (oa: {
-  #  mesonFlags = (oa.mesonFlags or  [ ]) ++ [ "-Dexperimental=true" ];
-  # });
+  # experimental waybar to allow for wlr/workspace
+  programs.waybar.package = pkgs.waybar.overrideAttrs (oa: {
+    mesonFlags = (oa.mesonFlags or  [ ]) ++ [ "-Dexperimental=true" ];
+  });
 
   wayland.windowManager.hyprland = {
     enable = true;
+    recommendedEnvironment = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
     extraConfig = ''
+      # nvidia bullshit 
       env = LIBVA_DRIVER_NAME,nvidia
       env = XDG_SESSION_TYPE,wayland
       # env = GBM_BACKEND,nvidia-drm
       env = __GLX_VENDOR_LIBRARY_NAME,nvidia
       env = WLR_NO_HARDWARE_CURSORS,1
-      # This is an example Hyprland config file
-      #
-      # Refer to the wiki for more information.
-      #
-      # Please note not all available settings / options are set here.
-      # For a full list, see the wiki
-      #
       
       # See https://wiki.hyprland.org/Configuring/Monitors/
       monitor=,preferred,auto,auto
-      
       
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       
       # Execute your favorite apps at launch
       # exec-once = waybar & hyprpaper & firefox
-      
+      # TODO: use hyprpaper, mako from pkgs
+      exec-once = mako
+      exec-once = ${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1
+
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
       
@@ -191,6 +171,6 @@
       bindm = $mainMod, mouse:272, movewindow
       bindm = $mainMod, mouse:273, resizewindow
 
-  '';
+    '';
   };
 }

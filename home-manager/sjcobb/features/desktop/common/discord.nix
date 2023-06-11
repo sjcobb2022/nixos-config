@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }:
-
 let inherit (config.colorscheme) colors;
-in {
+in
+{
   home.packages = with pkgs; [ discord discocss ];
 
-  #home.persistence = {
-  #  "/persist/home/misterio".directories = [ ".config/discord" ];
-  #};
+  home.persistence = {
+    "/persist/home/sjcobb".directories = [ ".config/discord" ];
+  };
 }

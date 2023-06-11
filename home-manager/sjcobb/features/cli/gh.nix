@@ -8,7 +8,7 @@
       prompt = "enabled";
     };
   };
- # home.persistence = {
-    # "/persist/home/misterio".directories = [ ".config/gh" ];
- # };
+  home.persistence = {
+     "/persist/home/sjcobb".directories = [ ".config/gh" ];
+  };
 }
