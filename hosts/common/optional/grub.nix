@@ -4,7 +4,7 @@
       systemd-boot.enable = false;
       timeout = 15;
       grub = {
-        configurationLimit = 10;
+        configurationLimit = 25;
         enable = true;
         efiSupport = true;
 	default = "saved";

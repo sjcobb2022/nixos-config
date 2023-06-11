@@ -21,6 +21,7 @@
 
     hyprland.url = "github:hyprwm/hyprland";
     hyprwm-contrib.url = "github:hyprwm/contrib";
+    hyprpaper.url = "github:hyprwm/hyprpaper";
   };
 
   outputs = { self, nixpkgs, nixos-hardware,  home-manager, ... }@inputs:

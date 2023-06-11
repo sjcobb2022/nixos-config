@@ -1,8 +1,12 @@
 { config, pkgs, ... }:
 {
-  home.sessionVariables.EDITOR = "neovide";
+  home.packages = with pkgs; [
+    neovide
+  ];
+  
+  # home.sessionVariables.EDITOR = "neovide";
 
-  programs.neovide = {
-    enable = true;
-  };
+  # programs.neovide = {
+  #   enable = true;
+  # };
 }

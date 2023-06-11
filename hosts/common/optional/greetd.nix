@@ -1,7 +1,6 @@
 { pkgs, ... }:
 let
   user = "sjcobb";
-  greetd = "${pkgs.greetd.greetd}/bin/greetd";
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
 in
 {
@@ -9,7 +8,7 @@ in
     enable = true;
     settings = {
       default_session = {
-        command = "${tuigreet} --time --cmd Hyprland";
+        command = "${tuigreet} --time --remember --cmd Hyprland";
         inherit user;
       };
     };

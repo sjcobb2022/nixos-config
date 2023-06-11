@@ -6,6 +6,8 @@
   ];
 
   home.packages = with pkgs; [
+    inputs.hyprpaper.packages.${system}.hyprpaper
+    inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland
     inputs.hyprwm-contrib.packages.${system}.grimblast
     swaybg
     swayidle
@@ -18,8 +20,13 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    nvidiaPatches = true;
     recommendedEnvironment = true;
-    package = inputs.hyprland.packages.${pkgs.system}.default;
+    systemdIntegration = true;
+    xwayland = {
+      enable = true;
+      hidpi = true;
+    };
     extraConfig = ''
       # nvidia bullshit 
       env = LIBVA_DRIVER_NAME,nvidia
@@ -38,7 +45,6 @@
       # TODO: use hyprpaper, mako from pkgs
       exec-once = mako
       exec-once = ${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1
-
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
       
@@ -119,7 +125,7 @@
       bind = $mainMod SHIFT, W, exec, firefox
       # bind = $mainMod, E, exec, dolphin
       bind = $mainMod, V, togglefloating,
-      # bind = $mainMod, R, exec, wofi --show drun
+      bind = $mainMod, D, exec, wofi --show drun
       bind = $mainMod, P, pseudo, # dwindle
       bind = $mainMod, J, togglesplit, # dwindle
       
@@ -128,12 +134,11 @@
       bind = $mainMod, right, movefocus, r
       bind = $mainMod, up, movefocus, u
       bind = $mainMod, down, movefocus, d
-
       bind = SUPER SHIFT, left, movewindow, l
       bind = SUPER SHIFT, right, movewindow, r
       bind = SUPER SHIFT, up, movewindow, u
       bind = SUPER SHIFT, down, movewindow, d
-
+      
       # Switch workspaces with mainMod + [0-9]
       bind = $mainMod, 1, workspace, 1
       bind = $mainMod, 2, workspace, 2
@@ -147,30 +152,44 @@
       bind = $mainMod, 0, workspace, 10
       
       # Move active window to a workspace with mainMod + SHIFT + [0-9]
-      bind = $mainMod SHIFT, 1, movetoworkspace, 1
-      bind = $mainMod SHIFT, 2, movetoworkspace, 2
-      bind = $mainMod SHIFT, 3, movetoworkspace, 3
-      bind = $mainMod SHIFT, 4, movetoworkspace, 4
-      bind = $mainMod SHIFT, 5, movetoworkspace, 5
-      bind = $mainMod SHIFT, 6, movetoworkspace, 6
-      bind = $mainMod SHIFT, 7, movetoworkspace, 7
-      bind = $mainMod SHIFT, 8, movetoworkspace, 8
-      bind = $mainMod SHIFT, 9, movetoworkspace, 9
-      bind = $mainMod SHIFT, 0, movetoworkspace, 10
-      
+      bind = $mainMod SHIFT, 1, movetoworkspacesilent, 1
+      bind = $mainMod SHIFT, 2, movetoworkspacesilent, 2
+      bind = $mainMod SHIFT, 3, movetoworkspacesilent, 3
+      bind = $mainMod SHIFT, 4, movetoworkspacesilent, 4
+      bind = $mainMod SHIFT, 5, movetoworkspacesilent, 5
+      bind = $mainMod SHIFT, 6, movetoworkspacesilent, 6
+      bind = $mainMod SHIFT, 7, movetoworkspacesilent, 7
+      bind = $mainMod SHIFT, 8, movetoworkspacesilent, 8
+      bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
+      bind = $mainMod SHIFT, 0, movetoworkspacesilent, 10
+
+      # Example volume button that allows press and hold, volume limited to 150%
+      binde=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+
+      # Example volume button that will activate even while an input inhibitor is active
+      bindl=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+
       # Scroll through existing workspaces with mainMod + scroll
       bind = $mainMod, mouse_down, workspace, e+1
       bind = $mainMod, mouse_up, workspace, e-1
+      
+      # use main mod alt to move around workspaces
+      # we use relative workspaces here to make it easier to
+      bind = $mainMod ALT, left, workspace, r-1
+      bind = $mainMod ALT, right, workspace, r+1
+      bind = $mainMod ALT, up, workspace, r+1
+      bind = $mainMod ALT, down, workspace, r-1
 
-      bind = $mainMod ALT, left, workspace, e-1
-      bind = $mainMod ALT, right, workspace, e+1
-      bind = $mainMod ALT, up, workspace, e+1
-      bind = $mainMod ALT, down, workspace, e-1
+      # use mainMod shift to move (shift haha) an actiuve window 
+      bind = $mainMod SHIFT, left, movetoworkspacesilent, r-1
+      bind = $mainMod SHIFT, right, movetoworkspacesilent, r+1
+      bind = $mainMod SHIFT, up, movetoworkspacesilent, r+1
+      bind = $mainMod SHIFT, down, movetoworkspacesilent, r-1
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = $mainMod, mouse:272, movewindow
       bindm = $mainMod, mouse:273, resizewindow
-
     '';
   };
+
 }

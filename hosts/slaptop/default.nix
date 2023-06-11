@@ -1,5 +1,5 @@
 
-{ pkgs, inputs, config, ... }: {
+{ pkgs, inputs, config, lib, ... }: {
   imports = [
     inputs.nixos-hardware.nixosModules.omen-en00015p
 
@@ -47,7 +47,6 @@
   services.logind = {
     lidSwitch = "suspend";
   };
-
 
   services.openssh = {
     enable = true;
