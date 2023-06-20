@@ -21,7 +21,7 @@
           # eap=PEAP
           # ca_cert="......."
           identity="cosc3@lboro.ac.uk"
-          password="JwkCl674"
+          password=""
           phase2="auth=MSCHAPV2"
         '';
       };
