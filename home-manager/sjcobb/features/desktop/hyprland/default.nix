@@ -134,10 +134,10 @@
       bind = $mainMod, right, movefocus, r
       bind = $mainMod, up, movefocus, u
       bind = $mainMod, down, movefocus, d
-      bind = SUPER SHIFT, left, movewindow, l
-      bind = SUPER SHIFT, right, movewindow, r
-      bind = SUPER SHIFT, up, movewindow, u
-      bind = SUPER SHIFT, down, movewindow, d
+      bind = $mainMod CTRL, left, movewindow, l
+      bind = $mainMod CTRL, right, movewindow, r
+      bind = $mainMod CTRL, up, movewindow, u
+      bind = $mainMod CTRL, down, movewindow, d
       
       # Switch workspaces with mainMod + [0-9]
       bind = $mainMod, 1, workspace, 1
@@ -167,7 +167,7 @@
       binde=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
 
       # Example volume button that will activate even while an input inhibitor is active
-      bindl=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+      binde=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 
       # Scroll through existing workspaces with mainMod + scroll
       bind = $mainMod, mouse_down, workspace, e+1
