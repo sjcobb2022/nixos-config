@@ -9,10 +9,38 @@
     enable = true;
   };
 
-  xdg.configFile."nvim".source = builtins.fetchGit {
-    url = "https://github.com/AstroNvim/AstroNvim.git";
-    ref = "main";
-    # rev = "87a05226b003c05369ca70ff7e7baf4910d0f8b1";
-    shallow = true;
+  home.packages = with pkgs; [
+    unzip
+    gnumake
+    gcc
+    nodejs
+    rustc
+    cargo
+    python3
+    php
+    phpPackages.composer
+    stylua
+    luajitPackages.luarocks-nix
+    haskell.compiler.ghcHEAD
+    stack
+    haskell-language-server
+    haskellPackages.haskell-debug-adapter
+    haskellPackages.ghci-dap
+ ];
+
+  xdg.configFile = {
+     "nvim".source = builtins.fetchGit {
+       url = "https://github.com/AstroNvim/AstroNvim.git";
+       ref = "main";
+       rev = "87a05226b003c05369ca70ff7e7baf4910d0f8b1";
+       shallow = true;
+     };
+
+     "astronvim/lua/user".source = builtins.fetchGit {
+       url = "https://github.com/sjcobb2022/astro_config.git";
+       ref = "main";
+       rev = "a9c9b6f87ca32b5e7271280fbaef3a28a8c26bee";
+       shallow = true;
+     };
   };
 }

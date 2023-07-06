@@ -21,7 +21,9 @@ in
 
     # openssh.authorizedKeys.keys = [ (builtins.readFile ../../../../home-manager/sjcobb/ssh.pub) ];
     # passwordFile = config.sops.secrets.misterio-password.path;
-    packages = [ pkgs.home-manager ];
+    packages = [ 
+      pkgs.home-manager
+    ];
   };
 
   # sops.secrets.misterio-password = {
