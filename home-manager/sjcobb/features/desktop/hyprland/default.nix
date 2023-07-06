@@ -126,7 +126,7 @@
       bind = $mainMod SHIFT, W, exec, firefox
       # bind = $mainMod, E, exec, dolphin
       bind = $mainMod, V, togglefloating,
-      bind = $mainMod SHIFT, D, exec, wofi -S drun
+      bind = $mainMod, D, exec, pkill wofi || wofi -S drun
       bind = $mainMod, P, pseudo, # dwindle
       bind = $mainMod, J, togglesplit, # dwindle
       
