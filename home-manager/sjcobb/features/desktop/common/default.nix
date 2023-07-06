@@ -9,7 +9,6 @@
     ./pavucontrol.nix
     ./playerctl.nix
     ./qt.nix
-    ./thunar.nix
   ];
 
   xdg.mimeApps.enable = true;

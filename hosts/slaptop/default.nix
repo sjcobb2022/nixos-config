@@ -13,6 +13,7 @@
     ../common/optional/pipewire.nix
     ../common/optional/bluetooth.nix
     ../common/optional/blueman.nix
+    ../common/optional/thunar.nix
     # ../common/optional/wireless.nix
   ];
 
