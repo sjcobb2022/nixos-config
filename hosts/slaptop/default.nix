@@ -11,6 +11,8 @@
     ../common/optional/greetd.nix
     ../common/optional/grub.nix
     ../common/optional/pipewire.nix
+    ../common/optional/bluetooth.nix
+    ../common/optional/blueman.nix
     # ../common/optional/wireless.nix
   ];
 
@@ -34,6 +36,8 @@
     layout = "us";
     xkbVariant = "";
   };
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # nvidia bullshit
   services.xserver.videoDrivers = [ "nvidia" ];

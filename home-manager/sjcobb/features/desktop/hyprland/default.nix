@@ -106,7 +106,8 @@
       
       gestures {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
-          workspace_swipe = true 
+          workspace_swipe = true
+          workspace_swipe_fingers = 4
       }
       
       # Example windowrule v1
@@ -125,7 +126,7 @@
       bind = $mainMod SHIFT, W, exec, firefox
       # bind = $mainMod, E, exec, dolphin
       bind = $mainMod, V, togglefloating,
-      bind = $mainMod, D, exec, wofi --show drun
+      bind = $mainMod SHIFT, D, exec, wofi -S drun
       bind = $mainMod, P, pseudo, # dwindle
       bind = $mainMod, J, togglesplit, # dwindle
       

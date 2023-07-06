@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  wofi = pkgs.wofi.overrideAttrs (oa: {
+  wofi = pkgs.unstable.wofi.overrideAttrs (oa: {
     patches = (oa.patches or [ ]) ++ [
       # ./wofi-run-shell.patch # Fix for https://todo.sr.ht/~scoopta/wofi/174
     ];
