@@ -1,6 +1,11 @@
 { config, ... }:
 let inherit (config.colorscheme) colors;
 in {
+
+  xdg.mimeApps.defaultApplications = {
+    "application/pdf" = [ "zathura.desktop" ];
+  };
+
   programs.zathura = {
     enable = true;
     options = {

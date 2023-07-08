@@ -115,7 +115,15 @@
       # Example windowrule v2
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-      
+      # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
+      windowrulev2 = float,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
+      windowrulev2 = pin,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
+      windowrulev2 = noinitialfocus,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
+      windowrulev2 = size 76 31,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
+      windowrulev2 = nofullscreenrequest,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
+      windowrulev2 = move 0 0,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
+
+
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       $mainMod = SUPER
       
@@ -124,11 +132,13 @@
       bind = $mainMod, Q, killactive,
       bind = $mainMod, M, exit,
       bind = $mainMod SHIFT, W, exec, firefox
-      # bind = $mainMod, E, exec, dolphin
+      bind = $mainMod, E, exec, thunar 
       bind = $mainMod, V, togglefloating,
       bind = $mainMod, D, exec, pkill wofi || wofi -S drun
       bind = $mainMod, P, pseudo, # dwindle
       bind = $mainMod, J, togglesplit, # dwindle
+
+      bind = $mainMod, F, fullscreen
       
       # Move focus with mainMod + arrow keys
       bind = $mainMod, left, movefocus, l
@@ -164,11 +174,11 @@
       bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
       bind = $mainMod SHIFT, 0, movetoworkspacesilent, 10
 
-      # Example volume button that allows press and hold, volume limited to 150%
-      binde=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+      bindel=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+      bindel=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 
-      # Example volume button that will activate even while an input inhibitor is active
-      binde=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+      bindel=,XF86MonBrightnessUp,exec,light -A 10
+      bindel=,XF86MonBrightnessDown,exec,light -U 10
 
       # Scroll through existing workspaces with mainMod + scroll
       bind = $mainMod, mouse_down, workspace, e+1
