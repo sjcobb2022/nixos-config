@@ -11,20 +11,20 @@
         # efiInstallAsRemovable = true;  # grub will use efibootmgr
         device = "nodev";  # "/dev/sdx", or "nodev" for efi only
         useOSProber = true;
-	extraEntriesBeforeNixOS = true;
-	extraEntries = ''
-
-	  menuentry 'Shutdown' {
-	    halt
-	  } 
-	  
-	  menuentry 'Reboot' {
-	    reboot
-	  }
-	  
-	  menuentry 'UEFI Firmware Settings' {
-	    fwsetup
-	  }
+        enableCryptodisk = true;
+        extraEntriesBeforeNixOS = true;
+        extraEntries = ''
+	        menuentry 'Shutdown' {
+	          halt
+	        } 
+	        
+	        menuentry 'Reboot' {
+	          reboot
+	        }
+	        
+	        menuentry 'UEFI Firmware Settings' {
+	          fwsetup
+	        }
 	'';
       };
     };
