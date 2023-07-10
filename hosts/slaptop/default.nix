@@ -38,7 +38,7 @@
     xkbVariant = "";
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # nvidia bullshit
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -64,7 +64,6 @@
   boot = {
     # we love grub!
     loader = {
-      systemd-boot.enable = false;
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
