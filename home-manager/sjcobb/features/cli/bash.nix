@@ -1,5 +1,0 @@
-{
-  programs.bash = {
-    enable = true;
-  };
-}
