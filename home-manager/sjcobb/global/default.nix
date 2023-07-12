@@ -46,8 +46,8 @@ in
           "Documents"
           "Pictures"
           "Videos"
-	  "Music"
-	  "Downloads"
+          "Music"
+          "Downloads"
           ".local/bin"
         ];
         allowOther = true;

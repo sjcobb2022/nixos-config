@@ -11,6 +11,7 @@
     inputs.hyprwm-contrib.packages.${system}.grimblast
     swaybg
     swayidle
+    xorg.xprop
   ];
 
   # experimental waybar to allow for wlr/workspace
@@ -42,14 +43,20 @@
       
       # Execute your favorite apps at launch
       # exec-once = waybar & hyprpaper & firefox
+      
       # TODO: use hyprpaper, mako from pkgs
       exec-once = mako
       exec-once = ${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1
+      
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
       
-      # Some default env vars.
-      env = XCURSOR_SIZE,24
+      # sets xwayland scale
+      exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1
+      
+      # toolkit-specific scale
+      env = GDK_SCALE,2
+      env = XCURSOR_SIZE,32
       
       # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
       input {

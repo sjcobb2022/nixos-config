@@ -55,6 +55,7 @@
 
       homeConfigurations = {
         "sjcobb@slaptop" = mkHome [ ./home-manager/sjcobb/slaptop.nix ] nixpkgs.legacyPackages."x86_64-linux";
+        "guest@slaptop" = mkHome [ ./home-manager/guest/slaptop.nix ] nixpkgs.legacyPackages."x86_64-linux";
       };
     };
 }

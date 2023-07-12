@@ -1,6 +1,5 @@
 { pkgs, ... }:
 let
-  user = "sjcobb";
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
 in
 {
@@ -9,7 +8,7 @@ in
     settings = {
       default_session = {
         command = "${tuigreet} --time --remember --cmd Hyprland";
-        inherit user;
+        user = "greeter";
       };
     };
   };
@@ -29,9 +28,9 @@ in
     TTYVTDisallocate = true;
   };
 
-  environment.etc."greetd/environments".text = ''
-    Hyprland
-    fish
-    bash
-  '';
+  #environment.etc."greetd/environments".text = ''
+  #  Hyprland
+  #  fish
+  #  bash
+  #'';
 }

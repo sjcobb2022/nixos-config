@@ -31,8 +31,8 @@
   xdg.configFile = {
      "nvim".source = builtins.fetchGit {
        url = "https://github.com/AstroNvim/AstroNvim.git";
-       ref = "main";
-       rev = "87a05226b003c05369ca70ff7e7baf4910d0f8b1";
+       ref = "refs/tags/v3.32.0"; 
+       rev = "43d458135a534beead8f32158c1d9293adb202dc";
        shallow = true;
      };
 
