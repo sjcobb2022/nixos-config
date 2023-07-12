@@ -34,6 +34,7 @@
         inherit modules;
         specialArgs = { inherit inputs outputs; };
       };
+
       mkHome = modules: pkgs: home-manager.lib.homeManagerConfiguration {
         inherit modules pkgs;
         extraSpecialArgs = { inherit inputs outputs; };

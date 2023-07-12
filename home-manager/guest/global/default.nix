@@ -36,12 +36,12 @@ in
   };
 
   home = {
-    username = lib.mkDefault "sjcobb";
+    username = lib.mkDefault "guest";
     homeDirectory = lib.mkDefault "/home-manager/${config.home.username}";
     stateVersion = lib.mkDefault "23.05";
     sessionPath = [ "$HOME/.local/bin" ];
     persistence = {
-      "/persist/home/sjcobb" = {
+      "/persist/home/guest" = {
         directories = [
           "Documents"
           "Pictures"

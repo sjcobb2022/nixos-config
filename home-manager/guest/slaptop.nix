@@ -1,17 +1,12 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ inputs, outputs, lib, config, pkgs, ... }: 
-let
-  inherit (inputs.nix-colors) colorSchemes;
-  inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) colorschemeFromPicture;
-in
-{
+{ inputs, outputs, lib, config, pkgs, ... }: {
   # You can import other home-manager modules here
   imports = [
+    inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.nix-colors.homeManagerModule
-    ../common/global
-    ../common/features/desktop/hyprland
+    ./features/desktop/gnome
     # If you want to use modules your own flake exports (from modules/home-manager):
     # outputs.homeManagerModules.example
 
@@ -21,6 +16,8 @@ in
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
   ];
+
+  colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;
 
   nixpkgs = {
     # You can add overlays here
@@ -49,28 +46,27 @@ in
     };
   };
 
-  home = {
-    username = lib.mkDefault "sjcobb";
-    homeDirectory = lib.mkDefault "/home/${config.home.username}";
-    sessionPath = [ "$HOME/.local/bin" ];
-    persistence = {
-      "/persist/home/${config.home.username}" = {
-        directories = [
-          "Documents"
-          "Pictures"
-          "Videos"
-          "Music"
-          "Downloads"
-          ".local/bin"
-        ];
-        allowOther = true;
+    home = {
+      username = lib.mkDefault "guest";
+      homeDirectory = lib.mkDefault "/home-manager/${config.home.username}";
+      stateVersion = lib.mkDefault "23.05";
+      sessionPath = [ "$HOME/.local/bin" ];
+      persistence = {
+        "/persist/home/guest" = {
+          directories = [
+            "Documents"
+            "Pictures"
+            "Videos"
+            "Music"
+            "Downloads"
+            ".local/bin"
+          ];
+          allowOther = true;
       };
     };
   };
 
-  colorscheme = lib.mkDefault colorSchemes.tokyo-city-terminal-dark;
-  home.file.".colorscheme".text = config.colorscheme.slug;
-  
+
   # Add stuff for your user as you see fit:
   home.packages = with pkgs; [ ];
 
