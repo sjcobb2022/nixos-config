@@ -15,7 +15,7 @@
 
   home.packages = with pkgs; [
     grim
-    # imv
+    imv
     # mimeo
     # primary-xwayland
     # pulseaudio
