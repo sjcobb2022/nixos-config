@@ -14,6 +14,7 @@
     ../common/optional/bluetooth.nix
     ../common/optional/blueman.nix
     ../common/optional/thunar.nix
+    ../common/optional/tlp.nix
     # ../common/optional/wireless.nix
   ];
 
