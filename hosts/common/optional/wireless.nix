@@ -4,10 +4,11 @@
   #  sopsFile = ../secrets.yaml;
   #  neededForUsers = true;
   #};
-  networking.networkmanager.enable = false;
+  
+  # networking.networkmanager.enable = false;
 
   networking.wireless = {
-    enable = true;
+    # enable = true;
     fallbackToWPA2 = false;
     # Declarative
     # environmentFile = config.sops.secrets.wireless.path;

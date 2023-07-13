@@ -1,3 +1,4 @@
+{ lib, config, ...}:
 {
   services.tlp = {
     enable = lib.mkDefault ((lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")

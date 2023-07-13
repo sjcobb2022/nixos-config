@@ -15,7 +15,7 @@
     ../common/optional/blueman.nix
     ../common/optional/thunar.nix
     ../common/optional/tlp.nix
-    # ../common/optional/wireless.nix
+    ../common/optional/wireless.nix
   ];
 
   security.pki.certificateFiles = [

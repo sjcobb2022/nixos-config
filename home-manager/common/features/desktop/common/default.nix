@@ -9,6 +9,7 @@
     ./pavucontrol.nix
     ./playerctl.nix
     ./qt.nix
+    ./wpa-gui.nix
   ];
 
   xdg.mimeApps.enable = true;
