@@ -10,6 +10,7 @@
     ./playerctl.nix
     ./qt.nix
     ./wpa-gui.nix
+    ./adwaita.nix
   ];
 
   xdg.mimeApps.enable = true;
