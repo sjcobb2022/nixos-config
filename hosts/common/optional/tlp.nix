@@ -5,6 +5,7 @@
                                        || !config.services.power-profiles-daemon.enable);
     settings = {
       CPU_SCALING_GOVERNOR_ON_BAT = "schedutil";
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
     };
   };
 }
