@@ -53,11 +53,11 @@
       # source = ~/.config/hypr/myColors.conf
       
       # sets xwayland scale
-      exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1
+      # exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1
       
       # toolkit-specific scale
       env = GDK_SCALE,2
-      env = XCURSOR_SIZE,32
+      env = XCURSOR_SIZE,24
       
       # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
       input {
