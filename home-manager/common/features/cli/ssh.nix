@@ -1,4 +1,4 @@
-{ outputs, lib, ... }:
+{ config, outputs, lib, ... }:
 let
   hostnames = builtins.attrNames outputs.nixosConfigurations;
 in
@@ -9,15 +9,15 @@ in
       net = {
         host = builtins.concatStringsSep " " hostnames;
         forwardAgent = true;
-        remoteForwards = [{
+        # remoteForwards = [{
           # bind.address = ''/%d/.gnupg-sockets/S.gpg-agent'';
           # host.address = ''/%d/.gnupg-sockets/S.gpg-agent.extra'';
-        }];
+        #}];
       };
     };
   };
 
   home.persistence = {
-    "/persist/home/${user.home}".directories = [ ".ssh" ];
+    "/persist/home/${config.home.username}".directories = [ ".ssh" ];
   };
 }

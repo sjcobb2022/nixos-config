@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.gh = {
     enable = true;
@@ -9,6 +9,6 @@
     };
   };
   home.persistence = {
-     "/persist/home/sjcobb".directories = [ ".config/gh" ];
+     "/persist/home/${config.home.username}".directories = [ ".config/gh" ];
   };
 }
