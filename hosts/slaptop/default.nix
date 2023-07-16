@@ -57,14 +57,6 @@
     lidSwitch = "suspend";
   };
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-    };
-  };
-
   boot = {
     # we love grub!
     loader = {
