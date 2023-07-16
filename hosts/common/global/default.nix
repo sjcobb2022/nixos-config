@@ -5,6 +5,7 @@
     ./fish.nix
     ./nix.nix
     ./optin-persistence.nix
+    ./openssh.nix
     ./systemd-initrd.nix
   ] ++ (builtins.attrValues outputs.nixosModules);
 
