@@ -9,15 +9,15 @@ in
       net = {
         host = builtins.concatStringsSep " " hostnames;
         forwardAgent = true;
-        # remoteForwards = [{
-          # bind.address = ''/%d/.gnupg-sockets/S.gpg-agent'';
-          # host.address = ''/%d/.gnupg-sockets/S.gpg-agent.extra'';
-        #}];
+         remoteForwards = [{
+           bind.address = ''/%d/.gnupg-sockets/S.gpg-agent'';
+           host.address = ''/%d/.gnupg-sockets/S.gpg-agent.extra'';
+        }];
       };
     };
   };
 
   home.persistence = {
-    "/persist/home/${config.home.username}".directories = [ ".ssh" ];
+    "/persist/home/sjcobb".directories = [ ".ssh" ];
   };
 }

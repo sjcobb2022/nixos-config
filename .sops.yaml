@@ -1,22 +1,22 @@
 keys:
   # Users
   - &users:
-    - &sjcobb 7088C7421873E0DB97FF17C2245CAB70B4C225E9
+    - &sjcobb age1ycfr6sc02mdcjrs45jn7redkfjkcan02tgkrr8wtw02an9tfh59s3m6fnt
   # Hosts
   - &hosts:
-    - &slaptop age1n06f4dcslh8xq686z2fa9ddr3yg5yzj87p727896xsm8xvusdv6qan0grl
+    - &slaptop age1ycfr6sc02mdcjrs45jn7redkfjkcan02tgkrr8wtw02an9tfh59s3m6fnt 
 
 creation_rules:
   - path_regex: hosts/slaptop/secrets.ya?ml$
     key_groups:
     - age:
       - *slaptop
-      pgp:
-      - *sjcobb
+      # pgp:
+      # - *sjcobb
 
   - path_regex: hosts/common/secrets.ya?ml$
     key_groups:
     - age:
       - *slaptop
-      pgp:
-      - *sjcobb
+      # pgp:
+      # - *sjcobb

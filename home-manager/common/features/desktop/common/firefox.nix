@@ -32,7 +32,10 @@ in
   };
 
   home = {
-    sessionVariables.BROWSER = "firefox";
+    sessionVariables = {
+      BROWSER = "firefox";
+      TZ = "/etc/localtime";
+    };
     persistence = {
       "/persist/home/sjcobb".directories = [ ".mozilla/firefox" ];
     };

@@ -8,10 +8,11 @@
   environment.persistence = {
     "/persist" = {
       directories = [
-        "/etc/nixos"
         "/etc/NetworkManager"
         "/var/lib/systemd"
         "/var/lib/nixos"
+        "/var/log"
+        "/srv"
       ];
     };
   };
