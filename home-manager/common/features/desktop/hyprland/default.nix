@@ -33,7 +33,7 @@
       # nvidia bullshit 
       env = LIBVA_DRIVER_NAME,nvidia
       env = XDG_SESSION_TYPE,wayland
-      # env = GBM_BACKEND,nvidia-drm
+      env = GBM_BACKEND,nvidia
       env = __GLX_VENDOR_LIBRARY_NAME,nvidia
       env = WLR_NO_HARDWARE_CURSORS,1
 
@@ -53,7 +53,7 @@
       # source = ~/.config/hypr/myColors.conf
       
       # sets xwayland scale
-      # exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1
+      exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1
       
       # toolkit-specific scale
       env = GDK_SCALE,2
