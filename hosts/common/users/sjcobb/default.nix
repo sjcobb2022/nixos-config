@@ -19,17 +19,17 @@ in
       "libvirtd"
     ];
 
-    # openssh.authorizedKeys.keys = [ (builtins.readFile ../../../../home-manager/sjcobb/ssh.pub) ];
-    # passwordFile = config.sops.secrets.misterio-password.path;
+    openssh.authorizedKeys.keys = [ (builtins.readFile ../../../../home-manager/sjcobb/ssh.pub) ];
+    passwordFile = config.sops.secrets.sjcobb-password.path;
     packages = [ 
       pkgs.home-manager
     ];
   };
 
-  # sops.secrets.misterio-password = {
-  #   sopsFile = ../../secrets.yaml;
-  #   neededForUsers = true;
-  # };
+  sops.secrets.sjcobb-password = {
+     sopsFile = ../../secrets.yaml;
+     neededForUsers = true;
+   };
 
   home-manager.users.sjcobb = import ../../../../home-manager/sjcobb/${config.networking.hostName}.nix;
 
