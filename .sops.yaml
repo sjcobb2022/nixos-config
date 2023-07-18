@@ -4,7 +4,8 @@ keys:
     # - &sjcobb age1ycfr6sc02mdcjrs45jn7redkfjkcan02tgkrr8wtw02an9tfh59s3m6fnt
   # Hosts
   - &hosts:
-    - &slaptop age1ycfr6sc02mdcjrs45jn7redkfjkcan02tgkrr8wtw02an9tfh59s3m6fnt 
+    - &slaptop age1ycfr6sc02mdcjrs45jn7redkfjkcan02tgkrr8wtw02an9tfh59s3m6fnt
+    - &velocity age1jlfexy8fqfj8xexaf8da05yxxtggh09rp2f5wfm80quxn03afgns397jux
 
 creation_rules:
   - path_regex: hosts/slaptop/secrets.ya?ml$
