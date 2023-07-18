@@ -57,7 +57,7 @@
       
       # toolkit-specific scale
       env = GDK_SCALE,2
-      env = XCURSOR_SIZE,24
+      # env = XCURSOR_SIZE,24
       
       # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
       input {
