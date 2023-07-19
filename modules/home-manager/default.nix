@@ -5,4 +5,5 @@
   # List your module files here
   fonts = import ./fonts.nix;
   shellcolor = import ./shellcolor.nix;
+  ssh-agent = import ./ssh-agent.nix;
 }

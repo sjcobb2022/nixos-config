@@ -25,7 +25,7 @@ in
     enable = true;
     indicator = true;
   };
-  
+
   home.persistence = {
     "/persist/home/sjcobb".directories = [ ".config/kdeconnect" ];
   };
