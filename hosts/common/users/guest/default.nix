@@ -17,7 +17,7 @@ in
       "git"
     ];
 
-    # openssh.authorizedKeys.keys = [ (builtins.readFile ../../../../home-manager/sjcobb/ssh.pub) ];
+    openssh.authorizedKeys.keys = [ (builtins.readFile ../ssh.pub) ];
     # passwordFile = config.sops.secrets.misterio-password.path;
     packages = [ 
       pkgs.home-manager
