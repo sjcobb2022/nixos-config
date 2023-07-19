@@ -8,7 +8,6 @@
     ./fish.nix
     ./git.nix
     ./gh.nix
-    ./gpg.nix
     ./shellcolor.nix
     ./starship.nix
     ./ssh.nix
