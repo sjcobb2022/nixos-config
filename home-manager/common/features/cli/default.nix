@@ -10,7 +10,6 @@
     ./gh.nix
     ./gpg.nix
     ./shellcolor.nix
-    ./sops.nix
     ./starship.nix
     ./ssh.nix
   ];

@@ -11,5 +11,6 @@ in
 
   sops = {
     age.sshKeyPaths = map getKeyPath keys;
+    age.keyFile = "/home/sjcobb/.config/sops/age/keys.txt";
   };
 }
