@@ -19,7 +19,7 @@ in
       "libvirtd"
     ];
 
-    openssh.authorizedKeys.keys = [ (builtins.readFile ../../../../home-manager/sjcobb/ssh.pub) ];
+    openssh.authorizedKeys.keys = [ (builtins.readFile ./ssh.pub) ];
     passwordFile = config.sops.secrets.sjcobb-password.path;
     packages = [ 
       pkgs.home-manager
