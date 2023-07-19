@@ -5,6 +5,7 @@ in
 {
   programs.ssh = {
     enable = true;
+    startAgent = true;
     # matchBlocks = {
     #   net = {
     #     host = builtins.concatStringsSep " " hostnames;
