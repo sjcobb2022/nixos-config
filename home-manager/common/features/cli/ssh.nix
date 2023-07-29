@@ -17,6 +17,8 @@ in
     # };
   };
 
+  services.ssh-agent.enable = true;
+
   home.persistence = {
     "/persist/home/sjcobb".directories = [ ".ssh" ];
   };
