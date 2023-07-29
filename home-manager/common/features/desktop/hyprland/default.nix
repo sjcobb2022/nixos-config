@@ -15,6 +15,15 @@
     xorg.xprop
   ];
 
+
+
+  xdg.configFile."hypr/hyprpaper.conf".text = ''
+    preload = ${../common/assets/mountain.jpg}
+    preload = ${../common/assets/wave.png}
+    preload = ${../common/assets/rocks.jpg}
+    wallpaper = ,${../common/assets/mountain.jpg}
+  '';
+
   # experimental waybar to allow for wlr/workspace
   programs.waybar.package = pkgs.waybar.overrideAttrs (oa: {
     mesonFlags = (oa.mesonFlags or  [ ]) ++ [ "-Dexperimental=true" ];
