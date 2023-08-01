@@ -5,7 +5,7 @@ keys:
   # Hosts
   - &hosts:
     - &slaptop age1yh3xne5p2uncmhzw96zegk3zzezel5ndruf0z6qerk098ww28qvq94a4zp
-    - &velocity age1jlfexy8fqfj8xexaf8da05yxxtggh09rp2f5wfm80quxn03afgns397jux
+    - &velocity age1uvan6a6u3q06hxrdh2gnv9gljracmujjlk3c5fp6plx4zcxjqals2yt369
 
 creation_rules:
   - path_regex: hosts/slaptop/secrets.ya?ml$
