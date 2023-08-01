@@ -56,6 +56,7 @@
       
       # TODO: use hyprpaper, mako from pkgs
       exec-once = mako
+      exec-once = hyprpaper 
       exec-once = ${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1
       
       # Source a file (multi-file configs)
