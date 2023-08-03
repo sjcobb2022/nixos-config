@@ -1,8 +1,6 @@
 
 { pkgs, inputs, config, lib, ... }: {
   imports = [
-    inputs.nixos-hardware.nixosModules.omen-en00015p
-
     ./hardware-configuration.nix
     ../common/global
     ../common/users/sjcobb
