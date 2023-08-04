@@ -7,7 +7,7 @@
         configurationLimit = 25;
         enable = true;
         efiSupport = true;
-	default = "saved";
+        default = "saved";
         # efiInstallAsRemovable = true;  # grub will use efibootmgr
         device = "nodev";  # "/dev/sdx", or "nodev" for efi only
         useOSProber = true;
