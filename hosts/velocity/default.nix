@@ -1,7 +1,8 @@
 
 { pkgs, inputs, config, lib, ... }: {
   imports = [
-    ./hardware-configuration.nix
+    inputs.nixos-generators.nixosModules.all-formats
+    # ./hardware-configuration.nix
     ../common/global
     ../common/users/sjcobb
     ../common/optional/grub.nix
@@ -9,6 +10,8 @@
 
   zramSwap.enable = true;
 
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  
   networking = {
     hostName = "velocity";
     domain = "";
