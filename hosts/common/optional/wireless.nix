@@ -1,9 +1,10 @@
 { config, lib, ... }: {
   # Wireless secrets stored through sops
-  #sops.secrets.wireless = {
-  #  sopsFile = ../secrets.yaml;
-  #  neededForUsers = true;
-  #};
+  
+  sops.secrets.wireless = {
+   sopsFile = ../secrets.yaml;
+   neededForUsers = true;
+  };
   
   # networking.networkmanager.enable = false;
 
@@ -11,7 +12,7 @@
     # enable = true;
     fallbackToWPA2 = false;
     # Declarative
-    # environmentFile = config.sops.secrets.wireless.path;
+    environmentFile = config.sops.secrets.wireless.path;
     networks = { 
       "eduroam" = {
         # TODO: get the right identity / pswd and use sops

@@ -20,16 +20,16 @@ in
     ];
 
     openssh.authorizedKeys.keys = [ (builtins.readFile ../ssh.pub) ];
-    # passwordFile = config.sops.secrets.sjcobb-password.path;
+    passwordFile = config.sops.secrets.sjcobb-password.path;
     packages = [ 
       pkgs.home-manager
     ];
   };
 
-  # sops.secrets.sjcobb-password = {
-  #    sopsFile = ../../secrets.yaml;
-  #    neededForUsers = true;
-  #  };
+  sops.secrets.sjcobb-password = {
+     sopsFile = ../../secrets.yaml;
+     neededForUsers = true;
+   };
 
   home-manager.users.sjcobb = import ../../../../home-manager/sjcobb/${config.networking.hostName}.nix;
 

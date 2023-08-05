@@ -3,7 +3,7 @@ let ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.
 in
 {
   # users.mutableUsers = false;
-  users.users.sjcobb = {
+  users.users.guest = {
     initialPassword = "nixos";
     isNormalUser = true;
     shell = pkgs.fish;
@@ -18,16 +18,10 @@ in
     ];
 
     openssh.authorizedKeys.keys = [ (builtins.readFile ../ssh.pub) ];
-    # passwordFile = config.sops.secrets.misterio-password.path;
     packages = [ 
       pkgs.home-manager
     ];
   };
-
-  # sops.secrets.misterio-password = {
-  #   sopsFile = ../../secrets.yaml;
-  #   neededForUsers = true;
-  # };
 
   home-manager.users.guest= import ../../../../home-manager/guest/${config.networking.hostName}.nix;
 
