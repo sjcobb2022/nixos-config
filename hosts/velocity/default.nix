@@ -3,8 +3,8 @@
   imports = [
     ./hardware-configuration.nix
     ../common/global
-    # ../common/users/sjcobb
-    ../common/optional/grub.nix
+    ../common/users/sjcobb
+    # ../common/optional/grub.nix
   ];
 
   zramSwap.enable = true;
@@ -12,6 +12,12 @@
   networking = {
     hostName = "velocity";
     domain = "";
+  };
+
+  boot.loader.grub = {
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+    device = "nodev";
   };
 
   services.openssh.enable = true;
