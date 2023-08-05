@@ -36,6 +36,12 @@
     ];
   };
 
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 3000 5173 4173 ];
+  };
+
+
   nix.settings.auto-optimise-store = false;
 
   time.timeZone = "Europe/London";
