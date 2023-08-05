@@ -16,6 +16,7 @@
     ../common/optional/thunar.nix
     ../common/optional/tlp.nix
     ../common/optional/wireless.nix
+    ../common/optional/systemd-initrd.nix.nix
   ];
 
   security.pki.certificateFiles = [

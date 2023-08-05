@@ -19,6 +19,11 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland.url = "github:hyprwm/hyprland";
     hyprwm-contrib.url = "github:hyprwm/contrib";
     hyprpaper.url = "github:hyprwm/hyprpaper";
