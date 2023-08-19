@@ -31,13 +31,10 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    nvidiaPatches = true;
+    enableNvidiaPatches = true;
     recommendedEnvironment = true;
     systemdIntegration = true;
-    xwayland = {
-      enable = true;
-      hidpi = true;
-    };
+    xwayland.enable = true;
     extraConfig = ''
       # nvidia bullshit 
       env = LIBVA_DRIVER_NAME,nvidia
@@ -120,6 +117,10 @@
       master {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
           new_is_master = true
+      }
+
+      misc {
+        disable_hyprland_logo = true
       }
       
       gestures {
