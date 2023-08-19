@@ -24,9 +24,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/hyprland";
-    hyprwm-contrib.url = "github:hyprwm/contrib";
-    hyprpaper.url = "github:hyprwm/hyprpaper";
+    hyprland = { 
+      url = "github:hyprwm/hyprland"; 
+      inputs.nixpkgs.follows = "nixpkgs-unstable"; 
+    };
+
+    hyprwm-contrib = { 
+      url = "github:hyprwm/contrib"; 
+      inputs.nixpkgs.follows = "nixpkgs-unstable"; 
+    };
+
+    hyprpaper = { 
+      url = "github:hyprwm/hyprpaper";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = { self, nixpkgs, nixos-hardware,  home-manager, ... }@inputs:
