@@ -1,4 +1,3 @@
-
 { pkgs, inputs, config, lib, ... }: {
   imports = [
     inputs.nixos-hardware.nixosModules.omen-en00015p
@@ -47,12 +46,11 @@
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.powerManagement.enable = true;
-  hardware.nvidia.powerManagement.finegrained= true;
+  hardware.nvidia.powerManagement.finegrained = true;
 
   # steam bullshit
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
-
 
   services.logind = {
     lidSwitch = "suspend";
@@ -72,9 +70,8 @@
   programs = {
     light.enable = true;
     dconf.enable = true;
-    kdeconnect.enable = true;
   };
-  
+
   xdg.portal = {
     enable = true;
     wlr.enable = true;

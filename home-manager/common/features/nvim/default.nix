@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 {
-  # home.sessionVariables.EDITOR = "nvim";
-  imports = [
-    ./neovide.nix
-  ];
+  home.sessionVariables.EDITOR = "nvim";
   
   programs.neovim = {
     enable = true;
@@ -21,11 +18,10 @@
     phpPackages.composer
     stylua
     luajitPackages.luarocks-nix
-    haskell.compiler.ghcHEAD
-    stack
-    haskell-language-server
-    haskellPackages.haskell-debug-adapter
-    haskellPackages.ghci-dap
+    rnix-lsp
+    alejandra
+    deadnix
+    statix
  ];
 
   xdg.configFile = {
@@ -39,7 +35,7 @@
      "astronvim/lua/user".source = builtins.fetchGit {
        url = "https://github.com/sjcobb2022/astro_config.git";
        ref = "main";
-       rev = "a9c9b6f87ca32b5e7271280fbaef3a28a8c26bee";
+       rev = "f23396df07c9903f21a9cce402a9f749ce119a18";
        shallow = true;
      };
   };

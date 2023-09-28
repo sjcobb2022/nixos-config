@@ -1,7 +1,4 @@
 { pkgs, ... }: {
-  #home.packages = [
-  #  (pkgs.nerdfonts.override { fonts = [ "ProggyClean" "JetBrainsMono" "BigBlueTerminal" "Gohu" "FiraCode" ]; })
-  # ];
   fontProfiles = {
     enable = true;
     monospace = {
@@ -13,4 +10,12 @@
       package = pkgs.fira;
     };
   };
+
+  # fallback to japanese  
+  home.packages = with pkgs; [
+    ipafont
+    noto-fonts
+    source-han-sans
+    source-han-serif
+  ];
 }

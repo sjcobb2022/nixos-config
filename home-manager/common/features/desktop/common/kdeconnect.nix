@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 let
-  kdeconnect-cli = "${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-cli";
+  # kdeconnect-cli = "${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-cli";
 in
 {
   xdg.desktopEntries = {
@@ -25,6 +25,8 @@ in
     enable = true;
     indicator = true;
   };
+
+  home.packages = with pkgs; [ valent ];
 
   home.persistence = {
     "/persist/home/sjcobb".directories = [ ".config/kdeconnect" ];
