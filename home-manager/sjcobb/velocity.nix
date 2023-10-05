@@ -5,7 +5,7 @@
   # You can import other home-manager modules here
   imports = [
     inputs.nix-colors.homeManagerModule
-    ../common/global
+    ../common/features/cli
     # If you want to use modules your own flake exports (from modules/home-manager):
     # outputs.homeManagerModules.example
 
@@ -59,7 +59,7 @@
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;
   home.file.".colorscheme".text = config.colorscheme.slug;
-  
+
   # Add stuff for your user as you see fit:
   home.packages = with pkgs; [ ];
 

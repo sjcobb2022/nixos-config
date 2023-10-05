@@ -17,30 +17,30 @@
     nix-colors.url = "github:misterio77/nix-colors";
     sops-nix.url = "github:mic92/sops-nix";
 
-    nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware.url = "github:sjcobb2022/nixos-hardware";
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = { 
-      url = "github:hyprwm/hyprland"; 
-      inputs.nixpkgs.follows = "nixpkgs-unstable"; 
+    hyprland = {
+      url = "github:hyprwm/hyprland";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    hyprwm-contrib = { 
-      url = "github:hyprwm/contrib"; 
-      inputs.nixpkgs.follows = "nixpkgs-unstable"; 
+    hyprwm-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    hyprpaper = { 
+    hyprpaper = {
       url = "github:hyprwm/hyprpaper";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
-  outputs = { self, nixpkgs, nixos-hardware,  home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
       forEachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
@@ -68,7 +68,7 @@
 
       nixosConfigurations = {
         slaptop = mkNixos [ ./hosts/slaptop ];
-        velocity = mkNixos [ ./hosts/velocity];
+        velocity = mkNixos [ ./hosts/velocity ];
       };
 
       homeConfigurations = {

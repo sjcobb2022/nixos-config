@@ -1,5 +1,5 @@
 { inputs, lib, config, pkgs, ... }: {
-  
+
   imports = [
     ../common
     ../common/wayland
@@ -39,7 +39,7 @@
       # nvidia bullshit 
       env = LIBVA_DRIVER_NAME,nvidia
       env = XDG_SESSION_TYPE,wayland
-      env = GBM_BACKEND,nvidia
+      # env = GBM_BACKEND,nvidia
       env = __GLX_VENDOR_LIBRARY_NAME,nvidia
       env = WLR_NO_HARDWARE_CURSORS,1
 

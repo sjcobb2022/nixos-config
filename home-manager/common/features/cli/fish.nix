@@ -34,6 +34,8 @@ in
 
       ls = mkIf hasEza "eza";
 
+      gcl = "git clone";
+
       e = mkIf hasEmacs "emacsclient -t";
 
       vrg = mkIf (hasNeomutt && hasRipgrep) "nvimrg";
