@@ -2,8 +2,8 @@
   imports = [
     ./hardware-configuration.nix
     ../common/global
-    ../common/optional/nginx.nix
     ../common/users/sjcobb
+    ../common/optional/nginx.nix
     # ../common/optional/grub.nix
   ];
 
@@ -38,7 +38,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 3000 5173 4173 ];
+    allowedTCPPorts = [ 3000 5173 4173 80 443 ];
   };
 
 
