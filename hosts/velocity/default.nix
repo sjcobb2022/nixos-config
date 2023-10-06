@@ -1,8 +1,8 @@
-
 { pkgs, inputs, config, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../common/global
+    ../common/optional/nginx.nix
     ../common/users/sjcobb
     # ../common/optional/grub.nix
   ];
@@ -47,6 +47,6 @@
   time.timeZone = "Europe/London";
 
   i18n.defaultLocale = "en_GB.UTF-8";
-  
+
   system.stateVersion = "23.05";
 } 
