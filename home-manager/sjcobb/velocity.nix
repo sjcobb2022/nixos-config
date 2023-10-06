@@ -4,6 +4,7 @@
 { inputs, outputs, lib, config, pkgs, ... }: {
   # You can import other home-manager modules here
   imports = [
+    inputs.nix-colors.homeManagerModule
     inputs.impermanence.nixosModules.home-manager.impermanence
     ../common/features/cli
     # If you want to use modules your own flake exports (from modules/home-manager):
