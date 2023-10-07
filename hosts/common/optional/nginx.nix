@@ -14,6 +14,18 @@
         server G683083F1D51ED3-UJ2GE94JAJZME69W.adb.uk-london-1.oraclecloudapps.com:27017;
       }
     '';
+    appendHttpConfig = ''
+
+    upstream backend {
+      server G683083F1D51ED3-UJ2GE94JAJZME69W.adb.uk-london-1.oraclecloudapps.com
+    }
+
+    server {
+      location / {
+        proxy_pass http://backend 
+      }
+    }
+    '';
   };
 }
 
