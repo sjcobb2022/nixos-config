@@ -15,7 +15,6 @@
     ../common/optional/thunar.nix
     ../common/optional/tlp.nix
     ../common/optional/wireless.nix
-    ../common/optional/nginx.nix
   ];
 
   security.pki.certificateFiles = [
