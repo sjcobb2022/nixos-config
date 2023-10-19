@@ -1,8 +1,8 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, config, ... }: {
   home.packages = [ pkgs.lutris ];
 
   home.persistence = {
-    "/persist/home/sjcobb" = {
+    "/persist/home/${config.home.username}" = {
       allowOther = true;
       directories = [
         {
