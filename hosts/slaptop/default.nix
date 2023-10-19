@@ -6,6 +6,7 @@
 
     ../common/global
     ../common/users/sjcobb
+    ../common/users/guest
 
     ../common/optional/greetd.nix
     ../common/optional/grub.nix
@@ -63,7 +64,7 @@
 
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
-    nvidiaSettings = false;
+    nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -74,6 +75,7 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [ libvdpau-va-gl vaapiVdpau ];
   };
 
   services.logind = {
@@ -89,6 +91,38 @@
       };
     };
     plymouth.enable = false;
+  };
+
+  specialisation.gnome = {
+    inheritParentConfig = true;
+    configuration = {
+      services.greetd.enable = lib.mkForce false;
+      services.pipewire.enable = lib.mkForce false;
+      services.xserver.enable = lib.mkForce true;
+      services.xserver.displayManager.gdm.enable = lib.mkForce true;
+      services.xserver.desktopManager.gnome.enable = lib.mkForce true;
+
+      environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator ];
+      services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
+      environment.gnome.excludePackages = (with pkgs; [
+        gnome-photos
+        gnome-tour
+      ]) ++ (with pkgs.gnome; [
+        cheese # webcam tool
+        gnome-music
+        gedit # text editor
+        epiphany # web browser
+        geary # email reader
+        evince # document viewer
+        gnome-characters
+        totem # video player
+        tali # poker game
+        iagno # go game
+        hitori # sudoku game
+        atomix # puzzle game
+      ]);
+    };
   };
 
   programs = {
