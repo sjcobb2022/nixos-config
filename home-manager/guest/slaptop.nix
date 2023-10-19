@@ -6,7 +6,8 @@
   imports = [
     inputs.nix-colors.homeManagerModule
     ../common/global
-    ../common/features/desktop/gnome
+    ../common/features/desktop/common
+    ../common/features/games
     # If you want to use modules your own flake exports (from modules/home-manager):
     # outputs.homeManagerModules.example
 
@@ -35,7 +36,7 @@
   };
 
   home = {
-    username = lib.mkDefault "sjcobb";
+    username = lib.mkDefault "guest";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
     sessionPath = [ "$HOME/.local/bin" ];
     persistence = {
@@ -55,7 +56,7 @@
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;
   home.file.".colorscheme".text = config.colorscheme.slug;
-  
+
   # Add stuff for your user as you see fit:
   home.packages = with pkgs; [ ];
 
