@@ -15,8 +15,6 @@
     xorg.xprop
   ];
 
-
-
   xdg.configFile."hypr/hyprpaper.conf".text = ''
     preload = ${../common/assets/mountain.jpg}
     preload = ${../common/assets/wave.png}
@@ -54,16 +52,16 @@
       # TODO: use hyprpaper, mako from pkgs
       exec-once = mako
       exec-once = hyprpaper 
-      exec-once = ${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1
+      exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
       
       # sets xwayland scale
-      exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1
-      
+      # exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1
+          
       # toolkit-specific scale
-      env = GDK_SCALE,2
+      # env = GDK_SCALE,2
       # env = XCURSOR_SIZE,24
       
       # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
