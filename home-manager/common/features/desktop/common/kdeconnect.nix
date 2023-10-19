@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 let
   # kdeconnect-cli = "${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-cli";
 in
@@ -29,6 +29,6 @@ in
   home.packages = with pkgs; [ valent ];
 
   home.persistence = {
-    "/persist/home/sjcobb".directories = [ ".config/kdeconnect" ];
+    "/persist/home/${config.home.username}".directories = [ ".config/kdeconnect" ];
   };
 }

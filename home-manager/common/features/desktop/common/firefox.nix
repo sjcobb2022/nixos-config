@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, lib, config, inputs, ... }:
 
 let
   addons = inputs.firefox-addons.packages.${pkgs.system};
@@ -37,7 +37,7 @@ in
       TZ = "/etc/localtime";
     };
     persistence = {
-      "/persist/home/sjcobb".directories = [ ".mozilla/firefox" ];
+      "/persist/home/${config.home.username}".directories = [ ".mozilla/firefox" ];
     };
   };
 

@@ -5,6 +5,6 @@ in
   home.packages = with pkgs; [ discord discocss ];
 
   home.persistence = {
-    "/persist/home/sjcobb".directories = [ ".config/discord" ];
+    "/persist/home/${config.home.username}".directories = [ ".config/discord" ];
   };
 }
