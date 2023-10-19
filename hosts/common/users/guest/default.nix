@@ -1,4 +1,4 @@
-{ pkgs, config, ...}:
+{ pkgs, config, lib, ... }:
 let ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
 {
@@ -18,12 +18,12 @@ in
     ];
 
     openssh.authorizedKeys.keys = [ (builtins.readFile ../ssh.pub) ];
-    packages = [ 
+    packages = [
       pkgs.home-manager
     ];
   };
 
-  home-manager.users.guest= import ../../../../home-manager/guest/${config.networking.hostName}.nix;
+  home-manager.users.guest = import ../../../../home-manager/guest/${config.networking.hostName}.nix;
 
   services.geoclue2.enable = true;
 
