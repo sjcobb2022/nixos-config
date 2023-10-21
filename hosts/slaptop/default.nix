@@ -23,6 +23,10 @@
     ./CA-7512C298D4BAF4863B833F3CDEE56EEAE93EDCCA.cer
   ];
 
+  environment.systemPackages = [
+    pkgs.unstable.nodePackages_latest.prisma
+  ];
+
   networking = {
     networkmanager.enable = true;
     hostName = "slaptop";
@@ -97,6 +101,7 @@
     inheritParentConfig = true;
     configuration = {
       services.greetd.enable = lib.mkForce false;
+      systemd.services.greetd.enable = lib.mkForce false;
       services.pipewire.enable = lib.mkForce false;
       services.xserver.enable = lib.mkForce true;
       services.xserver.displayManager.gdm.enable = lib.mkForce true;
