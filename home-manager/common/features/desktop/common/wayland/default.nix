@@ -7,7 +7,7 @@
     ./mako.nix
     #./swayidle.nix
     #./swaylock.nix
-    #./waybar.nix
+    ./waybar.nix
     ./kde-polkit-agent.nix
     ./wofi.nix
     ./zathura.nix

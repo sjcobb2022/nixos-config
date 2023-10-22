@@ -22,11 +22,6 @@
     wallpaper = ,${../common/assets/mountain.jpg}
   '';
 
-  # experimental waybar to allow for wlr/workspace
-  programs.waybar.package = pkgs.waybar.overrideAttrs (oa: {
-    mesonFlags = (oa.mesonFlags or  [ ]) ++ [ "-Dexperimental=true" ];
-  });
-
   wayland.windowManager.hyprland = {
     enable = true;
     enableNvidiaPatches = true;
@@ -193,6 +188,8 @@
 
       bindel=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
       bindel=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+
+      bindl=, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
       bindel=,XF86MonBrightnessUp,exec,light -A 10
       bindel=,XF86MonBrightnessDown,exec,light -U 10

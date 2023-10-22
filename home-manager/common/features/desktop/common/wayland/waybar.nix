@@ -2,25 +2,26 @@
 
 let
   # Dependencies
+  cat = "${pkgs.coreutils}/bin/cat";
+  cut = "${pkgs.coreutils}/bin/cut";
+  find = "${pkgs.findutils}/bin/find";
+  grep = "${pkgs.gnugrep}/bin/grep";
+  pgrep = "${pkgs.procps}/bin/pgrep";
+  tail = "${pkgs.coreutils}/bin/tail";
+  wc = "${pkgs.coreutils}/bin/wc";
+  xargs = "${pkgs.findutils}/bin/xargs";
+  timeout = "${pkgs.coreutils}/bin/timeout";
+  ping = "${pkgs.iputils}/bin/ping";
+
   jq = "${pkgs.jq}/bin/jq";
-  xml = "${pkgs.xmlstarlet}/bin/xml";
-  gamemoded = "${pkgs.gamemode}/bin/gamemoded";
   systemctl = "${pkgs.systemd}/bin/systemctl";
   journalctl = "${pkgs.systemd}/bin/journalctl";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   playerctld = "${pkgs.playerctl}/bin/playerctld";
-  neomutt = "${pkgs.neomutt}/bin/neomutt";
   pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
-  btm = "${pkgs.bottom}/bin/btm";
   wofi = "${pkgs.wofi}/bin/wofi";
-  ikhal = "${pkgs.khal}/bin/ikhal";
-
-  terminal = "${pkgs.kitty}/bin/kitty";
-  terminal-spawn = cmd: "${terminal} $SHELL -i -c ${cmd}";
-
-  calendar = terminal-spawn ikhal;
-  systemMonitor = terminal-spawn btm;
-  mail = terminal-spawn neomutt;
+  light = "${pkgs.light}/bin/light";
+  wpctl = "${pkgs.wireplumber}/bin/wpctl";
 
   # Function to simplify making waybar outputs
   jsonOutput = name: { pre ? "", text ? "", tooltip ? "", alt ? "", class ? "", percentage ? "" }: "${pkgs.writeShellScriptBin "waybar-${name}" ''
@@ -38,118 +39,107 @@ in
 {
   programs.waybar = {
     enable = true;
+    package = pkgs.unstable.waybar.overrideAttrs (oa: {
+      mesonFlags = (oa.mesonFlags or  [ ]) ++ [ "-Dexperimental=true" ];
+    });
+    systemd.enable = true;
     settings = {
-
-      secondary = {
-        mode = "dock";
-        layer = "top";
-        height = 32;
-        width = 100;
-        margin = "6";
-        position = "bottom";
-        modules-center = (lib.optionals config.wayland.windowManager.sway.enable [
-          "sway/workspaces"
-          "sway/mode"
-        ]) ++ (lib.optionals config.wayland.windowManager.hyprland.enable [
-          "wlr/workspaces"
-        ]);
-
-        "wlr/workspaces" = {
-          on-click = "activate";
-        };
-      };
-
       primary = {
-        mode = "dock";
         layer = "top";
-        height = 40;
-        margin = "6";
         position = "top";
-        # output = builtins.map (m: m.name) (builtins.filter (m: ! m.noBar) config.monitors);
+        height = 10;
         modules-left = [
-          #"custom/menu"
-          #"custom/currentplayer"
-          #"custom/player"
+          # "custom/currentplayer"
+          # "custom/player"
+        ]
+        ++ (lib.optionals config.wayland.windowManager.hyprland.enable [
+          "hyprland/workspaces"
+          "hyprland/submap"
+        ]) ++ [
+          # whatever else 
         ];
+
         modules-center = [
-          #"cpu"
-          #"custom/gpu"
-          #"memory"
-          #"clock"
-          #"pulseaudio"
-          #"custom/unread-mail"
-          #"custom/gammastep"
-          #"custom/gpg-agent"
+          "hyprland/window"
+          #   "pulseaudio"
+          #   "battery"
+          #   "clock"
         ];
+
+        # modules-right = [
+        #   "network"
+        #   "tray"
+        # ];
+
         modules-right = [
-          #"custom/gamemode"
-          #"network"
-          #"custom/tailscale-ping"
-          #"battery"
-          #"tray"
-          #"custom/hostname"
+          "network"
+          "idle_inhibitor"
+          "memory"
+          "cpu"
+          "pulseaudio"
+          "battery"
+          "backlight"
+          "clock"
+          "tray"
         ];
 
         clock = {
+          interval = 10;
           format = "{:%d/%m %H:%M}";
+          format-alt = " {:%Y-%m-%d %H:%M:%S %z}";
+          on-click-left = "mode";
           tooltip-format = ''
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
-          on-click = calendar;
         };
+
         cpu = {
-          format = "   {usage}%";
-          on-click = systemMonitor;
-        };
-        "custom/gpu" = {
           interval = 5;
-          return-type = "json";
-          exec = jsonOutput "gpu" {
-            text = "$(cat /sys/class/drm/card0/device/gpu_busy_percent)";
-            tooltip = "GPU Usage";
+          format = "  {usage}% ({load})";
+          states = {
+            "warning" = 70;
+            "critical" = 90;
           };
-          format = "力  {}%";
-          on-click = systemMonitor;
+          on-click = "wezterm start -- top";
         };
+
         memory = {
-          format = "  {}%";
           interval = 5;
-          on-click = systemMonitor;
-        };
-        pulseaudio = {
-          format = "{icon}  {volume}%";
-          format-muted = "   0%";
-          format-icons = {
-            headphone = "";
-            headset = "";
-            portable = "";
-            default = [ "" "" "" ];
+          format = "  {}%";
+          states = {
+            "warning" = 70;
+            "critical" = 90;
           };
-          on-click = pavucontrol;
         };
+
         idle_inhibitor = {
           format = "{icon}";
           format-icons = {
-            activated = "零";
-            deactivated = "鈴";
+            activated = "󰒳";
+            deactivated = "󰒲";
           };
         };
+
         battery = {
           bat = "BAT0";
           interval = 10;
-          format-icons = [ "" "" "" "" "" "" "" "" "" "" ];
+          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+          format-charging = "󰂄 {capacity}%";
+          format-plugged = "{capacity}% ";
           format = "{icon} {capacity}%";
-          format-charging = " {capacity}%";
           onclick = "";
         };
-        "sway/window" = {
-          max-length = 20;
-        };
+
         network = {
           interval = 3;
-          format-wifi = "   {essid}";
-          format-ethernet = " Connected";
-          format-disconnected = "";
+          format = "{icon}   {essid} ({signalStrength}%)";
+          format-alt = "{ifname}: {ipaddr}/{cidr}";
+
+          format-icons = {
+            "wifi" = [ "睊" "直" "" ];
+            "ethernet" = [ "" ];
+            "disconnected" = [ "" ];
+          };
           tooltip-format = ''
             {ifname}
             {ipaddr}/{cidr}
@@ -157,83 +147,21 @@ in
             Down: {bandwidthDownBits}'';
           on-click = "";
         };
-        "custom/tailscale-ping" = {
-          interval = 2;
-          return-type = "json";
-          exec =
-            let
-              inherit (builtins) concatStringsSep attrNames;
-              hosts = attrNames outputs.nixosConfigurations;
-              homeMachine = "merope";
-              remoteMachine = "alcyone";
-            in
-            jsonOutput "tailscale-ping" {
-              # Build variables for each host
-              pre = ''
-                set -o pipefail
-                ${concatStringsSep "\n" (map (host: ''
-                  ping_${host}="$(timeout 2 ping -c 1 -q ${host} 2>/dev/null | tail -1 | cut -d '/' -f5 | cut -d '.' -f1)ms" || ping_${host}="Disconnected"
-                '') hosts)}
-              '';
-              # Access a remote machine's and a home machine's ping
-              text = "  $ping_${remoteMachine} /  $ping_${homeMachine}";
-              # Show pings from all machines
-              tooltip = concatStringsSep "\n" (map (host: "${host}: $ping_${host}") hosts);
-            };
-          format = "{}";
-          on-click = "";
+
+        "backlight" = {
+          format = "{icon}  {percent}% ";
+          format-icons = [ "" ];
+          on-scroll-down = "${light} -A 1";
+          on-scroll-up = "${light} -U 1";
         };
-        "custom/menu" = {
-          return-type = "json";
-          exec = jsonOutput "menu" {
-            text = "";
-            tooltip = ''$(cat /etc/os-release | grep PRETTY_NAME | cut -d '"' -f2)'';
-          };
-          on-click = "${wofi} -S drun -x 10 -y 10 -W 25% -H 60%";
-        };
-        "custom/hostname" = {
-          exec = "echo $USER@$(hostname)";
-          on-click = terminal;
-        };
-        "custom/unread-mail" = {
-          interval = 5;
-          return-type = "json";
-          exec = jsonOutput "unread-mail" {
-            pre = ''
-              count=$(find ~/Mail/*/Inbox/new -type f | wc -l)
-              if [ "$count" == "0" ]; then
-                subjects="No new mail"
-                status="read"
-              else
-                subjects=$(\
-                  grep -h "Subject: " -r ~/Mail/*/Inbox/new | cut -d ':' -f2- | \
-                  perl -CS -MEncode -ne 'print decode("MIME-Header", $_)' | ${xml} esc | sed -e 's/^/\-/'\
-                )
-                status="unread"
-              fi
-              if pgrep mbsync &>/dev/null; then
-                status="syncing"
-              fi
-            '';
-            text = "$count";
-            tooltip = "$subjects";
-            alt = "$status";
-          };
-          format = "{icon}  ({})";
-          format-icons = {
-            "read" = "";
-            "unread" = "";
-            "syncing" = "";
-          };
-          on-click = mail;
-        };
+
         "custom/currentplayer" = {
           interval = 2;
           return-type = "json";
           exec = jsonOutput "currentplayer" {
             pre = ''
-              player="$(${playerctl} status -f "{{playerName}}" 2>/dev/null || echo "No player active" | cut -d '.' -f1)"
-              count="$(${playerctl} -l | wc -l)"
+              player="$(${playerctl} status -f "{{playerName}}" 2>/dev/null || echo "No player active" | ${cut} -d '.' -f1)"
+              count="$(${playerctl} -l | ${wc} -l)"
               if ((count > 1)); then
                 more=" +$((count - 1))"
               else
@@ -247,30 +175,75 @@ in
           format = "{icon}{}";
           format-icons = {
             "No player active" = " ";
-            "Celluloid" = " ";
-            "spotify" = " 阮";
-            "ncspot" = " 阮";
-            "qutebrowser" = "爵";
+            "Celluloid" = "󰎁 ";
+            "spotify" = "󰓇 ";
+            "ncspot" = "󰓇 ";
+            "qutebrowser" = "󰖟 ";
             "firefox" = " ";
-            "discord" = " ﭮ ";
-            "kdeconnect" = " ";
+            "discord" = " 󰙯 ";
+            "sublimemusic" = " ";
+            "kdeconnect" = "󰄡 ";
+            "chromium" = " ";
           };
           on-click = "${playerctld} shift";
           on-click-right = "${playerctld} unshift";
         };
         "custom/player" = {
           exec-if = "${playerctl} status";
-          exec = ''${playerctl} metadata --format '{"text": "{{artist}} - {{title}}", "alt": "{{status}}", "tooltip": "{{title}} ({{artist}} - {{album}})"}' '';
+          exec = ''${playerctl} metadata --format '{"text": "{{title}} - {{artist}}", "alt": "{{status}}", "tooltip": "{{title}} - {{artist}} ({{album}})"}' '';
           return-type = "json";
           interval = 2;
           max-length = 30;
           format = "{icon} {}";
           format-icons = {
-            "Playing" = "契";
-            "Paused" = " ";
-            "Stopped" = "栗";
+            "Playing" = "󰐊";
+            "Paused" = "󰏤 ";
+            "Stopped" = "󰓛";
           };
           on-click = "${playerctl} play-pause";
+        };
+
+        pulseaudio = {
+          "scroll-step" = 1;
+          "format" = "{volume}% {icon}";
+          "format-bluetooth" = "{volume}% {icon}  {format_source}";
+          "format-bluetooth-muted" = " {icon}  {format_source}";
+          "format-muted" = "  {format_source}";
+          "format-source" = "{volume}% ";
+          "format-source-muted" = "";
+          "format-icons" = {
+            "headphone" = "";
+            "hands-free" = "וֹ";
+            "headset" = "  ";
+            "phone" = "";
+            "portable" = "";
+            "car" = "";
+            default = [ "" "" "" ];
+          };
+          "on-click" = "${pavucontrol}";
+          "on-scroll-down" = "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+";
+          "on-scroll-up" = "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%-";
+        };
+
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          format-icons = {
+            "1" = "一";
+            "2" = "二";
+            "3" = "三";
+            "4" = "四";
+            "5" = "五";
+            "6" = "六";
+            "7" = "七";
+            "8" = "八";
+            "9" = "九";
+            "10" = "十";
+            default = "";
+          };
+        };
+
+        "hyprland/window" = {
+          max-length = 50;
         };
       };
 
@@ -281,87 +254,164 @@ in
     # x y z -> top, horizontal, bottom
     # w x y z -> top, right, bottom, left
     style = let inherit (config.colorscheme) colors; in /* css */ ''
+      @define-color highlight #5294e2 ;
+      @define-color base1  #${colors.base01} ;
+
+      @keyframes blink-warning {
+          70% {
+              color: white;
+          }
+
+          to {
+              color: white;
+              background-color: orange;
+          }
+      }
+
+      @keyframes blink-critical {
+          70% {
+            color: white;
+          }
+
+          to {
+              color: white;
+              background-color: red;
+          }
+      }
+
+      /* -----------------------------------------------------------------------------
+       * Base styles
+       * -------------------------------------------------------------------------- */
+
+      /* Reset all styles */
       * {
-        font-family: ${config.fontProfiles.regular.family}, ${config.fontProfiles.monospace.family};
-        font-size: 12pt;
-        padding: 0 8px;
+          border: none;
+          border-radius: 0;
+          min-height: 0;
+          margin: 0;
+          padding: 0;
       }
 
-      .modules-right {
-        margin-right: -15px;
+      /* The whole bar */
+      #waybar {
+          background: transparent;
+          color: #bebebe;
+          background-color: @base1;
+          font-family: Fira Sans, FiraCode Nerd Font;
+          font-size: 12px;
       }
 
-      .modules-left {
-        margin-left: -15px;
+      /* Every modules */
+      #battery,
+      #clock,
+      #backlight,
+      #cpu,
+      #memory,
+      #mode,
+      #network,
+      #pulseaudio,
+      #temperature,
+      #tray,
+      #idle_inhibitor {
+          padding:0.5rem 0.6rem;
+          margin: 1px 0px;
       }
 
-      window#waybar.top {
-        opacity: 0.95;
-        padding: 0;
-        background-color: #${colors.base00};
-        border: 2px solid #${colors.base0C};
-        border-radius: 10px;
-      }
-      window#waybar.bottom {
-        opacity: 0.90;
-        background-color: #${colors.base00};
-        border: 2px solid #${colors.base0C};
-        border-radius: 10px;
+      /* -----------------------------------------------------------------------------
+       * Modules styles
+       * -------------------------------------------------------------------------- */
+
+      #battery {
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
       }
 
-      window#waybar {
-        color: #${colors.base05};
+      #battery.warning {
+          color: orange;
+      }
+
+      #battery.critical {
+          color: red;
+      }
+
+      #battery.warning.discharging {
+          animation-name: blink-warning;
+          animation-duration: 3s;
+      }
+
+      #battery.critical.discharging {
+          animation-name: blink-critical;
+          animation-duration: 2s;
+      }
+
+      #cpu.warning {
+          color: orange;
+      }
+
+      #cpu.critical {
+          color: red;
+      }
+
+      #memory {
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+      }
+
+      #memory.warning {
+          color: orange;
+       }
+
+      #memory.critical {
+          color: red;
+          animation-name: blink-critical;
+          animation-duration: 2s;
+          padding-left:5px;
+          padding-right:5px;
+      }
+
+      #network.disconnected {
+          color: orange;
+      }
+
+      #pulseaudio {
+          padding-top:6px;
+      }
+
+      #pulseaudio.muted {
+          color: @highlight;
+      }
+
+      #temperature.critical {
+          color: red;
+      }
+
+      #window {
+          font-weight: bold;
+      }
+
+      #workspaces {
+          font-size:13px;
       }
 
       #workspaces button {
-        background-color: #${colors.base01};
-        color: #${colors.base05};
-        margin: 4px;
-      }
-      #workspaces button.hidden {
-        background-color: #${colors.base00};
-        color: #${colors.base04};
-      }
-      #workspaces button.focused,
-      #workspaces button.active {
-        background-color: #${colors.base0A};
-        color: #${colors.base00};
+          border-bottom: 3px solid transparent;
+          margin-bottom: 0px;
+          padding:0px;
       }
 
-      #clock {
-        background-color: #${colors.base0C};
-        color: #${colors.base00};
-        padding-left: 15px;
-        padding-right: 15px;
-        margin-top: 0;
-        margin-bottom: 0;
-        border-radius: 10px;
+      #workspaces button.focused {
+          border-bottom: 3px solid  @highlight;
+          margin-bottom: 1px;
+          padding-left:0;
       }
 
-      #custom-menu {
-        background-color: #${colors.base0C};
-        color: #${colors.base00};
-        padding-left: 15px;
-        padding-right: 22px;
-        margin-left: 0;
-        margin-right: 10px;
-        margin-top: 0;
-        margin-bottom: 0;
-        border-radius: 10px;
+      #workspaces button.urgent {
+          border-color: #c9545d;
+          color: #c9545d;
       }
-      #custom-hostname {
-        background-color: #${colors.base0C};
-        color: #${colors.base00};
-        padding-left: 15px;
-        padding-right: 18px;
-        margin-right: 0;
-        margin-top: 0;
-        margin-bottom: 0;
-        border-radius: 10px;
-      }
-      #tray {
-        color: #${colors.base05};
-      }
+
     '';
   };
 }
