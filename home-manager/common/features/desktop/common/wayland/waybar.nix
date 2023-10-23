@@ -47,7 +47,6 @@ in
       primary = {
         layer = "top";
         position = "top";
-        height = 10;
         modules-left = [
           # "custom/currentplayer"
           # "custom/player"
@@ -72,21 +71,21 @@ in
         # ];
 
         modules-right = [
+          "tray"
           "network"
           "idle_inhibitor"
           "memory"
           "cpu"
           "pulseaudio"
-          "battery"
           "backlight"
+          "battery"
           "clock"
-          "tray"
         ];
 
         clock = {
           interval = 10;
           format = "{:%d/%m %H:%M}";
-          format-alt = " {:%Y-%m-%d %H:%M:%S %z}";
+          format-alt = "{:%Y-%m-%d %H:%M:%S %z}";
           on-click-left = "mode";
           tooltip-format = ''
             <big>{:%Y %B}</big>
@@ -95,17 +94,18 @@ in
 
         cpu = {
           interval = 5;
-          format = "  {usage}% ({load})";
+          format = "{icon} {usage}% ({load})";
           states = {
             "warning" = 70;
             "critical" = 90;
           };
-          on-click = "wezterm start -- top";
+          format-icons = [ "" ];
         };
 
         memory = {
           interval = 5;
-          format = "  {}%";
+          format = "{icon} {}%";
+          format-icons = [ "󰍛" ];
           states = {
             "warning" = 70;
             "critical" = 90;
@@ -125,18 +125,18 @@ in
           interval = 10;
           format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
           format-charging = "󰂄 {capacity}%";
-          format-plugged = "{capacity}% ";
+          format-plugged = " {capacity}%";
           format = "{icon} {capacity}%";
           onclick = "";
         };
 
         network = {
           interval = 3;
-          format = "{icon}   {essid} ({signalStrength}%)";
+          format = "{icon} {essid} ({signalStrength}%)";
           format-alt = "{ifname}: {ipaddr}/{cidr}";
 
           format-icons = {
-            "wifi" = [ "睊" "直" "" ];
+            "wifi" = [ "󰤟 " "󰤢 " "󰤥 " "󰤨 " ];
             "ethernet" = [ "" ];
             "disconnected" = [ "" ];
           };
@@ -149,7 +149,7 @@ in
         };
 
         "backlight" = {
-          format = "{icon}  {percent}% ";
+          format = "{icon} {percent}% ";
           format-icons = [ "" ];
           on-scroll-down = "${light} -A 1";
           on-scroll-up = "${light} -U 1";
@@ -188,6 +188,7 @@ in
           on-click = "${playerctld} shift";
           on-click-right = "${playerctld} unshift";
         };
+
         "custom/player" = {
           exec-if = "${playerctl} status";
           exec = ''${playerctl} metadata --format '{"text": "{{title}} - {{artist}}", "alt": "{{status}}", "tooltip": "{{title}} - {{artist}} ({{album}})"}' '';
@@ -288,7 +289,7 @@ in
           border: none;
           border-radius: 0;
           min-height: 0;
-          margin: 0;
+          margin: 1px;
           padding: 0;
       }
 
@@ -297,7 +298,7 @@ in
           background: transparent;
           color: #bebebe;
           background-color: @base1;
-          font-family: Fira Sans, FiraCode Nerd Font;
+          font-family: FiraMono;
           font-size: 12px;
       }
 
