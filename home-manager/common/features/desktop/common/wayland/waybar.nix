@@ -123,22 +123,20 @@ in
         battery = {
           bat = "BAT0";
           interval = 10;
+          format = "{icon} {capacity}%";
           format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
           format-charging = "󰂄 {capacity}%";
           format-plugged = " {capacity}%";
-          format = "{icon} {capacity}%";
-          onclick = "";
         };
 
         network = {
           interval = 3;
           format = "{icon} {essid} ({signalStrength}%)";
           format-alt = "{ifname}: {ipaddr}/{cidr}";
-
           format-icons = {
             "wifi" = [ "󰤟 " "󰤢 " "󰤥 " "󰤨 " ];
-            "ethernet" = [ "" ];
-            "disconnected" = [ "" ];
+            "ethernet" = [ "󰈀" ];
+            "disconnected" = [ "󰌙" ];
           };
           tooltip-format = ''
             {ifname}
@@ -151,6 +149,7 @@ in
         "backlight" = {
           format = "{icon} {percent}% ";
           format-icons = [ "" ];
+          tooltip-format = "{percent}%";
           on-scroll-down = "${light} -A 1";
           on-scroll-up = "${light} -U 1";
         };
@@ -206,9 +205,9 @@ in
 
         pulseaudio = {
           "scroll-step" = 1;
-          "format" = "{volume}% {icon}";
-          "format-bluetooth" = "{volume}% {icon}  {format_source}";
-          "format-bluetooth-muted" = " {icon}  {format_source}";
+          "format" = "{icon} {volume}%";
+          "format-bluetooth" = "{icon} {volume}%  {format_source}";
+          "format-bluetooth-muted" = "{icon}    {format_source}";
           "format-muted" = "  {format_source}";
           "format-source" = "{volume}% ";
           "format-source-muted" = "";
@@ -228,6 +227,7 @@ in
 
         "hyprland/workspaces" = {
           format = "{icon}";
+          all-outputs = true;
           format-icons = {
             "1" = "一";
             "2" = "二";
@@ -240,6 +240,9 @@ in
             "9" = "九";
             "10" = "十";
             default = "";
+          };
+          "persistent-workspaces" = {
+            "*" = [ 1 2 3 4 5 ];
           };
         };
 
@@ -397,15 +400,13 @@ in
       }
 
       #workspaces button {
-          border-bottom: 3px solid transparent;
+          border-bottom: 1px solid transparent;
           margin-bottom: 0px;
-          padding:0px;
+          padding: 0px 5px;
       }
 
-      #workspaces button.focused {
-          border-bottom: 3px solid  @highlight;
-          margin-bottom: 1px;
-          padding-left:0;
+      #workspaces button.active {
+          border-bottom: 1px solid  @highlight;
       }
 
       #workspaces button.urgent {
