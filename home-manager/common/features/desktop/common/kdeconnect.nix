@@ -16,7 +16,12 @@ in
     };
     "org.kde.kdeconnect.app" = {
       exec = "";
-      name = "KDE Connect";
+      name = "kde connect";
+      settings.NoDisplay = "true";
+    };
+    "org.kde.kdeconnect_open" = {
+      exec = "";
+      name = "Open on connected device via KDE Connect";
       settings.NoDisplay = "true";
     };
   };
