@@ -114,6 +114,7 @@
 
       misc {
         disable_hyprland_logo = true
+        new_window_takes_over_fullscreen = false
       }
       
       gestures {
