@@ -9,6 +9,7 @@
     ./pavucontrol.nix
     ./playerctl.nix
     ./qt.nix
+    ./mpd.nix
     ./wpa-gui.nix
     ./adwaita.nix
   ];
