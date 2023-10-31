@@ -72,6 +72,7 @@ in
 
         modules-right = [
           "tray"
+          "temperature"
           "network"
           "idle_inhibitor"
           "memory"
@@ -93,7 +94,6 @@ in
         };
 
         cpu = {
-          interval = 5;
           format = "{icon} {usage}% ({load})";
           states = {
             "warning" = 70;
@@ -103,13 +103,17 @@ in
         };
 
         memory = {
-          interval = 5;
           format = "{icon} {}%";
           format-icons = [ "󰍛" ];
           states = {
             "warning" = 70;
             "critical" = 90;
           };
+        };
+
+        temperature = {
+          format = "{icon} {temperatureC}°C";
+          format-icons = [ "" "" "" "" "" ];
         };
 
         idle_inhibitor = {
@@ -257,31 +261,29 @@ in
     # x y -> vertical, horizontal
     # x y z -> top, horizontal, bottom
     # w x y z -> top, right, bottom, left
+
+    # base00: "#171D23"
+    # base01: "#1D252C"
+    # base02: "#28323A"
+    # base03: "#526270"
+    # base04: "#B7C5D3"
+    # base05: "#D8E2EC"
+    # base06: "#F6F6F8"
+    # base07: "#FBFBFD"
+    # base08: "#F7768E"
+    # base09: "#FF9E64"
+    # base0A: "#B7C5D3"
+    # base0B: "#9ECE6A"
+    # base0C: "#89DDFF"
+    # base0D: "#7AA2F7"
+    # base0E: "#BB9AF7"
+    # base0F: "#BB9AF7"
     style = let inherit (config.colorscheme) colors; in /* css */ ''
-      @define-color highlight #5294e2 ;
-      @define-color base1  #${colors.base01} ;
-
-      @keyframes blink-warning {
-          70% {
-              color: white;
-          }
-
-          to {
-              color: white;
-              background-color: orange;
-          }
-      }
-
-      @keyframes blink-critical {
-          70% {
-            color: white;
-          }
-
-          to {
-              color: white;
-              background-color: red;
-          }
-      }
+      @define-color highlight #${colors.base0D};
+      @define-color base1  #${colors.base01};
+      @define-color base2  #${colors.base04};
+      @define-color warning #${colors.base09};
+      @define-color critical #${colors.base08};
 
       /* -----------------------------------------------------------------------------
        * Base styles
@@ -299,7 +301,7 @@ in
       /* The whole bar */
       #waybar {
           background: transparent;
-          color: #bebebe;
+          color: @base2;
           background-color: @base1;
           font-family: FiraMono;
           font-size: 12px;
@@ -332,11 +334,11 @@ in
       }
 
       #battery.warning {
-          color: orange;
+          color: @warning;
       }
 
       #battery.critical {
-          color: red;
+          color: @critical;
       }
 
       #battery.warning.discharging {
@@ -350,33 +352,26 @@ in
       }
 
       #cpu.warning {
-          color: orange;
+          color: @warning;
       }
 
       #cpu.critical {
-          color: red;
+          color: @critical;
       }
 
       #memory {
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
       }
 
       #memory.warning {
-          color: orange;
+          color: @warning;
        }
 
       #memory.critical {
-          color: red;
-          animation-name: blink-critical;
-          animation-duration: 2s;
-          padding-left:5px;
-          padding-right:5px;
+          color: @critical;
       }
 
       #network.disconnected {
-          color: orange;
+          color: @warning;
       }
 
       #pulseaudio {
@@ -388,7 +383,7 @@ in
       }
 
       #temperature.critical {
-          color: red;
+          color: @critical;
       }
 
       #window {
@@ -410,8 +405,8 @@ in
       }
 
       #workspaces button.urgent {
-          border-color: #c9545d;
-          color: #c9545d;
+          border-color: @critical;
+          color: @critical;
       }
 
     '';
