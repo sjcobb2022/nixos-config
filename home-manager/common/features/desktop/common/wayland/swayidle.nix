@@ -45,7 +45,7 @@ in
       }
 
       {
-        timeout = 5 * 10;
+        timeout = 10 * 60;
         command = "${pkgs.systemd}/bin/systemctl suspend";
       }
     ];
