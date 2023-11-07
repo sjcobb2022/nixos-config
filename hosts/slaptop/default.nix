@@ -16,6 +16,7 @@
     ../common/optional/thunar.nix
     ../common/optional/tlp.nix
     ../common/optional/wireless.nix
+    ../common/optional/swaylock.nix
   ];
 
   security.pki.certificateFiles = [
@@ -104,7 +105,7 @@
     configuration = {
       services.greetd.enable = lib.mkForce false;
       systemd.services.greetd.enable = lib.mkForce false;
-      services.pipewire.enable = lib.mkForce false;
+      hardware.pulseaudio.enable = false;
       services.xserver.enable = lib.mkForce true;
       services.xserver.displayManager.gdm.enable = lib.mkForce true;
       services.xserver.desktopManager.gnome.enable = lib.mkForce true;

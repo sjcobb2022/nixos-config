@@ -39,11 +39,6 @@
       # See https://wiki.hyprland.org/Configuring/Monitors/
       monitor=,preferred,auto,auto
       
-      # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-      
-      # Execute your favorite apps at launch
-      # exec-once = waybar & hyprpaper & firefox
-      
       # TODO: use hyprpaper, mako from pkgs
       exec-once = mako
       exec-once = hyprpaper 

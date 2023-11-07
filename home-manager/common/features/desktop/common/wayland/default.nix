@@ -5,11 +5,12 @@
     #./kitty.nix
     ./wezterm.nix
     ./mako.nix
-    #./swayidle.nix
-    #./swaylock.nix
+    ./swayidle.nix
+    ./swaylock.nix
     ./waybar.nix
     ./kde-polkit-agent.nix
     ./wofi.nix
+    ./wlogout.nix
     ./zathura.nix
   ];
 
@@ -17,7 +18,6 @@
     grim
     imv
     # mimeo
-    # primary-xwayland
     # pulseaudio
     slurp
     waypipe

@@ -1,45 +1,42 @@
 { config, pkgs, ... }:
-
 let inherit (config.colorscheme) colors;
 in
 {
   programs.swaylock = {
     enable = true;
-    package = pkgs.swaylock-effects;
+    package = pkgs.unstable.swaylock-effects;
     settings = {
+      font = "BigBlueTerm437 Nerd Font Mono";
+      screenshots = true;
       clock = true;
+      fade-in = 0;
+      effect-pixelate = 20;
 
-      effect-blur = "20x3";
-      fade-in = 0.1;
-
-      font = config.fontProfiles.regular.family;
-      font-size = 15;
-
-      line-uses-inside = true;
-      disable-caps-lock-text = true;
-      indicator-caps-lock = true;
-      indicator-radius = 40;
+      indicator = true;
       indicator-idle-visible = true;
-      indicator-y-position = 1000;
 
-      ring-color = "#${colors.base02}";
-      inside-wrong-color = "#${colors.base08}";
-      ring-wrong-color = "#${colors.base08}";
-      key-hl-color = "#${colors.base0B}";
-      bs-hl-color = "#${colors.base08}";
-      ring-ver-color = "#${colors.base09}";
-      inside-ver-color = "#${colors.base09}";
-      inside-color = "#${colors.base01}";
-      text-color = "#${colors.base07}";
-      text-clear-color = "#${colors.base01}";
-      text-ver-color = "#${colors.base01}";
-      text-wrong-color = "#${colors.base01}";
-      text-caps-lock-color = "#${colors.base07}";
-      inside-clear-color = "#${colors.base0C}";
-      ring-clear-color = "#${colors.base0C}";
-      inside-caps-lock-color = "#${colors.base09}";
-      ring-caps-lock-color = "#${colors.base02}";
-      separator-color = "#${colors.base02}";
+      ring-color = "00000000";
+      ring-ver-color = "00000000";
+      ring-wrong-color = "00000000";
+      ring-clear-color = "00000000";
+      ring-caps-lock-color = "00000000";
+      key-hl-color = "00000000";
+      text-color = "fff";
+      text-ver-color = "ffffff";
+      text-clear-color = "ffffff";
+      text-caps-lock-color = "ffffff";
+      text-wrong-color = "ffffff";
+      line-color = "00000000";
+      line-ver-color = "00000000";
+      line-wrong-color = "00000000";
+      line-clear-color = "00000000";
+      line-caps-lock-color = "00000000";
+      inside-color = "00000000";
+      inside-ver-color = "00000000";
+      inside-wrong-color = "00000000";
+      inside-clear-color = "00000000";
+      inside-caps-lock-color = "00000000";
+      separator-color = "00000000";
     };
   };
 }

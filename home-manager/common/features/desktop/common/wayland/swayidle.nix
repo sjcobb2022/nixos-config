@@ -1,27 +1,54 @@
 { pkgs, lib, config, ... }:
 
 let
-  swaylock = "${config.programs.swaylock.package}/bin/swaylock";
-  # pactl = "${pkgs.pulseaudio}/bin/pactl";
+  swaylock = "${config.programs.swaylock.package}/bin/swaylock --daemonize";
+  hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
+  loginctl = "${pkgs.systemd}/bin/loginctl";
 in
 {
-  programs.swayidle = {
+  services.swayidle = {
     enable = true;
+    package = pkgs.unstable.swayidle;
+    systemdTarget = "graphical-session.target";
     events = [
       {
-        event = "lock";
-        command = "${pkgs.swaylock}/bin/swaylock";
+        event = "before-sleep";
+        command = "${hyprctl} dispatcher dpms off ";
       }
-      { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock"; }
 
-      # TODO: use hyprctl to turn screen off. Not sure 
-      # lib.optionalAttrs
-      # (config.wayland.windowManager.hyprland.enable)
-      # let hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl"; in 
-      # { event = "after-resume"; command = "${hyprctl} dispatch dpms on"; }
+      {
+        event = "before-sleep";
+        command = "${swaylock}";
+      }
+
+      {
+        event = "lock";
+        command = "${swaylock}";
+      }
+
+      {
+        event = "after-resume";
+        command = "${hyprctl} dispatcher dpms on";
+      }
+
     ];
     timeouts = [
-      { timeout = 4 * 60; command = "${pkgs.swaylock}/bin/swaylock"; }
+      {
+        timeout = 5 * 60;
+        command = "${hyprctl} dispatcher dpms off";
+        resumeCommand = "${hyprctl} dispatcher dpms on";
+      }
+
+      {
+        timeout = 5 * 60;
+        command = "${swaylock}";
+      }
+
+      {
+        timeout = 5 * 10;
+        command = "${pkgs.systemd}/bin/systemctl suspend";
+      }
     ];
   };
+
 }

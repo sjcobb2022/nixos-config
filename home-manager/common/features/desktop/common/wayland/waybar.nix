@@ -48,8 +48,7 @@ in
         layer = "top";
         position = "top";
         modules-left = [
-          # "custom/currentplayer"
-          # "custom/player"
+          "clock"
         ]
         ++ (lib.optionals config.wayland.windowManager.hyprland.enable [
           "hyprland/workspaces"
@@ -80,7 +79,6 @@ in
           "pulseaudio"
           "backlight"
           "battery"
-          "clock"
         ];
 
         clock = {
@@ -126,6 +124,10 @@ in
 
         battery = {
           bat = "BAT0";
+          states = {
+            warning = 30;
+            critical = 15;
+          };
           interval = 10;
           format = "{icon} {capacity}%";
           format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
@@ -342,13 +344,11 @@ in
       }
 
       #battery.warning.discharging {
-          animation-name: blink-warning;
-          animation-duration: 3s;
+          color: @warning;
       }
 
       #battery.critical.discharging {
-          animation-name: blink-critical;
-          animation-duration: 2s;
+          color: @critical;
       }
 
       #cpu.warning {

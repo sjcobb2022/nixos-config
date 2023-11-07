@@ -3,10 +3,14 @@
 let
   inherit (config) colorscheme;
   inherit (colorscheme) colors;
+
+  wezterm = pkgs.unstable.wezterm.override { };
+
 in
 {
   programs.wezterm = {
     enable = true;
+    package = pkgs.unstable.wezterm;
     colorSchemes = {
       "${colorscheme.slug}" = {
         foreground = "#${colors.base05}";

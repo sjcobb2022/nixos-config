@@ -17,5 +17,6 @@
     noto-fonts
     source-han-sans
     source-han-serif
+    (nerdfonts.override { fonts = [ "BigBlueTerminal" ]; })
   ];
 }
