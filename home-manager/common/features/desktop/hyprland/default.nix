@@ -146,6 +146,8 @@
       bind = $mainMod, P, pseudo, # dwindle
       bind = $mainMod, J, togglesplit, # dwindle
 
+      bind = $mainMod, escape, exec, pkill wlogout || wlogout -p layer-shell
+
       bind = $mainMod, F, fullscreen
       
       # Move focus with mainMod + arrow keys
