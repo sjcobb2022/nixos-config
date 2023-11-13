@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, ... }: {
+{ lib, inputs, config, pkgs, ... }: {
 
   imports = [
     ../common
@@ -7,12 +7,8 @@
   ];
 
   home.packages = with pkgs; [
-    inputs.hyprpaper.packages.${system}.hyprpaper
-    inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland
-    inputs.hyprwm-contrib.packages.${system}.grimblast
-    swaybg
-    swayidle
-    xorg.xprop
+    inputs.hyprwm-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprpaper.packages.${pkgs.system}.hyprpaper
   ];
 
   xdg.configFile."hypr/hyprpaper.conf".text = ''
@@ -28,12 +24,13 @@
     recommendedEnvironment = true;
     systemdIntegration = true;
     xwayland.enable = true;
+
     extraConfig = ''
       # nvidia bullshit 
       env = LIBVA_DRIVER_NAME,nvidia
       env = XDG_SESSION_TYPE,wayland
       # env = GBM_BACKEND,nvidia
-      env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+      # env = __GLX_VENDOR_LIBRARY_NAME,nvidia
       env = WLR_NO_HARDWARE_CURSORS,1
 
       # See https://wiki.hyprland.org/Configuring/Monitors/

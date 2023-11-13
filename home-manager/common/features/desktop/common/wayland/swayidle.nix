@@ -3,7 +3,6 @@
 let
   swaylock = "${config.programs.swaylock.package}/bin/swaylock --daemonize";
   hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
-  loginctl = "${pkgs.systemd}/bin/loginctl";
 in
 {
   services.swayidle = {
@@ -42,6 +41,7 @@ in
       {
         timeout = 5 * 60;
         command = "${swaylock}";
+        resumeCommand = "${hyprctl} dispatcher dpms on";
       }
 
       {

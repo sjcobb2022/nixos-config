@@ -71,9 +71,9 @@ in
 
         modules-right = [
           "tray"
+          "idle_inhibitor"
           "temperature"
           "network"
-          "idle_inhibitor"
           "memory"
           "cpu"
           "pulseaudio"
