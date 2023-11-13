@@ -11,7 +11,7 @@ in
         "${config.gtk.iconTheme.package}/share/icons/Papirus-Light";
     font = "${config.fontProfiles.regular.family} 12";
     padding = "10";
-    margin = "10";
+    margin = "5";
     layer = "overlay";
     width = 315;
     maxIconSize = 70;
@@ -25,7 +25,7 @@ in
     extraConfig = ''
       [urgency=high]
       ignore-timeout=1
-      border-color=#${colors.base0E}dd
+      border-color=#${colors.base08}dd
     '';
   };
 }

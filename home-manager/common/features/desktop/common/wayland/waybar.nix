@@ -59,15 +59,7 @@ in
 
         modules-center = [
           "hyprland/window"
-          #   "pulseaudio"
-          #   "battery"
-          #   "clock"
         ];
-
-        # modules-right = [
-        #   "network"
-        #   "tray"
-        # ];
 
         modules-right = [
           "tray"
@@ -218,9 +210,9 @@ in
           "format-source" = "{volume}% ";
           "format-source-muted" = "";
           "format-icons" = {
-            "headphone" = "";
-            "hands-free" = "וֹ";
-            "headset" = "  ";
+            "headphone" = "󰋋";
+            "hands-free" = "󰏳";
+            "headset" = "󰋎";
             "phone" = "";
             "portable" = "";
             "car" = "";
@@ -258,6 +250,7 @@ in
       };
 
     };
+
     # Cheatsheet:
     # x -> all sides
     # x y -> vertical, horizontal

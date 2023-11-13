@@ -36,8 +36,6 @@
       # See https://wiki.hyprland.org/Configuring/Monitors/
       monitor=,preferred,auto,auto
       
-      # TODO: use hyprpaper, mako from pkgs
-      exec-once = mako
       exec-once = hyprpaper 
       exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       
@@ -167,7 +165,6 @@
       bind = $mainMod, 7, workspace, 7
       bind = $mainMod, 8, workspace, 8
       bind = $mainMod, 9, workspace, 9
-      bind = $mainMod, 0, workspace, 10
       
       # Move active window to a workspace with mainMod + SHIFT + [0-9]
       bind = $mainMod SHIFT, 1, movetoworkspacesilent, 1
@@ -179,7 +176,6 @@
       bind = $mainMod SHIFT, 7, movetoworkspacesilent, 7
       bind = $mainMod SHIFT, 8, movetoworkspacesilent, 8
       bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
-      bind = $mainMod SHIFT, 0, movetoworkspacesilent, 10
 
       bindel=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
       bindel=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-

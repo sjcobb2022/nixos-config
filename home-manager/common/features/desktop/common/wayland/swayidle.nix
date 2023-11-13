@@ -1,5 +1,4 @@
 { pkgs, lib, config, ... }:
-
 let
   swaylock = "${config.programs.swaylock.package}/bin/swaylock --daemonize";
   hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
@@ -8,7 +7,6 @@ in
   services.swayidle = {
     enable = true;
     package = pkgs.unstable.swayidle;
-    systemdTarget = "graphical-session.target";
     events = [
       {
         event = "before-sleep";
@@ -31,6 +29,7 @@ in
       }
 
     ];
+
     timeouts = [
       {
         timeout = 5 * 60;

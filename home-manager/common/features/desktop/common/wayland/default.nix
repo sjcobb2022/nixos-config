@@ -8,7 +8,7 @@
     ./swayidle.nix
     ./swaylock.nix
     ./waybar.nix
-    ./kde-polkit-agent.nix
+    # ./polkit-gnome-authentication-agent.nix
     ./wofi.nix
     ./wlogout.nix
     ./zathura.nix
