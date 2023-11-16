@@ -6,6 +6,7 @@ in
 {
   services.swayidle = {
     enable = true;
+    systemdTarget = "hyprland-session.target";
     package = pkgs.unstable.swayidle;
     events = [
       {
