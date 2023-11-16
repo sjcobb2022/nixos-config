@@ -1,6 +1,7 @@
 { pkgs, inputs, config, lib, ... }: {
   imports = [
     inputs.nixos-hardware.nixosModules.omen-15-en1007sa
+    inputs.nixos-generators.nixosModules.all-formats
 
     ./hardware-configuration.nix
 
@@ -32,7 +33,7 @@
 
   networking = {
     networkmanager = {
-      enable = true;
+      enable = lib.mkDefault true;
     };
     hostName = "slaptop";
   };
@@ -48,7 +49,7 @@
     xkbVariant = "";
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_6_5;
+  boot.kernelPackages = pkgs.linuxPackages_6_5_hardened;
 
   programs.hyprland.enable = true;
 

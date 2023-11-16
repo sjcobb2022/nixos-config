@@ -15,7 +15,7 @@ in
     settings = {
       # Harden
       PasswordAuthentication = false;
-      PermitRootLogin = "no";
+      PermitRootLogin = lib.mkDefault "no";
       # Automatically remove stale sockets
       StreamLocalBindUnlink = "yes";
       # Allow forwarding ports to everywhere
@@ -36,7 +36,7 @@ in
     knownHosts = builtins.mapAttrs
       (name: _: {
         publicKeyFile = pubKey name;
-        extraHostNames = 
+        extraHostNames =
           (lib.optional (name == hostName) "localhost"); # Alias for localhost if it's the same host
       })
       hosts;
