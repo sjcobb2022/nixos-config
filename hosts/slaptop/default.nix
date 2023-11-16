@@ -105,6 +105,7 @@
   };
 
   programs = {
+    kdeconnect.enable = true;
     light.enable = true;
     dconf.enable = true;
   };
