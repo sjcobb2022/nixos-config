@@ -7,8 +7,8 @@
   ];
 
   home.packages = with pkgs; [
-    inputs.hyprwm-contrib.packages.${pkgs.system}.grimblast
-    inputs.hyprpaper.packages.${pkgs.system}.hyprpaper
+    inputs.hyprwm-contrib.packages.${system}.grimblast
+    inputs.hyprpaper.packages.${system}.hyprpaper
   ];
 
   xdg.configFile."hypr/hyprpaper.conf".text = ''
@@ -24,7 +24,6 @@
     recommendedEnvironment = true;
     systemdIntegration = true;
     xwayland.enable = true;
-
     extraConfig = ''
       # nvidia bullshit 
       env = LIBVA_DRIVER_NAME,nvidia
