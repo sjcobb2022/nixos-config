@@ -41,7 +41,6 @@ in
       {
         timeout = 5 * 60;
         command = "${swaylock}";
-        resumeCommand = "${hyprctl} dispatcher dpms on";
       }
 
       {
