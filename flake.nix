@@ -35,8 +35,9 @@
 
     hyprpaper = {
       url = "github:hyprwm/hyprpaper";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
@@ -68,6 +69,7 @@
       nixosConfigurations = {
         slaptop = mkNixos [ ./hosts/slaptop ];
         velocity = mkNixos [ ./hosts/velocity ];
+        iso = mkNixos [ ./hosts/iso ];
       };
 
       homeConfigurations = {

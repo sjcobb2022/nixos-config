@@ -18,6 +18,11 @@
     wallpaper = ,${../common/assets/mountain.jpg}
   '';
 
+  # xdg.portal = {
+  #   extraPortals = [ pkgs.inputs.hyprland.xdg-desktop-portal-hyprland ];
+  #   configPackages = [ pkgs.inputs.hyprland.hyprland ];
+  # };
+
   wayland.windowManager.hyprland = {
     enable = true;
     enableNvidiaPatches = true;

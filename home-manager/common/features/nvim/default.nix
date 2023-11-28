@@ -35,7 +35,7 @@
     "astronvim/lua/user".source = builtins.fetchGit {
       url = "https://github.com/sjcobb2022/astro_config.git";
       ref = "main";
-      rev = "f23396df07c9903f21a9cce402a9f749ce119a18";
+      rev = "d987e1cb8d7b086ae7d1d4d008310e9908b760ef";
       shallow = true;
     };
   };

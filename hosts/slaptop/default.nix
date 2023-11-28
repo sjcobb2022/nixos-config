@@ -1,8 +1,7 @@
-{ pkgs, inputs, config, lib, ... }: {
+{ pkgs, inputs, outputs, config, lib, ... }: {
   imports = [
     inputs.nixos-hardware.nixosModules.omen-15-en1007sa
-    inputs.nixos-generators.nixosModules.all-formats
-
+    # outputs.nixosModules.slaptop
     ./hardware-configuration.nix
 
     ../common/global
@@ -49,7 +48,7 @@
     xkbVariant = "";
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_6_5_hardened;
+  boot.kernelPackages = pkgs.linuxPackages_6_5;
 
   programs.hyprland.enable = true;
 
@@ -63,7 +62,7 @@
     powerManagement.enable = true;
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = true;
+    powerManagement.finegrained = false;
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).

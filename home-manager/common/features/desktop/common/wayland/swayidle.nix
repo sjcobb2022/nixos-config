@@ -39,7 +39,7 @@ in
       }
 
       {
-        timeout = 5 * 60;
+        timeout = 5 * 60 - 5;
         command = "${swaylock}";
       }
 

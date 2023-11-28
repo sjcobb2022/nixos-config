@@ -9,7 +9,7 @@
   # networking.networkmanager.enable = false;
 
   networking.wireless = {
-    enable = lib.mkDefault false;
+    enable = lib.mkForce false;
     fallbackToWPA2 = false;
     # Declarative
     environmentFile = config.sops.secrets.wireless.path;
@@ -22,7 +22,7 @@
           auth_alg=OPEN
           # eap=PEAP
           # ca_cert="......."
-          identity="cosc3@lboro.ac.uk"
+          identity="@lboro.ac.uk"
           password=""
           phase2="auth=MSCHAPV2"
         '';

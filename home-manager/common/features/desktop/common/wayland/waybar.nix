@@ -206,7 +206,7 @@ in
           "format" = "{icon} {volume}%";
           "format-bluetooth" = "{icon} {volume}%  {format_source}";
           "format-bluetooth-muted" = "{icon}    {format_source}";
-          "format-muted" = "  {format_source}";
+          "format-muted" = " ";
           "format-source" = "{volume}% ";
           "format-source-muted" = "";
           "format-icons" = {
@@ -221,6 +221,10 @@ in
           "on-click" = "${pavucontrol}";
           "on-scroll-down" = "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+";
           "on-scroll-up" = "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%-";
+        };
+
+        tray = {
+          spacing = 10;
         };
 
         "hyprland/workspaces" = {
@@ -400,6 +404,10 @@ in
       #workspaces button.urgent {
           border-color: @critical;
           color: @critical;
+      }
+
+      #tray {
+        color: @base2;
       }
 
     '';

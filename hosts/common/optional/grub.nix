@@ -9,7 +9,7 @@
         enable = lib.mkDefault true;
         efiSupport = true;
         default = "saved";
-        # efiInstallAsRemovable = true;  # grub will use efibootmgr
+        # efiInstallAsRemovable = true; # grub will use efibootmgr
         device = "nodev"; # "/dev/sdx", or "nodev" for efi only
         useOSProber = true;
         enableCryptodisk = true;

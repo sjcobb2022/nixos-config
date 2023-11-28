@@ -1,7 +1,7 @@
 {
   # Enable acme for usage with nginx vhosts
   security.acme = {
-    defaults.email = "sam.cobb.2003@gmial.com";
+    defaults.email = "sam.cobb.2003@gmail.com";
     acceptTerms = true;
   };
 

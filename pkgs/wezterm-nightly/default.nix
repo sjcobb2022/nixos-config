@@ -1,6 +1,8 @@
 { stdenv
-, rustPlatform
+, pkgs
 , lib
+, makeRustPlatform
+, rustPlatform
 , fetchFromGitHub
 , ncurses
 , perl
@@ -19,16 +21,18 @@
 , xcbutilwm
 , wayland
 , zlib
-, CoreGraphics
-, Cocoa
-, Foundation
-, System
-, libiconv
-, UserNotifications
 , nixosTests
 , runCommand
 , vulkan-loader
 }:
+let
+
+  rustPlatform = pkgs.makeRustPlatform {
+    cargo = fenix.minimal.toolchain;
+    rustc = fenix.minimal.toolchain;
+  };
+
+in
 rustPlatform.buildRustPackage rec {
   pname = "wezterm";
   version = "721fbdf5dc39aaeacc0517e0422d06f0cf81561b";
@@ -38,7 +42,7 @@ rustPlatform.buildRustPackage rec {
     repo = pname;
     rev = version;
     fetchSubmodules = true;
-    hash = "sha256-Uk6I/JtSkGCQGG95DDD1hsu40X00/k5d44WP3OJ+rn4=";
+    hash = "sha256-S8i3EXUEChlf2Il3AAhfjIkqZO6PoB2PfLizOeubNnU=";
   };
 
   postPatch = ''
@@ -51,8 +55,8 @@ rustPlatform.buildRustPackage rec {
   cargoLock = {
     lockFile = ./Cargo.lock;
     outputHashes = {
-      "image-0.24.5" = "sha256-fTajVwm88OInqCPZerWcSAm1ga46ansQ3EzAmbT58Js=";
-      "xcb-imdkit-0.2.0" = "sha256-QOT9HLlA26DVPUF4ViKH2ckexUsu45KZMdJwoUhW+hA=";
+      "xcb-imdkit-0.2.0" = "sha256-L+NKD0rsCk9bFABQF4FZi9YoqBHr4VAZeKAWgsaAegw=";
+      "xcb-1.2.1" = "sha256-zkuW5ATix3WXBAj2hzum1MJ5JTX3+uVQ01R1vL6F1rY=";
     };
   };
 
@@ -76,14 +80,15 @@ rustPlatform.buildRustPackage rec {
     xcbutilimage
     xcbutilkeysyms
     xcbutilwm # contains xcb-ewmh among others
-  ] ++ lib.optionals stdenv.isDarwin [
-    Cocoa
-    CoreGraphics
-    Foundation
-    libiconv
-    System
-    UserNotifications
   ];
+  # ++ lib.optionals stdenv.isDarwin [
+  #   Cocoa
+  #   CoreGraphics
+  #   Foundation
+  #   libiconv
+  #   System
+  #   UserNotifications
+  # ];
 
   buildFeatures = [ "distro-defaults" ];
 
