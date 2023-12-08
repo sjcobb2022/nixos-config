@@ -5,6 +5,6 @@
 {
   # example = pkgs.callPackage ./example { };
   shellcolord = pkgs.callPackage ./shellcolord { };
-  # wezterm-nightly = pkgs.callPackage ./wezterm-nightly { };
+  wezterm-nightly = pkgs.callPackage ./wezterm-nightly { };
   # iso = pkgs.callPackage ./iso { inherit inputs pkgs; };
 }

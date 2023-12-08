@@ -120,7 +120,6 @@ in
             warning = 30;
             critical = 15;
           };
-          interval = 10;
           format = "{icon} {capacity}%";
           format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
           format-charging = "󰂄 {capacity}%";

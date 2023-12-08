@@ -4,6 +4,10 @@
 
   programs.neovim = {
     enable = true;
+    plugins = with pkgs; [
+      vimPlugins.nvim-treesitter
+      vimPlugins.nvim-treesitter.withAllGrammars
+    ];
   };
 
   home.packages = with pkgs; [
@@ -32,10 +36,15 @@
       shallow = true;
     };
 
+    # "nvim".source = builtins.fetchGit {
+    #   url = "https://github.com/LazyVim/starter";
+    #   rev = "92b2689e6f11004e65376e84912e61b9e6c58827";
+    # };
+
     "astronvim/lua/user".source = builtins.fetchGit {
       url = "https://github.com/sjcobb2022/astro_config.git";
       ref = "main";
-      rev = "d987e1cb8d7b086ae7d1d4d008310e9908b760ef";
+      rev = "f0fb451c9d3198674a6255e3d43ef90b9a681415";
       shallow = true;
     };
   };

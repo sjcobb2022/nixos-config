@@ -3,12 +3,11 @@
   imports = [
     ../common
     ../common/wayland
-    inputs.hyprland.homeManagerModules.default
+    # inputs.hyprland.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [
     inputs.hyprwm-contrib.packages.${system}.grimblast
-    inputs.hyprpaper.packages.${system}.hyprpaper
   ];
 
   xdg.configFile."hypr/hyprpaper.conf".text = ''
@@ -18,6 +17,9 @@
     wallpaper = ,${../common/assets/mountain.jpg}
   '';
 
+
+  home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+
   # xdg.portal = {
   #   extraPortals = [ pkgs.inputs.hyprland.xdg-desktop-portal-hyprland ];
   #   configPackages = [ pkgs.inputs.hyprland.hyprland ];
@@ -25,113 +27,107 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    enableNvidiaPatches = true;
-    recommendedEnvironment = true;
-    systemdIntegration = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    systemd = {
+      enable = true;
+    };
     xwayland.enable = true;
+    settings = {
+      env = [
+
+        "LIBVA_DRIVER_NAME,nvidia"
+        "XDG_SESSION_TYPE,wayland"
+        # "GBM_BACKEND,nvidia-drm"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "WLR_NO_HARDWARE_CURSORS,1"
+      ];
+
+      exec-once = with pkgs; [
+        "${inputs.hyprpaper.packages.${system}.hyprpaper}/bin/hyprpaper"
+        "${polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+      ];
+
+      monitor = ",preferred,auto,auto";
+
+      input = {
+        kb_layout = "us";
+        kb_variant = "";
+        kb_model = "";
+        kb_options = "";
+        kb_rules = "";
+        follow_mouse = 1;
+
+        touchpad = {
+          natural_scroll = true;
+        };
+
+        sensitivity = 0;
+      };
+
+      general = {
+        # See https://wiki.hyprland.org/Configuring/Variables/ for more
+        gaps_in = 5;
+        gaps_out = 10;
+        border_size = 2;
+        layout = "dwindle";
+      };
+
+      animations = {
+        enabled = true;
+        # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+
+        animation = [
+          "windows, 1, 7, myBezier"
+          "windowsOut, 1, 7, default, popin 80%"
+          "windowsMove, 1, 7, myBezier"
+          "border, 1, 10, default"
+          "borderangle, 1, 8, default"
+          "fade, 1, 7, default"
+          "workspaces, 1, 6, default"
+        ];
+
+      };
+
+      dwindle = {
+        # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+        pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+        preserve_split = true; # you probably want this
+      };
+
+      master = {
+        # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+        new_is_master = true;
+      };
+
+      misc = {
+        disable_hyprland_logo = true;
+        new_window_takes_over_fullscreen = false;
+        mouse_move_enables_dpms = true;
+        key_press_enables_dpms = true;
+      };
+
+      xwayland = {
+        force_zero_scaling = true;
+      };
+
+      gestures = {
+        # See https://wiki.hyprland.org/Configuring/Variables/ for more
+        workspace_swipe = true;
+        workspace_swipe_fingers = 4;
+      };
+
+      windowrulev2 = [
+        "float,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+        "pin,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+        "noinitialfocus,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+        "size 76 31,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+        "nofullscreenrequest,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+        "move 0 0,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+      ];
+
+    };
     extraConfig = ''
-      # nvidia bullshit 
-      env = LIBVA_DRIVER_NAME,nvidia
-      env = XDG_SESSION_TYPE,wayland
-      # env = GBM_BACKEND,nvidia
-      # env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-      env = WLR_NO_HARDWARE_CURSORS,1
-
-      # See https://wiki.hyprland.org/Configuring/Monitors/
-      monitor=,preferred,auto,auto
-      
-      exec-once = hyprpaper 
-      exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
-      
-      # Source a file (multi-file configs)
-      # source = ~/.config/hypr/myColors.conf
-      
-      # sets xwayland scale
-      # exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1
-          
-      # toolkit-specific scale
-      # env = GDK_SCALE,2
-      # env = XCURSOR_SIZE,24
-      
-      # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
-      input {
-          kb_layout = us
-          kb_variant =
-          kb_model =
-          kb_options =
-          kb_rules =
-      
-          follow_mouse = 1
-      
-          touchpad {
-              natural_scroll = true 
-          }
-      
-          sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
-      }
-      
-      general {
-          # See https://wiki.hyprland.org/Configuring/Variables/ for more
-      
-          gaps_in = 5
-          gaps_out = 10
-          border_size = 2
-      
-          layout = dwindle
-      }
-      
-      animations {
-          enabled = true
-      
-          # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-      
-          bezier = myBezier, 0.05, 0.9, 0.1, 1.05
-      
-          animation = windows, 1, 7, myBezier
-          animation = windowsOut, 1, 7, default, popin 80%
-          animation = border, 1, 10, default
-          animation = borderangle, 1, 8, default
-          animation = fade, 1, 7, default
-          animation = workspaces, 1, 6, default
-      }
-      
-      dwindle {
-          # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-          pseudotile = true # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-          preserve_split = true # you probably want this
-      }
-      
-      master {
-          # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-          new_is_master = true
-      }
-
-      misc {
-        disable_hyprland_logo = true
-        new_window_takes_over_fullscreen = false
-        mouse_move_enables_dpms=true
-        key_press_enables_dpms=true
-      }
-      
-      gestures {
-          # See https://wiki.hyprland.org/Configuring/Variables/ for more
-          workspace_swipe = true
-          workspace_swipe_fingers = 4
-      }
-      
-      # Example windowrule v1
-      # windowrule = float, ^(kitty)$
-      # Example windowrule v2
-      # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-      # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-      # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-      windowrulev2 = float,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
-      windowrulev2 = pin,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
-      windowrulev2 = noinitialfocus,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
-      windowrulev2 = size 76 31,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
-      windowrulev2 = nofullscreenrequest,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
-      windowrulev2 = move 0 0,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$
-
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       $mainMod = SUPER
@@ -156,10 +152,11 @@
       bind = $mainMod, right, movefocus, r
       bind = $mainMod, up, movefocus, u
       bind = $mainMod, down, movefocus, d
-      bind = $mainMod CTRL, left, movewindow, l
-      bind = $mainMod CTRL, right, movewindow, r
-      bind = $mainMod CTRL, up, movewindow, u
-      bind = $mainMod CTRL, down, movewindow, d
+      
+      bind = $mainMod CTRL, left, resizeactive, -5% 0
+      bind = $mainMod CTRL, right, resizeactive, 5% 0
+      bind = $mainMod CTRL, up, resizeactive, 0 -5%
+      bind = $mainMod CTRL, down, resizeactive, 0 5%
       
       # Switch workspaces with mainMod + [0-9]
       bind = $mainMod, 1, workspace, 1
@@ -202,10 +199,10 @@
       bind = $mainMod ALT, down, workspace, r-1
 
       # use mainMod shift to move (shift haha) an actiuve window 
-      bind = $mainMod SHIFT, left, movetoworkspacesilent, r-1
-      bind = $mainMod SHIFT, right, movetoworkspacesilent, r+1
-      bind = $mainMod SHIFT, up, movetoworkspacesilent, r+1
-      bind = $mainMod SHIFT, down, movetoworkspacesilent, r-1
+      bind = $mainMod SHIFT, left, movewindow, l 
+      bind = $mainMod SHIFT, right, movewindow, r
+      bind = $mainMod SHIFT, up, movewindow, u
+      bind = $mainMod SHIFT, down, movewindow, d 
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = $mainMod, mouse:272, movewindow

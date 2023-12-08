@@ -27,11 +27,6 @@
 }:
 let
 
-  rustPlatform = pkgs.makeRustPlatform {
-    cargo = fenix.minimal.toolchain;
-    rustc = fenix.minimal.toolchain;
-  };
-
 in
 rustPlatform.buildRustPackage rec {
   pname = "wezterm";

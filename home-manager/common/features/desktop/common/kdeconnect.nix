@@ -31,7 +31,7 @@ in
     indicator = true;
   };
 
-  home.packages = with pkgs; [ valent ];
+  # home.packages = with pkgs; [ valent ];
 
   home.persistence = {
     "/persist/home/${config.home.username}".directories = [ ".config/kdeconnect" ];

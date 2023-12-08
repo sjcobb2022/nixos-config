@@ -17,7 +17,7 @@ in
     # };
   };
 
-  services.ssh-agent.enable = true;
+  # services.ssh-agent.enable = true;
 
   home.persistence = {
     "/persist/home/${config.home.username}".directories = [ ".ssh" ];

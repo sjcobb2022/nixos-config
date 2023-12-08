@@ -7,10 +7,16 @@ let
   wezterm = pkgs.unstable.wezterm.override { };
 
 in
+
 {
+
+  home.packages = with pkgs; [
+    xterm
+  ];
+
   programs.wezterm = {
     enable = true;
-    package = pkgs.unstable.wezterm;
+    package = pkgs.wezterm-nightly;
     colorSchemes = {
       "${colorscheme.slug}" = {
         foreground = "#${colors.base05}";
