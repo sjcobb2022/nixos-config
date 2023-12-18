@@ -4,6 +4,8 @@
     inheritParentConfig = true;
     configuration = {
 
+      system.autoUpgrade.enable = lib.mkForce false;
+
       services.greetd.enable = lib.mkForce false;
       systemd.services.greetd.enable = lib.mkForce false;
 

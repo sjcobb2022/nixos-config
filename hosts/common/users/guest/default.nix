@@ -8,7 +8,6 @@ in
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups = [
-      "wheel"
       "video"
       "audio"
     ] ++ ifTheyExist [
@@ -27,5 +26,4 @@ in
 
   services.geoclue2.enable = true;
 
-  # security.pam.services = { swaylock = { }; };
 }

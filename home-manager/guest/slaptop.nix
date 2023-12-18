@@ -7,6 +7,7 @@
     inputs.nix-colors.homeManagerModule
     ../common/global
     ../common/features/desktop/common
+    ../common/features/desktop/hyprland
     ../common/features/games
     # If you want to use modules your own flake exports (from modules/home-manager):
     # outputs.homeManagerModules.example
