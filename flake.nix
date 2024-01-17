@@ -34,8 +34,13 @@
     };
 
     hyprpaper = {
-      url = "github:hyprwm/hyprpaper";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:hyprwm/hyprpaper/ef0e051255af1b96155b222da94c94ecad1f7708";
+    };
+
+    # TODO: Remove this once the PR is merged 
+    wezterm = {
+      url = "github:happenslol/wezterm?dir=nix&ref=add-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
