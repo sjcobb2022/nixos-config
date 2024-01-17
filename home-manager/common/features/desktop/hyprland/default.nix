@@ -10,6 +10,11 @@
     inputs.hyprwm-contrib.packages.${system}.grimblast
   ];
 
+  xdg.portal = with pkgs; {
+    extraPortals = [ inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland ];
+    configPackages = [ inputs.hyprland.packages.${system}.hyprland ];
+  };
+
   xdg.configFile."hypr/hyprpaper.conf".text = ''
     preload = ${../common/assets/mountain.jpg}
     preload = ${../common/assets/wave.png}
@@ -18,12 +23,7 @@
   '';
 
 
-  home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
-
-  # xdg.portal = {
-  #   extraPortals = [ pkgs.inputs.hyprland.xdg-desktop-portal-hyprland ];
-  #   configPackages = [ pkgs.inputs.hyprland.hyprland ];
-  # };
+  # home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -47,7 +47,7 @@
         "${polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
 
-      monitor = ",preferred,auto,auto";
+      monitor = ",preferred,auto,1.6";
 
       input = {
         kb_layout = "us";

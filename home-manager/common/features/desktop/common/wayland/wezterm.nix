@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
   inherit (config) colorscheme;
@@ -16,7 +16,8 @@ in
 
   programs.wezterm = {
     enable = true;
-    package = pkgs.wezterm-nightly;
+    package = inputs.wezterm.packages.${pkgs.system}.default;
+    # package = pkgs.wezterm-nightly;
     colorSchemes = {
       "${colorscheme.slug}" = {
         foreground = "#${colors.base05}";
@@ -55,6 +56,7 @@ in
         color_scheme = "${colorscheme.slug}",
         hide_tab_bar_if_only_one_tab = true,
         window_close_confirmation = "NeverPrompt",
+        check_for_updates = false,
         set_environment_variables = {
           TERM = 'wezterm',
         },

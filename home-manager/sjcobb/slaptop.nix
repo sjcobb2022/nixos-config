@@ -7,6 +7,7 @@
     inputs.nix-colors.homeManagerModule
     ../common/global
     ../common/features/nvim
+    ../common/features/helix
     ../common/features/desktop/hyprland
     # If you want to use modules your own flake exports (from modules/home-manager):
     # outputs.homeManagerModules.example
