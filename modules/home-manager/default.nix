@@ -6,5 +6,4 @@
   fonts = import ./fonts.nix;
   shellcolor = import ./shellcolor.nix;
   xdg-portal = import ./xdg-portal.nix;
-  # ssh-agent = import ./ssh-agent.nix;
 }
