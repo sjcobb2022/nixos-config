@@ -19,15 +19,12 @@
     ../common/optional/tlp.nix
     ../common/optional/wireless.nix
     ../common/optional/swaylock.nix
+    ../common/optional/docker.nix
   ];
 
   security.pki.certificateFiles = [
     ./CA-3EA5E6E5BB060084AA0C733C499C11F4828FC1FB.cer
     ./CA-7512C298D4BAF4863B833F3CDEE56EEAE93EDCCA.cer
-  ];
-
-  environment.systemPackages = [
-    pkgs.unstable.nodePackages_latest.prisma
   ];
 
   networking = {
@@ -75,7 +72,7 @@
 
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
+    nvidiaSettings = false;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -117,7 +114,6 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
   };
 
   system.stateVersion = "23.05";
