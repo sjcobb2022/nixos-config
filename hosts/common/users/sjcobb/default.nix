@@ -17,6 +17,7 @@ in
       "wireshark"
       "git"
       "libvirtd"
+      "docker"
     ];
 
     openssh.authorizedKeys.keys = [ (builtins.readFile ../ssh.pub) ];
