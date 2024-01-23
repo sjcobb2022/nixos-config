@@ -10,37 +10,49 @@
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     impermanence.url = "github:nix-community/impermanence";
-    nix-colors.url = "github:misterio77/nix-colors";
-    sops-nix.url = "github:mic92/sops-nix";
 
-    nixos-hardware.url = "github:sjcobb2022/nixos-hardware";
+    nix-colors.url = "github:misterio77/nix-colors";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ###
+    # Unstable
+    ###
+
     hyprland = {
       url = "github:hyprwm/hyprland";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     hyprwm-contrib = {
       url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     hyprpaper = {
-      url = "github:hyprwm/hyprpaper/ef0e051255af1b96155b222da94c94ecad1f7708";
+      url = "github:hyprwm/hyprpaper";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # TODO: Remove this once the PR is merged 
     wezterm = {
-      url = "github:happenslol/wezterm?dir=nix&ref=add-nix-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:wez/wezterm?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
   };
