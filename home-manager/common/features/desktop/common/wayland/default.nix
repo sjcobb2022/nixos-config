@@ -12,6 +12,7 @@
     ./wofi.nix
     ./wlogout.nix
     ./zathura.nix
+    ./obsidian.nix
   ];
 
   home.packages = with pkgs; [
