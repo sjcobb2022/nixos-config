@@ -112,9 +112,5 @@
     allowedTCPPorts = [ 3000 5173 4173 80 443 1522 27017 ];
   };
 
-  xdg.portal = {
-    enable = true;
-  };
-
   system.stateVersion = "23.05";
 } 
