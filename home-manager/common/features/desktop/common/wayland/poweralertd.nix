@@ -1,0 +1,3 @@
+{
+  services.poweralertd.enable = true;
+}

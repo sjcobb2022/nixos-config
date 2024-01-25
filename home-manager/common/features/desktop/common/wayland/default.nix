@@ -13,6 +13,7 @@
     ./wlogout.nix
     ./zathura.nix
     ./obsidian.nix
+    ./poweralertd.nix
   ];
 
   home.packages = with pkgs; [
