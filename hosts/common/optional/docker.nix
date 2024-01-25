@@ -7,4 +7,7 @@
       setSocketVariable = true;
     };
   };
+
+  # Ensure group exists
+  users.groups.docker = { };
 }
