@@ -1,23 +1,13 @@
 { config, pkgs, inputs, ... }:
-
 let
   inherit (config) colorscheme;
   inherit (colorscheme) colors;
-
-  wezterm = pkgs.unstable.wezterm.override { };
-
 in
-
 {
-
-  home.packages = with pkgs; [
-    xterm
-  ];
 
   programs.wezterm = {
     enable = true;
     package = inputs.wezterm.packages.${pkgs.system}.default;
-    # package = pkgs.wezterm-nightly;
     colorSchemes = {
       "${colorscheme.slug}" = {
         foreground = "#${colors.base05}";
@@ -57,10 +47,17 @@ in
         hide_tab_bar_if_only_one_tab = true,
         window_close_confirmation = "NeverPrompt",
         check_for_updates = false,
-        set_environment_variables = {
-          TERM = 'wezterm',
-        },
       }
     '';
   };
+
+  home.sessionVariables = {
+    TERM = "wezterm";
+  };
+
+  # Add xterm incase wezterm breaks
+  home.packages = with pkgs; [
+    xterm
+  ];
+
 }
