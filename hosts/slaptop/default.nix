@@ -20,6 +20,7 @@
     ../common/optional/wireless.nix
     ../common/optional/swaylock.nix
     ../common/optional/docker.nix
+    ../common/optional/upower.nix
   ];
 
   security.pki.certificateFiles = [
