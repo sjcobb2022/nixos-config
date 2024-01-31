@@ -4,6 +4,14 @@ let
   inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
 in
 rec {
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    name = "Adwaita";
+    package = pkgs.gnome.adwaita-icon-theme;
+    size = 16;
+  };
+
   gtk = {
     enable = true;
     font = {
