@@ -58,10 +58,15 @@
     modesetting.enable = false;
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    powerManagement.enable = true;
+    powerManagement.enable = false;
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
     powerManagement.finegrained = true;
+
+    # Enable dynamic power management. 
+    # Dynamic Boost balances power between the CPU and the GPU for improved
+    # performance on supported laptops using the nvidia-powerd daemon.
+    dynamicBoost.enable = true;
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
@@ -74,7 +79,7 @@
 
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
+    nvidiaSettings = false;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;

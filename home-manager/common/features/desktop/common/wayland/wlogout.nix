@@ -1,41 +1,29 @@
 { pkgs, lib, config, ... }:
+let
+  inherit (config) colorscheme;
+  inherit (colorscheme) palette;
+in
 {
   programs.wlogout = {
     enable = true;
-    # base00: "#171D23"
-    # base01: "#1D252C"
-    # base02: "#28323A"
-    # base03: "#526270"
-    # base04: "#B7C5D3"
-    # base05: "#D8E2EC"
-    # base06: "#F6F6F8"
-    # base07: "#FBFBFD"
-    # base08: "#F7768E"
-    # base09: "#FF9E64"
-    # base0A: "#B7C5D3"
-    # base0B: "#9ECE6A"
-    # base0C: "#89DDFF"
-    # base0D: "#7AA2F7"
-    # base0E: "#BB9AF7"
-    # base0F: "#BB9AF7"
-    style = let inherit (config.colorscheme) colors; in /* css */ ''
+    style = /* css */ ''
       * {
         background-image: none;
       }
       
       window {
-        background-color: alpha(#${colors.base00}, 0.8);
+        background-color: alpha(#${palette.base00}, 0.8);
       }
       
       button {
-        background-color: #${colors.base00};
+        background-color: #${palette.base00};
         background-repeat: no-repeat;
         background-position: center;
         background-size: 25%;
       }
 
       button:focus, button:active, button:hover {
-        background-color: #${colors.base01};
+        background-color: #${palette.base01};
       }
 
       #lock {

@@ -276,12 +276,12 @@ in
     # base0D: "#7AA2F7"
     # base0E: "#BB9AF7"
     # base0F: "#BB9AF7"
-    style = let inherit (config.colorscheme) colors; in /* css */ ''
-      @define-color highlight #${colors.base0D};
-      @define-color base1  #${colors.base01};
-      @define-color base2  #${colors.base04};
-      @define-color warning #${colors.base09};
-      @define-color critical #${colors.base08};
+    style = let inherit (config.colorscheme) palette; in /* css */ ''
+      @define-color highlight #${palette.base0D};
+      @define-color base1  #${palette.base01};
+      @define-color base2  #${palette.base04};
+      @define-color warning #${palette.base09};
+      @define-color critical #${palette.base08};
 
       /* -----------------------------------------------------------------------------
        * Base styles

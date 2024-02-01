@@ -15,7 +15,7 @@
   systemd.services.nginx.serviceConfig.ReadWritePaths = [ "/home/sjcobb/Documents/" ];
 
   services.nginx = {
-    enable = true;
+    enable = false;
 
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
@@ -32,14 +32,10 @@
         set $mongo "G683083F1D51ED3-UJ2GE94JAJZME69W.adb.uk-london-1.oraclecloudapps.com:27017";
         listen 27017 so_keepalive=on;
         proxy_connect_timeout 10s;
-        # ssl_certificate /home/sjcobb/Documents/cert.pem;
-        # ssl_certificate_key /home/sjcobb/Documents/newkey.pem;
         proxy_ssl  on;
         proxy_ssl_certificate /home/sjcobb/Downloads/wallet/ewallet.pem;
         proxy_ssl_certificate_key /home/sjcobb/Downloads/wallet/ewallet.pem;
         proxy_ssl_password_file /home/sjcobb/Downloads/wallet/key_file.txt;
-        # proxy_ssl_certificate_key /home/sjcobb/Downloads/wallet/new.key;
-        # proxy_ssl_trusted_certificate /home/sjcobb/Documents/test.pem;
         
         # proxy_ssl_verify       on;
 
