@@ -34,12 +34,13 @@
     xwayland.enable = true;
     settings = {
       env = [
-
-        "LIBVA_DRIVER_NAME,nvidia"
+        # Prioritise first card (which for me is the amd iGPU)
+        "WLR_DRM_DEVICES,/dev/dri/card0"
         "XDG_SESSION_TYPE,wayland"
-        # "GBM_BACKEND,nvidia-drm"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "MOZ_ENABLE_WAYLAND,1"
         "WLR_NO_HARDWARE_CURSORS,1"
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       ];
 
       exec-once = with pkgs; [
