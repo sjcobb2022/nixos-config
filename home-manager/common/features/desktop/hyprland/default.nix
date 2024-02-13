@@ -127,26 +127,24 @@
         "move 0 0,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
       ];
 
+      "$mod" = "SUPER";
+      "$mainMod" = "SUPER";
+
+      bind = [
+        "$mod,Return,exec,wezterm"
+        "$mod,Q,killactive,"
+        "$mod,M,exit,"
+        "$mod SHIFT,W,exec,firefox"
+        "$mod,E,exec,thunar"
+        "$mod,V,togglefloating,"
+        "$mod,D,exec,pkill wofi || wofi -S drun"
+        "$mod,P,pseudo,"
+        "$mod,J,togglesplit,"
+        "$mod,escape,exec,pkill wlogout || wlogout -p layer-shell"
+        "$mod,F,fullscreen"
+      ];
     };
     extraConfig = ''
-
-      # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-      $mainMod = SUPER
-      
-      # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-      bind = $mainMod, Return, exec, wezterm
-      bind = $mainMod, Q, killactive,
-      bind = $mainMod, M, exit,
-      bind = $mainMod SHIFT, W, exec, firefox
-      bind = $mainMod, E, exec, thunar 
-      bind = $mainMod, V, togglefloating,
-      bind = $mainMod, D, exec, pkill wofi || wofi -S drun
-      bind = $mainMod, P, pseudo, # dwindle
-      bind = $mainMod, J, togglesplit, # dwindle
-
-      bind = $mainMod, escape, exec, pkill wlogout || wlogout -p layer-shell
-
-      bind = $mainMod, F, fullscreen
       
       # Move focus with mainMod + arrow keys
       bind = $mainMod, left, movefocus, l
