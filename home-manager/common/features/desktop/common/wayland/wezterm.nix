@@ -43,10 +43,11 @@ in
       return {
         font = wezterm.font("${config.fontProfiles.monospace.family}"),
         font_size = 12.0,
-        color_scheme = "${colorscheme.slug}",
+        color_scheme = '${colorscheme.slug}',
         hide_tab_bar_if_only_one_tab = true,
         window_close_confirmation = "NeverPrompt",
         check_for_updates = false,
+        term='wezterm'
       }
     '';
   };

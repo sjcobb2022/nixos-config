@@ -4,12 +4,14 @@ let
   hasPackage = pname: lib.any (p: p ? pname && p.pname == pname) config.home.packages;
   hasRipgrep = hasPackage "ripgrep";
   hasEza = hasPackage "eza";
+  hasZoxide = hasPackage "zoxide";
   hasNeovim = config.programs.neovim.enable;
   hasEmacs = config.programs.emacs.enable;
   hasNeomutt = config.programs.neomutt.enable;
   hasShellColor = config.programs.shellcolor.enable;
   hasKitty = config.programs.kitty.enable;
   shellcolor = "${pkgs.shellcolord}/bin/shellcolor";
+
 in
 {
   programs.fish = {
@@ -33,6 +35,8 @@ in
       hms = "home-manager --flake . switch";
 
       ls = mkIf hasEza "eza";
+
+      cd = mkIf hasZoxide "z";
 
       gcl = "git clone";
 

@@ -1,6 +1,4 @@
-
-
-{pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
     ./bash.nix
     ./bat.nix
@@ -12,8 +10,9 @@
     ./shellcolor.nix
     ./starship.nix
     ./ssh.nix
+    ./zoxide.nix
   ];
-  
+
   home.packages = with pkgs; [
     comma # Install and run programs by sticking a , before them
     bottom # System viewer

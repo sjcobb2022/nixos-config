@@ -23,7 +23,8 @@ in
       run-always_parse_args = true;
       run-cache_file = "/dev/null";
       run-exec_search = true;
-      term = "${inputs.wezterm.packages.${pkgs.system}.default}";
+      term = "wezterm";
+      terminal = "wezterm";
     };
   };
 }
