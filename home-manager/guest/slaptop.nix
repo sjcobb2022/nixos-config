@@ -19,47 +19,9 @@
     # ./nvim.nix
   ];
 
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-    ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = (_: true);
-    };
-  };
-
   home = {
     username = lib.mkDefault "guest";
-    homeDirectory = lib.mkDefault "/home/${config.home.username}";
-    sessionPath = [ "$HOME/.local/bin" ];
-    persistence = {
-      "/persist/home/${config.home.username}" = {
-        directories = [
-          "Documents"
-          "Pictures"
-          "Videos"
-          "Music"
-          "Downloads"
-          ".local/bin"
-        ];
-        allowOther = true;
-      };
-    };
   };
-
-  colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;
-  home.file.".colorscheme".text = config.colorscheme.slug;
-
-  # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [ ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";

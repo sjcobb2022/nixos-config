@@ -23,6 +23,31 @@
 
   systemd.user.startServices = "sd-switch";
 
+  home = {
+    homeDirectory = lib.mkDefault "/home/${config.home.username}";
+    stateVersion = "23.05";
+    sessionPath = [ "$HOME/.local/bin" ];
+    persistence = {
+      "/persist/home/${config.home.username}" = {
+        directories = [
+          "Documents"
+          "Pictures"
+          "Videos"
+          "Music"
+          "Downloads"
+          "Templates"
+          "Public"
+          ".local/bin"
+          ".local/share/nix" 
+        ];
+        allowOther = true;
+      };
+    };
+  };
+
+  colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;
+  home.file.".colorscheme".text = config.colorscheme.slug;
+
   programs = {
     home-manager.enable = true;
     git.enable = true;
