@@ -16,10 +16,17 @@ in
       "git"
     ];
 
+    hashedPasswordFile = config.sops.secrets.guest-password.path;
+
     openssh.authorizedKeys.keys = [ (builtins.readFile ../ssh.pub) ];
     packages = [
       pkgs.home-manager
     ];
+  };
+
+  sops.secrets.guest-password = {
+    sopsFile = ../../secrets.yaml;
+    neededForUsers = true;
   };
 
   home-manager.users.guest = import ../../../../home-manager/guest/${config.networking.hostName}.nix;

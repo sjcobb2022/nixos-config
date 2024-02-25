@@ -4,7 +4,7 @@ keys:
     - &sjcobb age16ph0xq7xqfe8pmcwtgpvsw4sgeeclmajx0mln28ffrh8nrly7vnqscf559
   # Hosts
   - &hosts:
-    - &slaptop age1yh3xne5p2uncmhzw96zegk3zzezel5ndruf0z6qerk098ww28qvq94a4zp
+    - &slaptop age1ygqez4yjlggfekj8sgtsfda4v5up3x5946u5yn8e82elrr5rvdzqt3n7z6
     - &velocity age1a4yag0568a423nf2vg8nzpp46nxxz08stl63veqz06k52husa5cqju04vl 
 
 creation_rules:

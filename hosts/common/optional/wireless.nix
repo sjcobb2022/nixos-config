@@ -20,10 +20,10 @@
           key_mgmt=WPA-EAP
           pairwise=CCMP
           auth_alg=OPEN
-          # eap=PEAP
-          # ca_cert="......."
-          identity="@lboro.ac.uk"
-          password=""
+          eap=PEAP
+          domain_suffix_match="@EDUROAM_DOMAIN@"
+          identity="@EDUROAM_IDENT@"
+          password="@EDUROAM_PASS@"
           phase2="auth=MSCHAPV2"
         '';
       };

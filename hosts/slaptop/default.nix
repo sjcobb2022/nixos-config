@@ -23,11 +23,6 @@
     ../common/optional/upower.nix
   ];
 
-  security.pki.certificateFiles = [
-    ./CA-3EA5E6E5BB060084AA0C733C499C11F4828FC1FB.cer
-    ./CA-7512C298D4BAF4863B833F3CDEE56EEAE93EDCCA.cer
-  ];
-
   networking = {
     networkmanager = {
       enable = lib.mkDefault true;
@@ -121,6 +116,13 @@
     enable = true;
     allowedTCPPorts = [ 3000 5173 4173 80 443 1522 27017 ];
   };
+
+ swapDevices = [ 
+    {
+      device = "/swapfile";
+      size = 16 * 1024;
+    } 
+  ];
 
   system.stateVersion = "23.05";
 } 
