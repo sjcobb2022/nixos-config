@@ -49,6 +49,7 @@ in
         position = "top";
         modules-left = [
           "clock"
+          "mpris"
         ]
         ++ (lib.optionals config.wayland.windowManager.hyprland.enable [
           "hyprland/workspaces"
@@ -90,6 +91,18 @@ in
             "critical" = 90;
           };
           format-icons = [ "" ];
+        };
+
+        mpris = {
+          format = "{status_icon} {title}";
+          format-paused = "{status_icon} <i>{title}</i>";
+          status-icons = {
+            paused = "󰐊";
+            playing = "󰏤";
+            stopped = "󰓛";
+          };
+
+          title-len = 20;
         };
 
         memory = {
@@ -151,55 +164,6 @@ in
           on-scroll-up = "${light} -U 1";
         };
 
-        "custom/currentplayer" = {
-          interval = 2;
-          return-type = "json";
-          exec = jsonOutput "currentplayer" {
-            pre = ''
-              player="$(${playerctl} status -f "{{playerName}}" 2>/dev/null || echo "No player active" | ${cut} -d '.' -f1)"
-              count="$(${playerctl} -l | ${wc} -l)"
-              if ((count > 1)); then
-                more=" +$((count - 1))"
-              else
-                more=""
-              fi
-            '';
-            alt = "$player";
-            tooltip = "$player ($count available)";
-            text = "$more";
-          };
-          format = "{icon}{}";
-          format-icons = {
-            "No player active" = " ";
-            "Celluloid" = "󰎁 ";
-            "spotify" = "󰓇 ";
-            "ncspot" = "󰓇 ";
-            "qutebrowser" = "󰖟 ";
-            "firefox" = " ";
-            "discord" = " 󰙯 ";
-            "sublimemusic" = " ";
-            "kdeconnect" = "󰄡 ";
-            "chromium" = " ";
-          };
-          on-click = "${playerctld} shift";
-          on-click-right = "${playerctld} unshift";
-        };
-
-        "custom/player" = {
-          exec-if = "${playerctl} status";
-          exec = ''${playerctl} metadata --format '{"text": "{{title}} - {{artist}}", "alt": "{{status}}", "tooltip": "{{title}} - {{artist}} ({{album}})"}' '';
-          return-type = "json";
-          interval = 2;
-          max-length = 30;
-          format = "{icon} {}";
-          format-icons = {
-            "Playing" = "󰐊";
-            "Paused" = "󰏤 ";
-            "Stopped" = "󰓛";
-          };
-          on-click = "${playerctl} play-pause";
-        };
-
         pulseaudio = {
           "scroll-step" = 1;
           "format" = "{icon} {volume}%";
@@ -240,7 +204,7 @@ in
             "8" = "八";
             "9" = "九";
             "10" = "十";
-            default = "";
+            default = " ";
           };
           "persistent-workspaces" = {
             "*" = [ 1 2 3 4 5 ];
@@ -356,6 +320,10 @@ in
       }
 
       #memory {
+      }
+
+      #mpris {
+        margin-right: 0.5rem;
       }
 
       #memory.warning {

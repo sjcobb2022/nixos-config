@@ -13,6 +13,7 @@
   xdg.portal = with pkgs; {
     extraPortals = [ inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland ];
     configPackages = [ inputs.hyprland.packages.${system}.hyprland ];
+    xdgOpenUsePortal = true;
   };
 
   xdg.configFile."hypr/hyprpaper.conf".text = ''
@@ -92,7 +93,7 @@
 
       dwindle = {
         # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-        pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+        pseudotile = true; # master switch for pseudotiling. Enabling is bound to mod + P in the keybinds section below
         preserve_split = true; # you probably want this
       };
 
@@ -103,9 +104,14 @@
 
       misc = {
         disable_hyprland_logo = true;
-        new_window_takes_over_fullscreen = false;
         mouse_move_enables_dpms = true;
+        new_window_takes_over_fullscreen = 2;
         key_press_enables_dpms = true;
+        vrr = 1;
+      };
+
+      decoration = {
+        drop_shadow = false;
       };
 
       xwayland = {
@@ -119,16 +125,14 @@
       };
 
       windowrulev2 = [
-        "float,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
-        "pin,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
-        "noinitialfocus,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
-        "size 76 31,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
-        "nofullscreenrequest,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
-        "move 0 0,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+        # "float,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+        # "pin,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+        # "noinitialfocus,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+        # "size 76 31,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
+        # "move 0 0,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
       ];
 
       "$mod" = "SUPER";
-      "$mainMod" = "SUPER";
 
       bind = [
         "$mod,Return,exec,wezterm"
@@ -142,71 +146,74 @@
         "$mod,J,togglesplit,"
         "$mod,escape,exec,pkill wlogout || wlogout -p layer-shell"
         "$mod,F,fullscreen"
+
+        "$mod, left, movefocus, l"
+        "$mod, right, movefocus, r"
+        "$mod, up, movefocus, u"
+        "$mod, down, movefocus, d"
+
+        "$mod CTRL, left, resizeactive, -5% 0"
+        "$mod CTRL, right, resizeactive, 5% 0"
+        "$mod CTRL, up, resizeactive, 0 -5%"
+        "$mod CTRL, down, resizeactive, 0 5%"
+
+        #" Switch workspaces with mod + [0-9]
+        "$mod, 1, workspace, 1"
+        "$mod, 2, workspace, 2"
+        "$mod, 3, workspace, 3"
+        "$mod, 4, workspace, 4"
+        "$mod, 5, workspace, 5"
+        "$mod, 6, workspace, 6"
+        "$mod, 7, workspace, 7"
+        "$mod, 8, workspace, 8"
+        "$mod, 9, workspace, 9"
+
+        # Move active window to a workspace with mod + SHIFT + [0-9]
+        "$mod SHIFT, 1, movetoworkspacesilent, 1"
+        "$mod SHIFT, 2, movetoworkspacesilent, 2"
+        "$mod SHIFT, 3, movetoworkspacesilent, 3"
+        "$mod SHIFT, 4, movetoworkspacesilent, 4"
+        "$mod SHIFT, 5, movetoworkspacesilent, 5"
+        "$mod SHIFT, 6, movetoworkspacesilent, 6"
+        "$mod SHIFT, 7, movetoworkspacesilent, 7"
+        "$mod SHIFT, 8, movetoworkspacesilent, 8"
+        "$mod SHIFT, 9, movetoworkspacesilent, 9"
+
+        # Scroll through existing workspaces with mod + scroll
+        "$mod, mouse_down, workspace, e+1"
+        "$mod, mouse_up, workspace, e-1"
+
+        # use main mod alt to move around workspaces
+        # we use relative workspaces here to make it easier to
+        "$mod ALT, left, workspace, r-1"
+        "$mod ALT, right, workspace, r+1"
+        "$mod ALT, up, workspace, r+1"
+        "$mod ALT, down, workspace, r-1"
+
+        # use mod shift to move (shift haha) an actiuve window 
+        "$mod SHIFT, left, movewindow, l"
+        "$mod SHIFT, right, movewindow, r"
+        "$mod SHIFT, up, movewindow, u"
+        "$mod SHIFT, down, movewindow, d"
+
+      ];
+
+      bindel = [
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86MonBrightnessUp,exec,light -A 10"
+        ", XF86MonBrightnessDown,exec,light -U 10"
+      ];
+
+      bindl = [
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ];
+
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
       ];
     };
-    extraConfig = ''
-      
-      # Move focus with mainMod + arrow keys
-      bind = $mainMod, left, movefocus, l
-      bind = $mainMod, right, movefocus, r
-      bind = $mainMod, up, movefocus, u
-      bind = $mainMod, down, movefocus, d
-      
-      bind = $mainMod CTRL, left, resizeactive, -5% 0
-      bind = $mainMod CTRL, right, resizeactive, 5% 0
-      bind = $mainMod CTRL, up, resizeactive, 0 -5%
-      bind = $mainMod CTRL, down, resizeactive, 0 5%
-      
-      # Switch workspaces with mainMod + [0-9]
-      bind = $mainMod, 1, workspace, 1
-      bind = $mainMod, 2, workspace, 2
-      bind = $mainMod, 3, workspace, 3
-      bind = $mainMod, 4, workspace, 4
-      bind = $mainMod, 5, workspace, 5
-      bind = $mainMod, 6, workspace, 6
-      bind = $mainMod, 7, workspace, 7
-      bind = $mainMod, 8, workspace, 8
-      bind = $mainMod, 9, workspace, 9
-      
-      # Move active window to a workspace with mainMod + SHIFT + [0-9]
-      bind = $mainMod SHIFT, 1, movetoworkspacesilent, 1
-      bind = $mainMod SHIFT, 2, movetoworkspacesilent, 2
-      bind = $mainMod SHIFT, 3, movetoworkspacesilent, 3
-      bind = $mainMod SHIFT, 4, movetoworkspacesilent, 4
-      bind = $mainMod SHIFT, 5, movetoworkspacesilent, 5
-      bind = $mainMod SHIFT, 6, movetoworkspacesilent, 6
-      bind = $mainMod SHIFT, 7, movetoworkspacesilent, 7
-      bind = $mainMod SHIFT, 8, movetoworkspacesilent, 8
-      bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
-
-      bindel=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
-      bindel=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-      bindl=, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-
-      bindel=,XF86MonBrightnessUp,exec,light -A 10
-      bindel=,XF86MonBrightnessDown,exec,light -U 10
-
-      # Scroll through existing workspaces with mainMod + scroll
-      bind = $mainMod, mouse_down, workspace, e+1
-      bind = $mainMod, mouse_up, workspace, e-1
-      
-      # use main mod alt to move around workspaces
-      # we use relative workspaces here to make it easier to
-      bind = $mainMod ALT, left, workspace, r-1
-      bind = $mainMod ALT, right, workspace, r+1
-      bind = $mainMod ALT, up, workspace, r+1
-      bind = $mainMod ALT, down, workspace, r-1
-
-      # use mainMod shift to move (shift haha) an actiuve window 
-      bind = $mainMod SHIFT, left, movewindow, l 
-      bind = $mainMod SHIFT, right, movewindow, r
-      bind = $mainMod SHIFT, up, movewindow, u
-      bind = $mainMod SHIFT, down, movewindow, d 
-
-      # Move/resize windows with mainMod + LMB/RMB and dragging
-      bindm = $mainMod, mouse:272, movewindow
-      bindm = $mainMod, mouse:273, resizewindow
-    '';
   };
 
 }

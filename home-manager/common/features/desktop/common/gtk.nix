@@ -9,7 +9,7 @@ rec {
     gtk.enable = true;
     name = "Adwaita";
     package = pkgs.gnome.adwaita-icon-theme;
-    size = 16;
+    size = 12;
   };
 
   gtk = {
@@ -22,9 +22,22 @@ rec {
       name = "${config.colorscheme.slug}";
       package = gtkThemeFromScheme { scheme = config.colorscheme; };
     };
+
     iconTheme = {
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
+    };
+
+    gtk3.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
     };
   };
 

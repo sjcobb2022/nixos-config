@@ -5,6 +5,6 @@
   default = pkgs.mkShell {
     # Enable experimental features without having to specify the argument
     NIX_CONFIG = "experimental-features = nix-command flakes";
-    nativeBuildInputs = with pkgs; [ nix home-manager git sops ssh-to-age gnupg age rnix ];
+    nativeBuildInputs = with pkgs; [ nix home-manager git sops ssh-to-age gnupg age rnix-lsp ];
   };
 }
