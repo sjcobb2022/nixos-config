@@ -54,9 +54,7 @@ in
         ++ (lib.optionals config.wayland.windowManager.hyprland.enable [
           "hyprland/workspaces"
           "hyprland/submap"
-        ]) ++ [
-          # whatever else 
-        ];
+        ]);
 
         modules-center = [
           "hyprland/window"

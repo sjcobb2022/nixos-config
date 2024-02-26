@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 inputs.nixos-generators.nixosGenerate {
 
-  system = pkgs.system;
+  inherit (pkgs) system;
 
   modules = [
     # you can include your own nixos configuration here, i.e.

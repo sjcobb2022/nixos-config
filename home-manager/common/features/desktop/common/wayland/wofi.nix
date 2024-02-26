@@ -1,9 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
 let
   wofi = pkgs.unstable.wofi.overrideAttrs (oa: {
-    patches = (oa.patches or [ ]) ++ [
-      # ./wofi-run-shell.patch # Fix for https://todo.sr.ht/~scoopta/wofi/174
-    ];
+    patches = oa.patches or [ ];
   });
 
   pass = config.programs.password-store.package;

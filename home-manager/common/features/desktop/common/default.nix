@@ -1,4 +1,4 @@
-{ pkgs, lib, outputs, ... }:
+{ ... }:
 {
   imports = [
     ./discord.nix
@@ -15,8 +15,6 @@
   ];
 
   xdg.mimeApps.enable = true;
-  # xdg.portal.enable = true;
-  # home.packages = with pkgs; [
-  #   xdg-utils-spawn-terminal
-  # ];
+  xdg.configFile."mimeapps.list".force = true;
+
 }
