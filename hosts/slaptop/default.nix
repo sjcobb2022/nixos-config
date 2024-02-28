@@ -25,8 +25,8 @@
 
   networking = {
     networkmanager = {
-      enable = lib.mkDefault true;
-    };
+        enable = lib.mkDefault true;
+      };
     hostName = "slaptop";
   };
 
