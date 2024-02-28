@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.sessionVariables.EDITOR = "nvim";
 
   programs.neovim = {

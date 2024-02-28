@@ -1,5 +1,10 @@
-{ pkgs, lib, config, ... }: {
-  home.packages = [ pkgs.lutris ];
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
+  home.packages = [pkgs.lutris];
 
   home.persistence = {
     "/persist/home/${config.home.username}" = {

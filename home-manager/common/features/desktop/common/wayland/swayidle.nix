@@ -1,9 +1,12 @@
-{ pkgs, lib, config, ... }:
-let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   swaylock = "${config.programs.swaylock.package}/bin/swaylock --daemonize";
   hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
-in
-{
+in {
   services.swayidle = {
     enable = true;
     systemdTarget = "hyprland-session.target";
@@ -28,7 +31,6 @@ in
         event = "after-resume";
         command = "${hyprctl} dispatcher dpms on";
       }
-
     ];
 
     timeouts = [
@@ -49,5 +51,4 @@ in
       }
     ];
   };
-
 }

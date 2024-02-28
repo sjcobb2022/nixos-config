@@ -1,14 +1,18 @@
-{ config, lib, pkgs, inputs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
   wofi = pkgs.unstable.wofi.overrideAttrs (oa: {
-    patches = oa.patches or [ ];
+    patches = oa.patches or [];
   });
 
   pass = config.programs.password-store.package;
   passEnabled = config.programs.password-store.enable;
-  pass-wofi = pkgs.pass-wofi.override { inherit pass; };
-in
-{
+  pass-wofi = pkgs.pass-wofi.override {inherit pass;};
+in {
   programs.wofi = {
     enable = true;
     settings = {

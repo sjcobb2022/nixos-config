@@ -1,10 +1,8 @@
-{ config, ... }:
-let inherit (config.colorscheme) palette;
-in
-{
-
+{config, ...}: let
+  inherit (config.colorscheme) palette;
+in {
   xdg.mimeApps.defaultApplications = {
-    "application/pdf" = [ "zathura.desktop" ];
+    "application/pdf" = ["zathura.desktop"];
   };
 
   programs.zathura = {

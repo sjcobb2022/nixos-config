@@ -1,8 +1,11 @@
-{ config, outputs, lib, ... }:
-let
-  hostnames = builtins.attrNames outputs.nixosConfigurations;
-in
 {
+  config,
+  outputs,
+  lib,
+  ...
+}: let
+  hostnames = builtins.attrNames outputs.nixosConfigurations;
+in {
   programs.ssh = {
     enable = true;
     # matchBlocks = {
@@ -20,6 +23,6 @@ in
   # services.ssh-agent.enable = true;
 
   home.persistence = {
-    "/persist/home/${config.home.username}".directories = [ ".ssh" ];
+    "/persist/home/${config.home.username}".directories = [".ssh"];
   };
 }

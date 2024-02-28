@@ -1,7 +1,6 @@
-{ config, ... }:
-let inherit (config.colorscheme) palette;
-in
-{
+{config, ...}: let
+  inherit (config.colorscheme) palette;
+in {
   programs.shellcolor = {
     enable = true;
     settings = {

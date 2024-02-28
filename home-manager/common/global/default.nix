@@ -1,9 +1,17 @@
-{ inputs, lib, pkgs, config, outputs, ... }:
 {
-  imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
-    ../features/cli
-  ] ++ (builtins.attrValues outputs.homeManagerModules);
+  inputs,
+  lib,
+  pkgs,
+  config,
+  outputs,
+  ...
+}: {
+  imports =
+    [
+      inputs.impermanence.nixosModules.home-manager.impermanence
+      ../features/cli
+    ]
+    ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {
     overlays = builtins.attrValues outputs.overlays;
@@ -16,7 +24,7 @@
   nix = {
     package = lib.mkDefault pkgs.nix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
       warn-dirty = false;
     };
   };
@@ -26,7 +34,7 @@
   home = {
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
     stateVersion = "23.05";
-    sessionPath = [ "$HOME/.local/bin" ];
+    sessionPath = ["$HOME/.local/bin"];
     persistence = {
       "/persist/home/${config.home.username}" = {
         directories = [
@@ -38,7 +46,7 @@
           "Templates"
           "Public"
           ".local/bin"
-          ".local/share/nix" 
+          ".local/share/nix"
         ];
         allowOther = true;
       };

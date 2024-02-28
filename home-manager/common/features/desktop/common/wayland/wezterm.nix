@@ -1,10 +1,12 @@
-{ config, pkgs, inputs, ... }:
-let
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: let
   inherit (config) colorscheme;
   inherit (colorscheme) palette;
-in
-{
-
+in {
   programs.wezterm = {
     enable = true;
     package = inputs.wezterm.packages.${pkgs.system}.default;
@@ -39,17 +41,21 @@ in
         selection_bg = "#${palette.base05}";
       };
     };
-    extraConfig = /* lua */ ''
-      return {
-        font = wezterm.font("${config.fontProfiles.monospace.family}"),
-        font_size = 12.0,
-        color_scheme = '${colorscheme.slug}',
-        hide_tab_bar_if_only_one_tab = true,
-        window_close_confirmation = "NeverPrompt",
-        check_for_updates = false,
-        term='wezterm'
-      }
-    '';
+    extraConfig =
+      /*
+      lua
+      */
+      ''
+        return {
+          font = wezterm.font("${config.fontProfiles.monospace.family}"),
+          font_size = 12.0,
+          color_scheme = '${colorscheme.slug}',
+          hide_tab_bar_if_only_one_tab = true,
+          window_close_confirmation = "NeverPrompt",
+          check_for_updates = false,
+          term='wezterm'
+        }
+      '';
   };
 
   home.sessionVariables = {
@@ -60,5 +66,4 @@ in
   home.packages = with pkgs; [
     xterm
   ];
-
 }

@@ -1,5 +1,10 @@
-{ lib, inputs, config, pkgs, ... }: {
-
+{
+  lib,
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../common
     ../common/wayland
@@ -11,8 +16,8 @@
   ];
 
   xdg.portal = with pkgs; {
-    extraPortals = [ inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland ];
-    configPackages = [ inputs.hyprland.packages.${system}.hyprland ];
+    extraPortals = [inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland];
+    configPackages = [inputs.hyprland.packages.${system}.hyprland];
     xdgOpenUsePortal = true;
   };
 
@@ -22,7 +27,6 @@
     preload = ${../common/assets/rocks.jpg}
     wallpaper = ,${../common/assets/mountain.jpg}
   '';
-
 
   # home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
@@ -88,7 +92,6 @@
           "fade, 1, 7, default"
           "workspaces, 1, 6, default"
         ];
-
       };
 
       dwindle = {
@@ -190,12 +193,11 @@
         "$mod ALT, up, workspace, r+1"
         "$mod ALT, down, workspace, r-1"
 
-        # use mod shift to move (shift haha) an actiuve window 
+        # use mod shift to move (shift haha) an actiuve window
         "$mod SHIFT, left, movewindow, l"
         "$mod SHIFT, right, movewindow, r"
         "$mod SHIFT, up, movewindow, u"
         "$mod SHIFT, down, movewindow, d"
-
       ];
 
       bindel = [
@@ -215,5 +217,4 @@
       ];
     };
   };
-
 }

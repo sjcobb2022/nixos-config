@@ -54,45 +54,52 @@
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
-    let
-      inherit (self) outputs;
-      forEachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
-      forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
+  outputs = {
+    self,
+    nixpkgs,
+    nixos-hardware,
+    home-manager,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
+    forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
 
-      mkNixos = modules: nixpkgs.lib.nixosSystem {
+    mkNixos = modules:
+      nixpkgs.lib.nixosSystem {
         inherit modules;
-        specialArgs = { inherit inputs outputs; };
+        specialArgs = {inherit inputs outputs;};
       };
 
-      mkHome = modules: pkgs: home-manager.lib.homeManagerConfiguration {
+    mkHome = modules: pkgs:
+      home-manager.lib.homeManagerConfiguration {
         inherit modules pkgs;
-        extraSpecialArgs = { inherit inputs outputs; };
+        extraSpecialArgs = {inherit inputs outputs;};
       };
-    in
-    {
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
-      templates = import ./templates;
+  in {
+    nixosModules = import ./modules/nixos;
+    homeManagerModules = import ./modules/home-manager;
+    templates = import ./templates;
 
-      overlays = import ./overlays { inherit inputs outputs; };
+    formatter = forEachPkgs (pkgs: pkgs.alejandra);
 
-      packages = forEachPkgs (pkgs: (import ./pkgs { inherit pkgs; }));
-      devShells = forEachPkgs (pkgs: import ./shell.nix { inherit pkgs; });
+    overlays = import ./overlays {inherit inputs outputs;};
 
-      nixosConfigurations = {
-        slaptop = mkNixos [ ./hosts/slaptop ];
-        velocity = mkNixos [ ./hosts/velocity ];
-        iso = mkNixos [ ./hosts/iso ];
-      };
+    packages = forEachPkgs (pkgs: (import ./pkgs {inherit pkgs;}));
+    devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
 
-      homeConfigurations = {
-        "sjcobb@slaptop" = mkHome [ ./home-manager/sjcobb/slaptop.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        "sjcobb@velocity" = mkHome [ ./home-manager/sjcobb/velocity.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        "guest@slaptop" = mkHome [ ./home-manager/guest/slaptop.nix ] nixpkgs.legacyPackages."x86_64-linux";
-      };
+    nixosConfigurations = {
+      slaptop = mkNixos [./hosts/slaptop];
+      velocity = mkNixos [./hosts/velocity];
+      iso = mkNixos [./hosts/iso];
     };
+
+    homeConfigurations = {
+      "sjcobb@slaptop" = mkHome [./home-manager/sjcobb/slaptop.nix] nixpkgs.legacyPackages."x86_64-linux";
+      "sjcobb@velocity" = mkHome [./home-manager/sjcobb/velocity.nix] nixpkgs.legacyPackages."x86_64-linux";
+      "guest@slaptop" = mkHome [./home-manager/guest/slaptop.nix] nixpkgs.legacyPackages."x86_64-linux";
+    };
+  };
 }

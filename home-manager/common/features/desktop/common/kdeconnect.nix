@@ -1,8 +1,11 @@
-{ pkgs, lib, config, ... }:
-let
-  # kdeconnect-cli = "${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-cli";
-in
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  # kdeconnect-cli = "${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-cli";
+in {
   xdg.desktopEntries = {
     "org.kde.kdeconnect.sms" = {
       exec = "";
@@ -34,6 +37,6 @@ in
   # home.packages = with pkgs; [ valent ];
 
   home.persistence = {
-    "/persist/home/${config.home.username}".directories = [ ".config/kdeconnect" ];
+    "/persist/home/${config.home.username}".directories = [".config/kdeconnect"];
   };
 }

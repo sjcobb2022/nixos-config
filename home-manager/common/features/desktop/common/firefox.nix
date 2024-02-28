@@ -1,9 +1,12 @@
-{ pkgs, lib, config, inputs, ... }:
-
-let
-  addons = inputs.firefox-addons.packages.${pkgs.system};
-in
 {
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}: let
+  addons = inputs.firefox-addons.packages.${pkgs.system};
+in {
   # programs.browserpass.enable = true;
   programs.firefox = {
     enable = true;
@@ -37,14 +40,14 @@ in
       TZ = "/etc/localtime";
     };
     persistence = {
-      "/persist/home/${config.home.username}".directories = [ ".mozilla/firefox" ];
+      "/persist/home/${config.home.username}".directories = [".mozilla/firefox"];
     };
   };
 
   xdg.mimeApps.defaultApplications = {
-    "text/html" = [ "firefox.desktop" ];
-    "text/xml" = [ "firefox.desktop" ];
-    "x-scheme-handler/http" = [ "firefox.desktop" ];
-    "x-scheme-handler/https" = [ "firefox.desktop" ];
+    "text/html" = ["firefox.desktop"];
+    "text/xml" = ["firefox.desktop"];
+    "x-scheme-handler/http" = ["firefox.desktop"];
+    "x-scheme-handler/https" = ["firefox.desktop"];
   };
 }

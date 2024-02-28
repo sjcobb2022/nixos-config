@@ -1,4 +1,8 @@
-{ config, lib, ... }: {
+{
+  config,
+  lib,
+  ...
+}: {
   # Wireless secrets stored through sops
 
   sops.secrets.wireless = {
@@ -19,7 +23,7 @@
       };
       "eduroam" = {
         # TODO: get the right identity / pswd and use sops
-        authProtocols = [ "WPA-EAP" ];
+        authProtocols = ["WPA-EAP"];
         auth = ''
           key_mgmt=WPA-EAP
           eap=PEAP
@@ -43,7 +47,7 @@
   };
 
   # Ensure group exists
-  users.groups.network = { };
+  users.groups.network = {};
 
   systemd.services.wpa_supplicant.preStart = "touch /etc/wpa_supplicant.conf";
 }

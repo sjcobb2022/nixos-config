@@ -1,4 +1,11 @@
-{ pkgs, inputs, outputs, config, lib, ... }: {
+{
+  pkgs,
+  inputs,
+  outputs,
+  config,
+  lib,
+  ...
+}: {
   imports = [
     inputs.nixos-hardware.nixosModules.omen-15-en1007sa
     # outputs.nixosModules.slaptop
@@ -25,8 +32,8 @@
 
   networking = {
     networkmanager = {
-        enable = lib.mkDefault true;
-      };
+      enable = lib.mkDefault true;
+    };
     hostName = "slaptop";
   };
 
@@ -35,7 +42,7 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   # Configure keymap in X11
-  # use US keyboard because laptop is in US keyboard layout 
+  # use US keyboard because laptop is in US keyboard layout
   services.xserver = {
     layout = "us";
     xkbVariant = "";
@@ -47,10 +54,9 @@
 
   # nvidia bullshit
 
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
 
   hardware.nvidia = {
-
     # Modesetting is required.
     # Use integrated options with nvidia-offload for battery saving
     modesetting.enable = false;
@@ -61,16 +67,16 @@
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
     powerManagement.finegrained = true;
 
-    # Enable dynamic power management. 
+    # Enable dynamic power management.
     # Dynamic Boost balances power between the CPU and the GPU for improved
     # performance on supported laptops using the nvidia-powerd daemon.
     dynamicBoost.enable = false;
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of 
-    # supported GPUs is at: 
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Support is limited to the Turing and later architectures. Full list of
+    # supported GPUs is at:
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
     # Only available from driver 515.43.04+
     # Do not disable this unless your GPU is unsupported or if you have a good reason to.
     open = false;
@@ -88,7 +94,7 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [ libvdpau-va-gl vaapiVdpau ];
+    extraPackages = with pkgs; [libvdpau-va-gl vaapiVdpau];
   };
 
   services.logind = {
@@ -114,15 +120,15 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 3000 5173 4173 80 443 1522 27017 ];
+    allowedTCPPorts = [3000 5173 4173 80 443 1522 27017];
   };
 
- swapDevices = [ 
+  swapDevices = [
     {
       device = "/swapfile";
       size = 16 * 1024;
-    } 
+    }
   ];
 
   system.stateVersion = "23.05";
-} 
+}

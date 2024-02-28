@@ -1,6 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 inputs.nixos-generators.nixosGenerate {
-
   inherit (pkgs) system;
 
   modules = [
@@ -14,7 +17,6 @@ inputs.nixos-generators.nixosGenerate {
     # ../../hosts/common/optional/tlp.nix
     # ../../hosts/common/optional/swaylock.nix
     # ../../hosts/common/optional/upower.nix
-
   ];
 
   format = "install-iso";

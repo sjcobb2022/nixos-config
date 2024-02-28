@@ -1,5 +1,9 @@
-{ pkgs, lib, config, ... }:
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
@@ -14,6 +18,6 @@
       feature.manyFiles = true;
       init.defaultBranch = "main";
     };
-    ignores = [ ".direnv" "result" ];
+    ignores = [".direnv" "result"];
   };
 }

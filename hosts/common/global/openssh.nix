@@ -1,6 +1,9 @@
-{ outputs, lib, config, ... }:
-
-let
+{
+  outputs,
+  lib,
+  config,
+  ...
+}: let
   inherit (config.networking) hostName;
   hosts = outputs.nixosConfigurations;
   pubKey = host: ../../${host}/ssh_host_ed25519_key.pub;
@@ -8,8 +11,7 @@ let
   # Sops needs acess to the keys before the persist dirs are even mounted; so
   # just persisting the keys won't work, we must point at /persist
   hasOptinPersistence = config.environment.persistence ? "/persist";
-in
-{
+in {
   services.openssh = {
     enable = true;
     settings = {
@@ -33,7 +35,8 @@ in
   programs.ssh = {
     startAgent = true;
     # Each hosts public key
-    knownHosts = builtins.mapAttrs
+    knownHosts =
+      builtins.mapAttrs
       (name: _: {
         publicKeyFile = pubKey name;
         extraHostNames =

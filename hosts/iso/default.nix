@@ -1,4 +1,11 @@
-{ pkgs, inputs, outputs, config, lib, ... }: {
+{
+  pkgs,
+  inputs,
+  outputs,
+  config,
+  lib,
+  ...
+}: {
   imports = [
     # ../common/global
     # ../common/users/sjcobb
@@ -14,7 +21,7 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   # Configure keymap in X11
-  # use US keyboard because laptop is in US keyboard layout 
+  # use US keyboard because laptop is in US keyboard layout
   services.xserver = {
     layout = "us";
     xkbVariant = "";
@@ -26,10 +33,9 @@
   nixpkgs.config.allowUnfree = true;
 
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amd" "nvidia" ];
+  services.xserver.videoDrivers = ["amd" "nvidia"];
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-
 
   networking = {
     hostName = "iso";
@@ -44,7 +50,7 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [ libvdpau-va-gl vaapiVdpau ];
+    extraPackages = with pkgs; [libvdpau-va-gl vaapiVdpau];
   };
 
   services.logind = {
@@ -69,7 +75,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 3000 5173 4173 80 443 1522 27017 ];
+    allowedTCPPorts = [3000 5173 4173 80 443 1522 27017];
   };
 
   # xdg.portal = {
@@ -78,4 +84,4 @@
   # };
 
   system.stateVersion = "23.05";
-} 
+}

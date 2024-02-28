@@ -1,4 +1,7 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  ...
+}: {
   services.blueman.enable = true;
 }

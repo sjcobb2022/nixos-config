@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     #./hyprland-vnc.nix
     #./kitty.nix

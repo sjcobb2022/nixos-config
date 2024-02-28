@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.programs.shellcolor;
   package = pkgs.shellcolord;
 
@@ -9,9 +12,7 @@ let
   '';
   renderSettings = settings:
     lib.concatStrings (lib.mapAttrsToList renderSetting settings);
-
-in
-{
+in {
   options.programs.shellcolor = {
     enable = lib.mkEnableOption "shellcolor";
 
@@ -54,7 +55,7 @@ in
 
     settings = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
-      default = { };
+      default = {};
       example = lib.literalExpression ''
         {
           base00 = "000000";
@@ -69,25 +70,26 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ package ];
+    home.packages = [package];
 
-    xdg.configFile."shellcolor.conf" = lib.mkIf (cfg.settings != { }) {
+    xdg.configFile."shellcolor.conf" = lib.mkIf (cfg.settings != {}) {
       text = renderSettings cfg.settings;
       onChange = ''
         timeout 1 ${package}/bin/shellcolor apply || true
       '';
     };
 
-    programs.bash.initExtra = lib.mkIf cfg.enableBashIntegration
+    programs.bash.initExtra =
+      lib.mkIf cfg.enableBashIntegration
       (lib.mkBefore ''
         ${package}/bin/shellcolord $$ & disown
         ${lib.optionalString cfg.enableBashSshFunction ''
-        ssh() {
-          ${package}/bin/shellcolor disable $$
-          command ssh "$@"
-          ${package}/bin/shellcolor enable $$
-          ${package}/bin/shellcolor apply $$
-        }
+          ssh() {
+            ${package}/bin/shellcolor disable $$
+            command ssh "$@"
+            ${package}/bin/shellcolor enable $$
+            ${package}/bin/shellcolor apply $$
+          }
         ''}
       '');
 
@@ -95,7 +97,8 @@ in
       ${package}/bin/shellcolord $$ & disown
     '');
 
-    programs.fish.interactiveShellInit = lib.mkIf cfg.enableFishIntegration
+    programs.fish.interactiveShellInit =
+      lib.mkIf cfg.enableFishIntegration
       (lib.mkBefore ''
         ${package}/bin/shellcolord $fish_pid & disown
       '');

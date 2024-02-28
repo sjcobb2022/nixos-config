@@ -1,10 +1,11 @@
-{ config, pkgs, inputs, ... }:
-
-let
-  inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
-in
-rec {
-
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: let
+  inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+in rec {
   home.pointerCursor = {
     gtk.enable = true;
     name = "Adwaita";
@@ -20,7 +21,7 @@ rec {
     };
     theme = {
       name = "${config.colorscheme.slug}";
-      package = gtkThemeFromScheme { scheme = config.colorscheme; };
+      package = gtkThemeFromScheme {scheme = config.colorscheme;};
     };
 
     iconTheme = {
@@ -49,5 +50,5 @@ rec {
     };
   };
 
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 }

@@ -1,5 +1,9 @@
-{ pkgs, lib, config, ... }: {
-
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   services.mpd = {
     enable = true;
     musicDirectory = "/home/${config.home.username}/Music";

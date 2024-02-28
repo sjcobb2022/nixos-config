@@ -1,5 +1,8 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  ...
+}: {
   virtualisation.docker = {
     enable = true;
     rootless = {
@@ -9,5 +12,5 @@
   };
 
   # Ensure group exists
-  users.groups.docker = { };
+  users.groups.docker = {};
 }

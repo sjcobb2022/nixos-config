@@ -1,9 +1,9 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   fontProfiles = {
     enable = true;
     monospace = {
       family = "FiraCode Nerd Font";
-      package = pkgs.unstable.nerdfonts.override { fonts = [ "FiraCode" ]; };
+      package = pkgs.unstable.nerdfonts.override {fonts = ["FiraCode"];};
     };
     regular = {
       family = "Fira Sans";
@@ -11,12 +11,12 @@
     };
   };
 
-  # fallback to japanese  
+  # fallback to japanese
   home.packages = with pkgs; [
     ipafont
     noto-fonts
     source-han-sans
     source-han-serif
-    (nerdfonts.override { fonts = [ "BigBlueTerminal" ]; })
+    (nerdfonts.override {fonts = ["BigBlueTerminal"];})
   ];
 }

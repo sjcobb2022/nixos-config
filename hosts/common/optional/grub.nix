@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   boot = {
     loader = {
       systemd-boot.enable = false;
@@ -15,18 +14,18 @@
         enableCryptodisk = true;
         extraEntriesBeforeNixOS = true;
         extraEntries = ''
-          	        menuentry 'Shutdown' {
-          	          halt
-          	        } 
-          	        
-          	        menuentry 'Reboot' {
-          	          reboot
-          	        }
-          	        
-          	        menuentry 'UEFI Firmware Settings' {
-          	          fwsetup
-          	        }
-          	'';
+          menuentry 'Shutdown' {
+            halt
+          }
+
+          menuentry 'Reboot' {
+            reboot
+          }
+
+          menuentry 'UEFI Firmware Settings' {
+            fwsetup
+          }
+        '';
       };
     };
   };

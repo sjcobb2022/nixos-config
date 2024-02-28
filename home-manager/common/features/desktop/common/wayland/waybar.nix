@@ -1,6 +1,10 @@
-{ outputs, config, lib, pkgs, ... }:
-
-let
+{
+  outputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   # Dependencies
   cat = "${pkgs.coreutils}/bin/cat";
   cut = "${pkgs.coreutils}/bin/cut";
@@ -24,7 +28,14 @@ let
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
 
   # Function to simplify making waybar outputs
-  jsonOutput = name: { pre ? "", text ? "", tooltip ? "", alt ? "", class ? "", percentage ? "" }: "${pkgs.writeShellScriptBin "waybar-${name}" ''
+  jsonOutput = name: {
+    pre ? "",
+    text ? "",
+    tooltip ? "",
+    alt ? "",
+    class ? "",
+    percentage ? "",
+  }: "${pkgs.writeShellScriptBin "waybar-${name}" ''
     set -euo pipefail
     ${pre}
     ${jq} -cn \
@@ -35,26 +46,26 @@ let
       --arg percentage "${percentage}" \
       '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
   ''}/bin/waybar-${name}";
-in
-{
+in {
   programs.waybar = {
     enable = true;
     package = pkgs.unstable.waybar.overrideAttrs (oa: {
-      mesonFlags = (oa.mesonFlags or  [ ]) ++ [ "-Dexperimental=true" ];
+      mesonFlags = (oa.mesonFlags or []) ++ ["-Dexperimental=true"];
     });
     systemd.enable = true;
     settings = {
       primary = {
         layer = "top";
         position = "top";
-        modules-left = [
-          "clock"
-          "mpris"
-        ]
-        ++ (lib.optionals config.wayland.windowManager.hyprland.enable [
-          "hyprland/workspaces"
-          "hyprland/submap"
-        ]);
+        modules-left =
+          [
+            "clock"
+            "mpris"
+          ]
+          ++ (lib.optionals config.wayland.windowManager.hyprland.enable [
+            "hyprland/workspaces"
+            "hyprland/submap"
+          ]);
 
         modules-center = [
           "hyprland/window"
@@ -88,7 +99,7 @@ in
             "warning" = 70;
             "critical" = 90;
           };
-          format-icons = [ "" ];
+          format-icons = [""];
         };
 
         mpris = {
@@ -105,7 +116,7 @@ in
 
         memory = {
           format = "{icon} {}%";
-          format-icons = [ "󰍛" ];
+          format-icons = ["󰍛"];
           states = {
             "warning" = 70;
             "critical" = 90;
@@ -114,7 +125,7 @@ in
 
         temperature = {
           format = "{icon} {temperatureC}°C";
-          format-icons = [ "" "" "" "" "" ];
+          format-icons = ["" "" "" "" ""];
         };
 
         idle_inhibitor = {
@@ -132,7 +143,7 @@ in
             critical = 15;
           };
           format = "{icon} {capacity}%";
-          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+          format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
           format-charging = "󰂄 {capacity}%";
           format-plugged = " {capacity}%";
         };
@@ -142,9 +153,9 @@ in
           format = "{icon} {essid} ({signalStrength}%)";
           format-alt = "{ifname}: {ipaddr}/{cidr}";
           format-icons = {
-            "wifi" = [ "󰤟 " "󰤢 " "󰤥 " "󰤨 " ];
-            "ethernet" = [ "󰈀" ];
-            "disconnected" = [ "󰌙" ];
+            "wifi" = ["󰤟 " "󰤢 " "󰤥 " "󰤨 "];
+            "ethernet" = ["󰈀"];
+            "disconnected" = ["󰌙"];
           };
           tooltip-format = ''
             {ifname}
@@ -156,7 +167,7 @@ in
 
         "backlight" = {
           format = "{icon} {percent}% ";
-          format-icons = [ "" ];
+          format-icons = [""];
           tooltip-format = "{percent}%";
           on-scroll-down = "${light} -A 1";
           on-scroll-up = "${light} -U 1";
@@ -177,7 +188,7 @@ in
             "phone" = "";
             "portable" = "";
             "car" = "";
-            default = [ "" "" "" ];
+            default = ["" "" ""];
           };
           "on-click" = "${pavucontrol}";
           "on-scroll-down" = "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+";
@@ -205,7 +216,7 @@ in
             default = " ";
           };
           "persistent-workspaces" = {
-            "*" = [ 1 2 3 4 5 ];
+            "*" = [1 2 3 4 5];
           };
         };
 
@@ -213,7 +224,6 @@ in
           max-length = 50;
         };
       };
-
     };
 
     # Cheatsheet:
@@ -238,143 +248,149 @@ in
     # base0D: "#7AA2F7"
     # base0E: "#BB9AF7"
     # base0F: "#BB9AF7"
-    style = let inherit (config.colorscheme) palette; in /* css */ ''
-      @define-color highlight #${palette.base0D};
-      @define-color base1  #${palette.base01};
-      @define-color base2  #${palette.base04};
-      @define-color warning #${palette.base09};
-      @define-color critical #${palette.base08};
+    style = let
+      inherit (config.colorscheme) palette;
+    in
+      /*
+      css
+      */
+      ''
+        @define-color highlight #${palette.base0D};
+        @define-color base1  #${palette.base01};
+        @define-color base2  #${palette.base04};
+        @define-color warning #${palette.base09};
+        @define-color critical #${palette.base08};
 
-      /* -----------------------------------------------------------------------------
-       * Base styles
-       * -------------------------------------------------------------------------- */
+        /* -----------------------------------------------------------------------------
+         * Base styles
+         * -------------------------------------------------------------------------- */
 
-      /* Reset all styles */
-      * {
-          border: none;
-          border-radius: 0;
-          min-height: 0;
-          margin: 1px;
-          padding: 0;
-      }
+        /* Reset all styles */
+        * {
+            border: none;
+            border-radius: 0;
+            min-height: 0;
+            margin: 1px;
+            padding: 0;
+        }
 
-      /* The whole bar */
-      #waybar {
-          background: transparent;
+        /* The whole bar */
+        #waybar {
+            background: transparent;
+            color: @base2;
+            background-color: @base1;
+            font-family: FiraMono;
+            font-size: 12px;
+        }
+
+        /* Every modules */
+        #battery,
+        #clock,
+        #backlight,
+        #cpu,
+        #memory,
+        #mode,
+        #network,
+        #pulseaudio,
+        #temperature,
+        #tray,
+        #idle_inhibitor {
+            padding:0.5rem 0.6rem;
+            margin: 1px 0px;
+        }
+
+        /* -----------------------------------------------------------------------------
+         * Modules styles
+         * -------------------------------------------------------------------------- */
+
+        #battery {
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        #battery.warning {
+            color: @warning;
+        }
+
+        #battery.critical {
+            color: @critical;
+        }
+
+        #battery.warning.discharging {
+            color: @warning;
+        }
+
+        #battery.critical.discharging {
+            color: @critical;
+        }
+
+        #cpu.warning {
+            color: @warning;
+        }
+
+        #cpu.critical {
+            color: @critical;
+        }
+
+        #memory {
+        }
+
+        #mpris {
+          margin-right: 0.5rem;
+        }
+
+        #memory.warning {
+            color: @warning;
+         }
+
+        #memory.critical {
+            color: @critical;
+        }
+
+        #network.disconnected {
+            color: @warning;
+        }
+
+        #pulseaudio {
+            padding-top:6px;
+        }
+
+        #pulseaudio.muted {
+            color: @highlight;
+        }
+
+        #temperature.critical {
+            color: @critical;
+        }
+
+        #window {
+            font-weight: bold;
+        }
+
+        #workspaces {
+            font-size:13px;
+        }
+
+        #workspaces button {
+            border-bottom: 1px solid transparent;
+            margin-bottom: 0px;
+            padding: 0px 5px;
+        }
+
+        #workspaces button.active {
+            border-bottom: 1px solid  @highlight;
+        }
+
+        #workspaces button.urgent {
+            border-color: @critical;
+            color: @critical;
+        }
+
+        #tray {
           color: @base2;
-          background-color: @base1;
-          font-family: FiraMono;
-          font-size: 12px;
-      }
+        }
 
-      /* Every modules */
-      #battery,
-      #clock,
-      #backlight,
-      #cpu,
-      #memory,
-      #mode,
-      #network,
-      #pulseaudio,
-      #temperature,
-      #tray,
-      #idle_inhibitor {
-          padding:0.5rem 0.6rem;
-          margin: 1px 0px;
-      }
-
-      /* -----------------------------------------------------------------------------
-       * Modules styles
-       * -------------------------------------------------------------------------- */
-
-      #battery {
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
-      }
-
-      #battery.warning {
-          color: @warning;
-      }
-
-      #battery.critical {
-          color: @critical;
-      }
-
-      #battery.warning.discharging {
-          color: @warning;
-      }
-
-      #battery.critical.discharging {
-          color: @critical;
-      }
-
-      #cpu.warning {
-          color: @warning;
-      }
-
-      #cpu.critical {
-          color: @critical;
-      }
-
-      #memory {
-      }
-
-      #mpris {
-        margin-right: 0.5rem;
-      }
-
-      #memory.warning {
-          color: @warning;
-       }
-
-      #memory.critical {
-          color: @critical;
-      }
-
-      #network.disconnected {
-          color: @warning;
-      }
-
-      #pulseaudio {
-          padding-top:6px;
-      }
-
-      #pulseaudio.muted {
-          color: @highlight;
-      }
-
-      #temperature.critical {
-          color: @critical;
-      }
-
-      #window {
-          font-weight: bold;
-      }
-
-      #workspaces {
-          font-size:13px;
-      }
-
-      #workspaces button {
-          border-bottom: 1px solid transparent;
-          margin-bottom: 0px;
-          padding: 0px 5px;
-      }
-
-      #workspaces button.active {
-          border-bottom: 1px solid  @highlight;
-      }
-
-      #workspaces button.urgent {
-          border-color: @critical;
-          color: @critical;
-      }
-
-      #tray {
-        color: @base2;
-      }
-
-    '';
+      '';
   };
 }

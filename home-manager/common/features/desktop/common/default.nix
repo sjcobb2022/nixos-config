@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./discord.nix
     ./firefox.nix
@@ -16,5 +15,4 @@
 
   xdg.mimeApps.enable = true;
   xdg.configFile."mimeapps.list".force = true;
-
 }
