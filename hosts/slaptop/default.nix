@@ -28,6 +28,7 @@
     ../common/optional/swaylock.nix
     ../common/optional/docker.nix
     ../common/optional/upower.nix
+    ../common/optional/virt-manager.nix
   ];
 
   networking = {
