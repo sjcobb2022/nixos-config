@@ -3,6 +3,7 @@
 {pkgs ? (import ../nixpkgs.nix) {}, ...}: {
   # example = pkgs.callPackage ./example { };
   shellcolord = pkgs.callPackage ./shellcolord {};
+  wofi-hyprkeys = pkgs.callPackage ./wofi-hyprkeys { };
   # wezterm-nightly = pkgs.callPackage ./wezterm-nightly { };
   # iso = pkgs.callPackage ./iso { inherit inputs pkgs; };
 }
