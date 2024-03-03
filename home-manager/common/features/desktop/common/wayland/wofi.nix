@@ -4,15 +4,23 @@
   pkgs,
   inputs,
   ...
-}: let
-  wofi = pkgs.unstable.wofi.overrideAttrs (oa: {
-    patches = oa.patches or [];
-  });
+}: 
+let script = pkgs.writeScript "wofi" ''
+    #!${pkgs.stdenv.shell}
+    JSON=$(hyprkeys --from-ctl --json | jq -r --slurp "[.[]][0]");
 
-  pass = config.programs.password-store.package;
-  passEnabled = config.programs.password-store.enable;
-  pass-wofi = pkgs.pass-wofi.override {inherit pass;};
-in {
+    USER_SELECTED=$(echo $JSON | jq -r '.[] | "\(.mods) \(.key) \(.dispatcher) \(.arg)"' | wofi --dmenu -p 'Keybinds' --define "dmenu-print_line_num=true");
+
+    if [ -z "$USER_SELECTED" ]; then
+      exit 0;
+    fi
+
+    EVENT=$(echo $JSON | jq -r "[.[]] | .[$USER_SELECTED]" | jq -r '"\(.dispatcher) \(.arg)"');
+
+    hyprctl dispatch "$EVENT";
+  '';
+in
+{
   programs.wofi = {
     enable = true;
     settings = {
@@ -26,7 +34,6 @@ in {
       run-cache_file = "/dev/null";
       run-exec_search = true;
       term = "wezterm";
-      terminal = "wezterm";
     };
   };
 }

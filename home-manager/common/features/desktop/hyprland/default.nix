@@ -4,7 +4,30 @@
   config,
   pkgs,
   ...
-}: {
+}:
+  let 
+  
+  jq = "${pkgs.jq}/bin/jq";
+  hyprkeys = "${inputs.hyprkeys.packages.${pkgs.system}.hyprkeys}/bin/hyprkeys";
+  wofi = "${pkgs.wofi}/bin/wofi";
+  hyprctl = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/hyprctl";
+  
+  wofi-keys = pkgs.writeScript "wofi-keys" ''
+    #!${pkgs.stdenv.shell}
+    JSON=$(${hyprkeys} --from-ctl --json | ${jq} -r --slurp "[.[]][0]");
+
+    USER_SELECTED=$(echo $JSON | ${jq} -r '.[] | "\(.mods) \(.key) \(.dispatcher) \(.arg)"' | ${wofi} --dmenu -p 'Keybinds' --define "dmenu-print_line_num=true");
+
+    if [ -z "$USER_SELECTED" ]; then
+      exit 0;
+    fi
+
+    EVENT=$(echo $JSON | ${jq} -r "[.[]] | .[$USER_SELECTED]" | ${jq} -r '"\(.dispatcher) \(.arg)"');
+
+    ${hyprctl} dispatch "$EVENT";
+  '';
+in
+{
   imports = [
     ../common
     ../common/wayland
@@ -13,6 +36,7 @@
 
   home.packages = with pkgs; [
     inputs.hyprwm-contrib.packages.${system}.grimblast
+    inputs.hyprkeys.packages.${system}.hyprkeys
   ];
 
   xdg.portal = with pkgs; {
@@ -149,6 +173,7 @@
         "$mod,J,togglesplit,"
         "$mod,escape,exec,pkill wlogout || wlogout -p layer-shell"
         "$mod,F,fullscreen"
+        "$mod,K,exec,${wofi-keys}"
 
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"

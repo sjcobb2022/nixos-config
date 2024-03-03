@@ -50,6 +50,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    hyprkeys = {
+        url = "github:hyprland-community/hyprkeys";
+        inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
