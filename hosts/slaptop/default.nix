@@ -29,6 +29,7 @@
     ../common/optional/docker.nix
     ../common/optional/upower.nix
     ../common/optional/virt-manager.nix
+    ../common/optional/steam-hardware.nix
   ];
 
   networking = {
