@@ -4,8 +4,8 @@
   pkgs,
   inputs,
   ...
-}: 
-let script = pkgs.writeScript "wofi" ''
+}: let
+  script = pkgs.writeScript "wofi" ''
     #!${pkgs.stdenv.shell}
     JSON=$(hyprkeys --from-ctl --json | jq -r --slurp "[.[]][0]");
 
@@ -19,8 +19,7 @@ let script = pkgs.writeScript "wofi" ''
 
     hyprctl dispatch "$EVENT";
   '';
-in
-{
+in {
   programs.wofi = {
     enable = true;
     settings = {

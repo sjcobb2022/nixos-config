@@ -4,8 +4,7 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     ../common
     ../common/wayland
@@ -52,7 +51,6 @@
 
       exec-once = with pkgs; [
         "${inputs.hyprpaper.packages.${system}.hyprpaper}/bin/hyprpaper"
-        "${polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
 
       monitor = ",preferred,auto,1.6";
