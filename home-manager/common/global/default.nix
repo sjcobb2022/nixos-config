@@ -18,6 +18,10 @@
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
+      permittedInsecurePackages = [
+        "nix-2.15.3"
+        "electron-25.9.0"
+      ];
     };
   };
 

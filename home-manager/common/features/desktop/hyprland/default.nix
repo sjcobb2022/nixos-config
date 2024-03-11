@@ -53,7 +53,7 @@
         "${inputs.hyprpaper.packages.${system}.hyprpaper}/bin/hyprpaper"
       ];
 
-      monitor = ",preferred,auto,1.6";
+      monitor = ",preferred,auto,auto";
 
       input = {
         kb_layout = "us";
@@ -199,6 +199,12 @@
         "$mod SHIFT, right, movewindow, r"
         "$mod SHIFT, up, movewindow, u"
         "$mod SHIFT, down, movewindow, d"
+
+        ",Print,exec,grimblast copy screen"
+        "SHIFT,Print,exec,grimblast save screen"
+
+        "CTRL,Print,exec,grimblast copy area"
+        "CTRL SHIFT,Print,exec,grimblast save area"
       ];
 
       bindel = [

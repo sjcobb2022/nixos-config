@@ -16,11 +16,11 @@
   ];
 
   home.packages = with pkgs; [
-    grim
+    # grim
     imv
     # mimeo
     # pulseaudio
-    slurp
+    # slurp
     waypipe
     wf-recorder
     wl-clipboard

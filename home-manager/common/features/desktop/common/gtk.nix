@@ -6,12 +6,12 @@
 }: let
   inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
 in rec {
-  home.pointerCursor = {
-    gtk.enable = true;
-    name = "Adwaita";
-    package = pkgs.gnome.adwaita-icon-theme;
-    size = 12;
-  };
+  # home.pointerCursor = {
+  #   gtk.enable = true;
+  #   name = "Adwaita";
+  #   package = pkgs.gnome.adwaita-icon-theme;
+  #   size = 16;
+  # };
 
   gtk = {
     enable = true;
@@ -28,17 +28,11 @@ in rec {
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
     };
+  };
 
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
     };
   };
 
