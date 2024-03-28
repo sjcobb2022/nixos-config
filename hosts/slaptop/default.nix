@@ -50,7 +50,7 @@
     xkbVariant = "";
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_6_5;
+  boot.kernelPackages = pkgs.linuxPackages_6_7;
 
   programs.hyprland.enable = true;
 
@@ -85,7 +85,7 @@
 
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
+    nvidiaSettings = false;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -122,7 +122,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [3000 5173 4173 80 443 1522 27017];
+    allowedTCPPorts = [3000 5173 4173 1522 27017];
   };
 
   swapDevices = [
