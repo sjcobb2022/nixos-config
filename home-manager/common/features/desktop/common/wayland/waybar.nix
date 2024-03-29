@@ -12,10 +12,10 @@
 in {
   programs.waybar = {
     enable = true;
-    package = pkgs.unstable.waybar.overrideAttrs (oa: {
-      mesonFlags = (oa.mesonFlags or []) ++ ["-Dexperimental=true"];
-    });
-    systemd.enable = true;
+    package = pkgs.unstable.waybar;
+    systemd = {
+      enable = true;
+    };
     settings = {
       primary = {
         layer = "top";
