@@ -11,6 +11,7 @@
     ./mpd.nix
     ./wpa-gui.nix
     ./adwaita.nix
+    ./cursor.nix
   ];
 
   xdg.mimeApps.enable = true;
