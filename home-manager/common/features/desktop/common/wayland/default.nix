@@ -2,7 +2,7 @@
   imports = [
     #./hyprland-vnc.nix
     #./kitty.nix
-    ./wezterm.nix
+    # ./wezterm.nix
     ./mako.nix
     ./swayidle.nix
     ./swaylock.nix
@@ -13,6 +13,7 @@
     ./zathura.nix
     ./obsidian.nix
     ./poweralertd.nix
+    ./alacritty.nix
   ];
 
   home.packages = with pkgs; [
