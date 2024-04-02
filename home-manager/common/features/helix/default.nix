@@ -5,7 +5,7 @@ in {
   programs.helix = {
     enable = true;
     settings = {
-      theme = "ondedarker";
+      theme = "onedarker";
       editor = {
         color-modes = true;
         line-number = "relative";

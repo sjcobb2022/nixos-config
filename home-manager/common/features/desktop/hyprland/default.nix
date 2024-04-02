@@ -194,14 +194,14 @@
         ++ (map (n: "$mod SHIFT,${n},movetoworkspacesilent,${n}") workspaces);
 
       bindel = [
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86MonBrightnessUp,exec,light -A 10"
-        ", XF86MonBrightnessDown,exec,light -U 10"
+        ", XF86AudioRaiseVolume, exec, swayosd --output-volume=raise"
+        ", XF86AudioLowerVolume, exec, swayosd --output-volume=lower"
+        ", XF86MonBrightnessUp,exec,swayosd --brightness=raise"
+        ", XF86MonBrightnessDown,exec,swayosd --brightness=lower"
       ];
 
       bindl = [
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMute, exec, swayosd --output-volume mute-toggle"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"

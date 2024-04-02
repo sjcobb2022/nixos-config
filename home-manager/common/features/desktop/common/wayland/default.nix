@@ -14,6 +14,7 @@
     ./obsidian.nix
     ./poweralertd.nix
     ./alacritty.nix
+    ./sway-osd.nix
   ];
 
   home.packages = with pkgs; [
