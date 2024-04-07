@@ -57,13 +57,4 @@ in {
         }
       '';
   };
-
-  home.sessionVariables = {
-    TERM = "wezterm";
-  };
-
-  # Add xterm incase wezterm breaks
-  home.packages = with pkgs; [
-    xterm
-  ];
 }
