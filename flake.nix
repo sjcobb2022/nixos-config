@@ -93,7 +93,21 @@
 
     overlays = import ./overlays {inherit inputs outputs;};
 
-    packages = forEachPkgs (pkgs: (import ./pkgs {inherit pkgs;}));
+    # Also setup generator with nixos generators
+    packages =
+      forEachPkgs
+      (
+        pkgs:
+          (import ./pkgs {inherit pkgs;})
+          // {
+            install-iso = inputs.nixos-generators.nixosGenerate {
+              system = "${pkgs.system}";
+              modules = [ ./hosts/iso ];
+              format = "install-iso";
+            };
+          }
+      );
+
     devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
 
     nixosConfigurations = {

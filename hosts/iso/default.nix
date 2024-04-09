@@ -13,7 +13,6 @@
 
     # ../common/optional/tlp.nix
     # ../common/optional/swaylock.nix
-    inputs.nixos-generators.nixosModules.all-formats
   ];
 
   time.timeZone = "Europe/London";
@@ -27,8 +26,6 @@
     xkbVariant = "";
   };
 
-  # networking.wireless.enable = false;
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   nixpkgs.config.allowUnfree = true;
 
@@ -39,9 +36,8 @@
 
   networking = {
     hostName = "iso";
+    wireless.enable = false;
   };
-
-  boot.kernelPackages = pkgs.linuxPackages_6_1;
 
   programs.hyprland.enable = true;
 
@@ -57,17 +53,6 @@
     lidSwitch = "suspend";
   };
 
-  # boot = {
-  #   # we love grub!
-  #   loader = {
-  #     efi = {
-  #       canTouchEfiVariables = true;
-  #       efiSysMountPoint = "/boot";
-  #     };
-  #   };
-  #   plymouth.enable = false;
-  # };
-
   programs = {
     light.enable = true;
     dconf.enable = true;
@@ -75,13 +60,8 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [3000 5173 4173 80 443 1522 27017];
+    allowedTCPPorts = [ 80 8080 ];
   };
-
-  # xdg.portal = {
-  #   enable = true;
-  #   wlr.enable = true;
-  # };
 
   system.stateVersion = "23.05";
 }

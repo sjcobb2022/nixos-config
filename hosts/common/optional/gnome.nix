@@ -7,6 +7,8 @@
   specialisation.gnome = {
     inheritParentConfig = true;
     configuration = {
+      hardware.xone.enable = true;
+
       system.autoUpgrade.enable = lib.mkForce false;
 
       services.greetd.enable = lib.mkForce false;
