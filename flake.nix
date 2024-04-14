@@ -70,7 +70,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
+    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux"];
     forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
 
     mkNixos = modules:
@@ -93,20 +93,15 @@
 
     overlays = import ./overlays {inherit inputs outputs;};
 
-    # Also setup generator with nixos generators
-    packages =
-      forEachPkgs
-      (
-        pkgs:
-          (import ./pkgs {inherit pkgs;})
-          // {
-            install-iso = inputs.nixos-generators.nixosGenerate {
-              system = "${pkgs.system}";
-              modules = [ ./hosts/iso ];
-              format = "install-iso";
-            };
-          }
-      );
+    # Also setup iso installs with nixos generators
+    packages = forEachPkgs (
+      pkgs:
+        (import ./pkgs {inherit pkgs;})
+        // (import ./generators {
+          inherit pkgs inputs outputs; 
+          specialArgs = {inherit inputs outputs; };
+         })
+    );
 
     devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
 
