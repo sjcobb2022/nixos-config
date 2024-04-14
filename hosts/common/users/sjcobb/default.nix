@@ -23,6 +23,8 @@ in {
         "git"
         "libvirtd"
         "docker"
+        "kvm"
+        "adbgroup"
       ];
 
     openssh.authorizedKeys.keys = [(builtins.readFile ../ssh.pub)];
