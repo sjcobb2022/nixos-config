@@ -7,6 +7,7 @@
   specialisation.gnome = {
     inheritParentConfig = true;
     configuration = {
+      environment.etc."specialisation".text = "gnome";
       hardware.xone.enable = true;
 
       system.autoUpgrade.enable = lib.mkForce false;

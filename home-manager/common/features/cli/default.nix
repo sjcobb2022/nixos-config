@@ -14,7 +14,6 @@
   ];
 
   home.packages = with pkgs; [
-    comma # Install and run programs by sticking a , before them
     bottom # System viewer
     ncdu # TUI disk usage
     unstable.eza # Better ls

@@ -15,6 +15,9 @@ in {
         "wheel"
         "video"
         "audio"
+        "adbusers"
+        "kvm"
+        "adbgroup"
       ]
       ++ ifTheyExist [
         "network"
@@ -24,7 +27,6 @@ in {
         "libvirtd"
         "docker"
         "kvm"
-        "adbgroup"
       ];
 
     openssh.authorizedKeys.keys = [(builtins.readFile ../ssh.pub)];

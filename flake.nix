@@ -37,7 +37,7 @@
 
     hyprland = {
       # url = "github:hyprwm/hyprland?ref=af0c8e299bbbf1726cecfde683137cfd4a6b8642";
-      url = "github:hyprwm/hyprland";
+      url = "github:hyprwm/hyprland?ref=e8e02e81e84bb04efa0c926361ec80c60744f665";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -56,9 +56,9 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    wezterm = {
-      url = "github:wez/wezterm?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nh = {
+      url = "github:viperML/nh?ref=fe4a96a0b0b0662dba7c186b4a1746c70bbcad03";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -98,9 +98,9 @@
       pkgs:
         (import ./pkgs {inherit pkgs;})
         // (import ./generators {
-          inherit pkgs inputs outputs; 
-          specialArgs = {inherit inputs outputs; };
-         })
+          inherit pkgs inputs outputs;
+          specialArgs = {inherit inputs outputs;};
+        })
     );
 
     devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});

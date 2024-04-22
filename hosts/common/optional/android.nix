@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{pkgs, ...}: {
   programs.adb.enable = true;
 
   services.udev.packages = [
@@ -6,7 +6,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    android-studio
+    unstable.android-studio
   ];
-  
 }
