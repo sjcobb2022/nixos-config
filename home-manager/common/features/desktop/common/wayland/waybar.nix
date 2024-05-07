@@ -144,15 +144,15 @@ in {
           "format-source" = "{volume}% ";
           "format-source-muted" = "";
           "format-icons" = {
-            "headphone" = "󰋋";
-            "hands-free" = "󰏳";
-            "headset" = "󰋎";
-            "phone" = "";
-            "portable" = "";
-            "car" = "";
-            default = ["" "" ""];
+        #     "headphone" = "󰋋";
+        #     "hands-free" = "󰏳";
+        #     "headset" = "󰋎";
+        #     "phone" = "";
+        #     "portable" = "";
+        #     "car" = "";
+            default = ["󰕿" "󰖀" "󰕾"];
           };
-          "on-click" = "${pavucontrol}";
+          # "on-click" = "${pavucontrol}";
           "on-scroll-down" = "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+";
           "on-scroll-up" = "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%-";
         };
