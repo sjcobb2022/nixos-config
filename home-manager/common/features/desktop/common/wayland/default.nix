@@ -26,6 +26,7 @@
     waypipe
     wf-recorder
     wl-clipboard
+    obs-studio
     # wl-mirror
     # wl-mirror-pick
     # ydotool

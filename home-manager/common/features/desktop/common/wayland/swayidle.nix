@@ -19,7 +19,7 @@ in {
 
       {
         event = "before-sleep";
-        command = "${swaylock}";
+        command = "pgrep swaylock || ${swaylock}";
       }
 
       {
@@ -42,7 +42,7 @@ in {
 
       {
         timeout = 5 * 60 - 5;
-        command = "${swaylock}";
+        command = "pgrep swaylock || ${swaylock}";
       }
 
       {
