@@ -6,6 +6,9 @@
 }: let
   swaylock = "${config.programs.swaylock.package}/bin/swaylock --daemonize";
   hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
+  playerctl = "${pkgs.playerctl}/bin/playerctl";
+  pgrep = "${pkgs.procps}/bin/pgrep";
+  isLocked = "${pgrep} -x ${swaylock}";
 in {
   services.swayidle = {
     enable = true;
@@ -19,18 +22,25 @@ in {
 
       {
         event = "before-sleep";
-        command = "pgrep swaylock || ${swaylock}";
+        command = "${isLocked} && ${swaylock}";
+      }
+      
+      {
+        event = "before-sleep";
+        command = "${playerctl} pause";
       }
 
       {
         event = "lock";
-        command = "${swaylock}";
+        command = "${isLocked} && ${swaylock}";
       }
 
       {
         event = "after-resume";
         command = "${hyprctl} dispatcher dpms on";
       }
+
+
     ];
 
     timeouts = [
@@ -42,7 +52,7 @@ in {
 
       {
         timeout = 5 * 60 - 5;
-        command = "pgrep swaylock || ${swaylock}";
+        command = "${isLocked} && ${swaylock}";
       }
 
       {
