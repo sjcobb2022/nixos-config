@@ -15,6 +15,7 @@
     ./poweralertd.nix
     ./alacritty.nix
     ./sway-osd.nix
+    ./obs.nix
   ];
 
   home.packages = with pkgs; [
@@ -26,7 +27,7 @@
     waypipe
     wf-recorder
     wl-clipboard
-    obs-studio
+    libsForQt5.kdenlive
     # wl-mirror
     # wl-mirror-pick
     # ydotool
