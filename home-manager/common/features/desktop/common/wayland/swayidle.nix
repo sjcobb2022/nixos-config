@@ -24,7 +24,7 @@ in {
         event = "before-sleep";
         command = "${isLocked} && ${swaylock}";
       }
-      
+
       {
         event = "before-sleep";
         command = "${playerctl} pause";
@@ -39,8 +39,6 @@ in {
         event = "after-resume";
         command = "${hyprctl} dispatcher dpms on";
       }
-
-
     ];
 
     timeouts = [
