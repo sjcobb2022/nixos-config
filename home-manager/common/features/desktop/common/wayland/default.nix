@@ -16,11 +16,11 @@
     ./alacritty.nix
     ./sway-osd.nix
     ./obs.nix
+    ./imv.nix
   ];
 
   home.packages = with pkgs; [
     # grim
-    imv
     # mimeo
     # pulseaudio
     # slurp
@@ -37,6 +37,7 @@
     MOZ_ENABLE_WAYLAND = 1;
     QT_QPA_PLATFORM = "wayland;xcb";
     LIBSEAT_BACKEND = "logind";
+    NIXOS_OZONE_WL = 1;
   };
 
   # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-wlr ];

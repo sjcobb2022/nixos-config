@@ -57,7 +57,7 @@
         "${inputs.hyprpaper.packages.${system}.hyprpaper}/bin/hyprpaper"
       ];
 
-      monitor = ",preferred,auto,auto";
+      monitor = ",highres,auto,auto";
 
       input = {
         kb_layout = "us";
