@@ -4,12 +4,7 @@
   lib,
   pkgs,
   ...
-}: let
-  # Dependencies
-  pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
-  light = "${pkgs.light}/bin/light";
-  wpctl = "${pkgs.wireplumber}/bin/wpctl";
-in {
+}: {
   programs.waybar = {
     enable = true;
     package = pkgs.unstable.waybar;
@@ -131,8 +126,8 @@ in {
           format = "{icon} {percent}% ";
           format-icons = [""];
           tooltip-format = "{percent}%";
-          on-scroll-down = "${light} -A 1";
-          on-scroll-up = "${light} -U 1";
+          on-scroll-down = "${lib.getExe pkgs.light} -A 1";
+          on-scroll-up = "${lib.getExe pkgs.light} -U 1";
         };
 
         pulseaudio = {
@@ -152,9 +147,9 @@ in {
             #     "car" = "";
             default = ["󰕿" "󰖀" "󰕾"];
           };
-          "on-click" = "${pavucontrol}";
-          "on-scroll-down" = "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+";
-          "on-scroll-up" = "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%-";
+          "on-click" = "${lib.getExe pkgs.pavucontrol}";
+          "on-scroll-down" = "${lib.getExe pkgs.wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+";
+          "on-scroll-up" = "${lib.getExe pkgs.wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%-";
         };
 
         tray = {
@@ -241,7 +236,7 @@ in {
             background: transparent;
             color: @base2;
             background-color: @base1;
-            font-family: FiraMono;
+            font-family: ${config.fontProfiles.monospace.family};
             font-size: 12px;
         }
 
