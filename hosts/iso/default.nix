@@ -20,7 +20,7 @@
   # use US keyboard because laptop is in US keyboard layout
   services.xserver = {
     layout = "us";
-    xkbVariant = "";
+    xkb.variant = "";
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

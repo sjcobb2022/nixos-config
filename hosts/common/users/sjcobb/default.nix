@@ -7,7 +7,6 @@
 in {
   # users.mutableUsers = false;
   users.users.sjcobb = {
-    initialPassword = "nixos";
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups =

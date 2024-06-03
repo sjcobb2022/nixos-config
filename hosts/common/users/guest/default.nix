@@ -8,7 +8,6 @@
 in {
   # users.mutableUsers = false;
   users.users.guest = {
-    initialPassword = "nixos";
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups =

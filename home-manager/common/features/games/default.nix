@@ -4,7 +4,7 @@
     ./steam.nix
     ./prism-launcher.nix
     ./r2modman.nix
-    ./ryujinx.nix
+    # ./ryujinx.nix
     ./heroic.nix
   ];
 }

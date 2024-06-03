@@ -25,7 +25,6 @@
     phpPackages.composer
     stylua
     luajitPackages.luarocks-nix
-    rnix-lsp
     alejandra
     deadnix
     statix

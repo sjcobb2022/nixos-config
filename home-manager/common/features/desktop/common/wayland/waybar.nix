@@ -148,8 +148,8 @@
             default = ["󰕿" "󰖀" "󰕾"];
           };
           "on-click" = "${lib.getExe pkgs.pavucontrol}";
-          "on-scroll-down" = "${lib.getExe pkgs.wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+";
-          "on-scroll-up" = "${lib.getExe pkgs.wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%-";
+          "on-scroll-down" = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+";
+          "on-scroll-up" = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%-";
         };
 
         tray = {

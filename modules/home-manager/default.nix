@@ -4,5 +4,5 @@
   # List your module files here
   fonts = import ./fonts.nix;
   shellcolor = import ./shellcolor.nix;
-  xdg-portal = import ./xdg-portal.nix;
+  # xdg-portal = import ./xdg-portal.nix;
 }

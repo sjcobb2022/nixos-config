@@ -45,12 +45,12 @@
     settings = {
       env = [
         # Prioritise first card (which for me is the amd iGPU)
-        "WLR_DRM_DEVICES,/dev/dri/card0"
+        "WLR_DRM_DEVICES,/dev/dri/card2"
         "XDG_SESSION_TYPE,wayland"
         "MOZ_ENABLE_WAYLAND,1"
         "WLR_NO_HARDWARE_CURSORS,1"
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        # "LIBVA_DRIVER_NAME,nvidia"
+        # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       ];
 
       exec-once = with pkgs; [

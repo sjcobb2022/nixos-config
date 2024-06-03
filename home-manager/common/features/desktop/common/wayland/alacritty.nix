@@ -11,7 +11,6 @@ in {
       font = {
         normal = {
           family = "Fira Mono";
-          size = 24;
         };
       };
       cursor = {

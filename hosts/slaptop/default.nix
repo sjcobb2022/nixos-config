@@ -48,8 +48,10 @@
   # Configure keymap in X11
   # use US keyboard because laptop is in US keyboard layout
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
