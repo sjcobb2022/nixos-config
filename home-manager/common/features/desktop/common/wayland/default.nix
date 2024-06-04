@@ -4,8 +4,10 @@
     #./kitty.nix
     # ./wezterm.nix
     ./mako.nix
-    ./swayidle.nix
-    ./swaylock.nix
+    # ./swayidle.nix
+    # ./swaylock.nix
+    ./hypridle.nix
+    ./hyprlock.nix
     ./waybar.nix
     ./polkit-gnome-authentication-agent.nix
     ./wofi.nix

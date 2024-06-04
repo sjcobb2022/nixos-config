@@ -44,7 +44,7 @@
     xwayland.enable = true;
     settings = {
       env = [
-        # Prioritise first card (which for me is the amd iGPU)
+        # Prioritise 2nd card (which for me is the amd iGPU)
         "WLR_DRM_DEVICES,/dev/dri/card2"
         "XDG_SESSION_TYPE,wayland"
         "MOZ_ENABLE_WAYLAND,1"
@@ -194,14 +194,14 @@
         ++ (map (n: "$mod SHIFT,${n},movetoworkspacesilent,${n}") workspaces);
 
       bindel = [
-        ", XF86AudioRaiseVolume, exec, swayosd --output-volume=raise"
-        ", XF86AudioLowerVolume, exec, swayosd --output-volume=lower"
-        ", XF86MonBrightnessUp,exec,   swayosd --brightness=raise"
-        ", XF86MonBrightnessDown,exec, swayosd --brightness=lower"
+        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume=raise"
+        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume=lower"
+        ", XF86MonBrightnessUp,exec,   swayosd-client --brightness=raise"
+        ", XF86MonBrightnessDown,exec, swayosd-client --brightness=lower"
       ];
 
       bindl = [
-        ", XF86AudioMute, exec, swayosd --output-volume mute-toggle"
+        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
