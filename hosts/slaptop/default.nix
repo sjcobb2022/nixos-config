@@ -66,7 +66,7 @@
   hardware.nvidia = {
     # Modesetting is required.
     # Use integrated options with nvidia-offload for battery saving
-    modesetting.enable = false;
+    modesetting.enable = true;
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     powerManagement.enable = true;
@@ -120,7 +120,6 @@
   };
 
   programs = {
-    kdeconnect.enable = true;
     light.enable = true;
     dconf.enable = true;
   };
@@ -136,6 +135,8 @@
       size = 16 * 1024;
     }
   ];
+
+  services.udev.packages = [pkgs.swayosd];
 
   system.stateVersion = "23.05";
 }

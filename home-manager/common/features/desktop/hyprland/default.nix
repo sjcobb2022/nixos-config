@@ -14,6 +14,7 @@
   home.packages = with pkgs; [
     inputs.hyprwm-contrib.packages.${system}.grimblast
     inputs.hyprkeys.packages.${system}.hyprkeys
+    pkgs.brightnessctl
   ];
 
   xdg.portal = with pkgs; {
@@ -193,18 +194,23 @@
         ++ (map (n: "$mod,${n},workspace,${n}") workspaces)
         ++ (map (n: "$mod SHIFT,${n},movetoworkspacesilent,${n}") workspaces);
 
-      bindel = [
-        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume=raise"
-        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume=lower"
-        ", XF86MonBrightnessUp,exec,   swayosd-client --brightness=raise"
-        ", XF86MonBrightnessDown,exec, swayosd-client --brightness=lower"
+      bindel = let
+        swayosd = lib.getExe' pkgs.swayosd "swayosd-client";
+      in [
+        ", XF86AudioRaiseVolume, exec, ${swayosd} --output-volume=raise"
+        ", XF86AudioLowerVolume, exec, ${swayosd} --output-volume=lower"
+        ", XF86MonBrightnessUp,exec, ${swayosd} --brightness=raise"
+        ", XF86MonBrightnessDown,exec, ${swayosd} --brightness=lower"
       ];
 
-      bindl = [
-        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
-        ", XF86AudioPrev, exec, playerctl previous"
-        ", XF86AudioPlay, exec, playerctl play-pause"
-        ", XF86AudioNext, exec, playerctl next"
+      bindl = let
+        playerctl = lib.getExe' pkgs.playerctl "playerctl";
+        swayosd = lib.getExe' pkgs.swayosd "swayosd-client";
+      in [
+        ", XF86AudioMute, exec, ${swayosd} --output-volume mute-toggle"
+        ", XF86AudioPrev, exec, ${playerctl} previous"
+        ", XF86AudioPlay, exec, ${playerctl} play-pause"
+        ", XF86AudioNext, exec, ${playerctl} next"
       ];
 
       bindm = [
