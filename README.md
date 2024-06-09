@@ -6,39 +6,30 @@ Massive props to @Misterio77, his packages, example configurations, and personal
 
 ## Structure
 
-- flake.nix - Main flake that references all host and home configurations. Bootstrap with nix develop to add decessary packages to path for setup.
-
+- `flake.nix`: Main flake that references all host and home configurations. Bootstrap with nix develop to add decessary packages to path for setup.
 - hosts
-
   - Host configurations. Each host has a configuration file that is referenced in the flake.
   - Each device can opt in or out of features: such as users, home-manager, etc.
   - common
-    - Common configuration options that are shared between hosts.
-    - global: Configuration options that are shared between all hosts.
-    - optional: Optional configuration options.
-  - slaptop: Personal laptop config
-  - velocity: Stripped down server configuration. Used mainly for home lab stuff.
-  - iso: A "machine" that is used to build custom iso images.
-
+    - `global`: Configuration options that are shared between all hosts.
+    - `optional`: Optional configuration options.
+  - `slaptop`: Personal laptop config
+  - `velocity`: Stripped down server configuration. Used mainly for home lab stuff.
+  - `iso`: A "machine" that is used to build custom iso images.
 - home-manager
-
   - common
-    - Common configuration options that are shared between users.
-    - global: All home manager
-    - optional
-  - sjcobb: Personal home-manager configuration. Uses most optional configurations.
-  - guest: Guest home-manager configuration. Quite minimal. Use for gaming as well, so I don't get distracted by work stuff.
-
+    - `global`: Global home manager config
+    - `optional`: Optional home manager config files
+  - `sjcobb`: Personal home-manager configuration. Uses most optional configurations.
+  - `guest`: Guest home-manager configuration. Quite minimal. Use for gaming as well, so I don't get distracted by work stuff.
 - generators: Generators for creating custom configurations using nixos-generators. Can be accessed through nix build
-
   - formats
-    - gnome-iso: configuration for a gnome iso image
-    - plasma-iso: configuration for a plasma iso image
-
-- pkgs: Custom packages. Used to build packages that are not in nixpkgs (or need modification that can't be done through a overlay). Can be accessed as well through nix build
-- overlays: Custom overlays. Used to add packages to nixpkgs or modify existing packages.
-- modules: Custom modules. Used to add custom configuration options to nixos. Most of these are not really necessary, but are used to make the configuration more readable.
-- templates: An attempt at a few custom templates.
+    - `gnome-iso`: configuration for a gnome iso image
+    - `plasma-iso`: configuration for a plasma iso image
+- `pkgs`: Custom packages. Used to build packages that are not in nixpkgs (or need modification that can't be done through a overlay). Can be accessed as well through nix build
+- `overlays`: Custom overlays. Used to add packages to nixpkgs or modify existing packages.
+- `modules`: Custom modules. Used to add custom configuration options to nixos. Most of these are not really necessary, but are used to make the configuration more readable.
+- `templates`: An attempt at a few custom templates.
 
 ## Bootstrapping
 
