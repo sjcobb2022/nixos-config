@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    "${toString modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-plasma5.nix"
+    "${toString modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
   ];
 
   # override installation-cd-base and enable wpa and sshd start at boot

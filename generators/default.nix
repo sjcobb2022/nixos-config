@@ -22,6 +22,23 @@
     ];
   };
 
+  hyprland-iso = inputs.nixos-generators.nixosGenerate {
+    system = "${pkgs.system}";
+    format = "iso";
+    customFormats = { iso = import ./formats/hyprland-iso.nix; };
+    modules = [
+      ../hosts/iso
+      ../home-manager/guest/iso.nix
+      ../home-manager/common/global
+      ../home-manager/common/features/desktop/hyprland
+      ../home-manager/common/features/desktop/common/qt.nix
+      ../home-manager/common/features/desktop/common/gtk.nix
+      ../home-manager/common/features/desktop/common/pavucontrol.nix
+      ../home-manager/common/features/desktop/common/wayland
+    ];
+  };
+
+
   minimal-iso = inputs.nixos-generators.nixosGenerate {
     system = "${pkgs.system}";
     format = "iso";

@@ -39,7 +39,11 @@
       enable = true;
       extraCommands = lib.mkBefore [
         "systemctl --user stop graphical-session.target"
+        "systemctl --user stop hyprland-session.target"
+        "systemctl --user start graphical-session.target"
         "systemctl --user start hyprland-session.target"
+        # "systemctl --user start hyprland-session.target"
+        # WARNING: Not sure if this works.
       ];
     };
     xwayland.enable = true;
@@ -143,18 +147,24 @@
       "$mod" = "SUPER";
 
       bind = let
+        wlogout = lib.getExe pkgs.wlogout;
+        wofi = lib.getExe pkgs.wofi;
+        alacritty = lib.getExe pkgs.alacritty;
+        firefox = lib.getExe pkgs.firefox;
+        thunar = lib.getExe pkgs.thunar;
+        grimblast = lib.getExe inputs.hyprwm-contrib.packages.${pkgs.system}.grimblast;
         workspaces = ["1" "2" "3" "4" "5" "6" "7" "8" "9"];
       in
         [
-          "$mod,Return,exec,alacritty"
+          "$mod,Return,exec,${alacritty}"
           "$mod,Q,killactive,"
-          "$mod SHIFT,W,exec,firefox"
+          "$mod SHIFT,W,exec,${firefox}"
           "$mod,E,exec,thunar"
           "$mod,V,togglefloating,"
-          "$mod,D,exec,pkill wofi || wofi -S drun"
+          "$mod,D,exec,pkill wofi || ${wofi} -S drun"
           "$mod,P,pseudo,"
           "$mod,J,togglesplit,"
-          "$mod,escape,exec,pkill wlogout || wlogout -p layer-shell"
+          "$mod,escape,exec,pkill wlogout || ${wlogout} -p layer-shell"
           "$mod,F,fullscreen"
           "$mod,K,exec,${pkgs.wofi-hyprkeys}/bin/wofi-hyprkeys"
 
@@ -185,11 +195,11 @@
           "$mod SHIFT, up, movewindow, u"
           "$mod SHIFT, down, movewindow, d"
 
-          ",Print,exec,grimblast copy screen"
-          "SHIFT,Print,exec,grimblast save screen"
+          ",Print,exec,${grimblast} --notify copy screen"
+          "SHIFT,Print,exec,${grimblast} --notify save screen"
 
-          "CTRL,Print,exec,grimblast copy area"
-          "CTRL SHIFT,Print,exec,grimblast save area"
+          "CTRL,Print,exec,grimblast --notify copy area"
+          "CTRL SHIFT,Print,exec,grimblast --notify save area"
         ]
         ++ (map (n: "$mod,${n},workspace,${n}") workspaces)
         ++ (map (n: "$mod SHIFT,${n},movetoworkspacesilent,${n}") workspaces);

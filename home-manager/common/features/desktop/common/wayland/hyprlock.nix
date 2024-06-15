@@ -29,7 +29,7 @@
           inner_color = "rgba(0, 0, 0, 0.5)";
           font_color = "rgb(200, 200, 200)";
           fade_on_empty = false;
-          font_family = "${config.fontProfiles.regular.family}";
+          font_family = "JetBrains Mono Nerd Font Mono";
           placeholder_text = "<i><span foreground=\"##cdd6f4\">Input Password...</span></i>";
           hide_input = false;
           position = "0, -120";
@@ -45,7 +45,7 @@
           # color = "#cdd6f4";
           color = "rgba(255, 255, 255, 0.6)";
           font_size = 120;
-          font_family = "${config.fontProfiles.regular.family}";
+          font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
           position = "0, -300";
           halign = "center";
           valign = "top";
@@ -57,7 +57,7 @@
           # color = "#cdd6f4";
           color = "rgba(255, 255, 255, 0.6)";
           font_size = 25;
-          font_family = "${config.fontProfiles.regular.family}";
+          font_family = "JetBrains Mono Nerd Font Mono";
           position = "0, -40";
           halign = "center";
           valign = "center";
