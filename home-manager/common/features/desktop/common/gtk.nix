@@ -15,7 +15,7 @@ in rec {
 
     theme = {
       name = "${config.colorscheme.slug}";
-      package = gtkThemeFromScheme { scheme = config.colorscheme; };
+      package = gtkThemeFromScheme {scheme = config.colorscheme;};
     };
 
     iconTheme = {
@@ -27,9 +27,9 @@ in rec {
   dconf = {
     enable = true;
     settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
     };
   };
 
@@ -41,5 +41,5 @@ in rec {
     };
   };
 
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 }

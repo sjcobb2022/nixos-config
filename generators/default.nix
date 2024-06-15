@@ -25,7 +25,7 @@
   hyprland-iso = inputs.nixos-generators.nixosGenerate {
     system = "${pkgs.system}";
     format = "iso";
-    customFormats = { iso = import ./formats/hyprland-iso.nix; };
+    customFormats = {iso = import ./formats/hyprland-iso.nix;};
     modules = [
       ../hosts/iso
       ../home-manager/guest/iso.nix
@@ -37,7 +37,6 @@
       ../home-manager/common/features/desktop/common/wayland
     ];
   };
-
 
   minimal-iso = inputs.nixos-generators.nixosGenerate {
     system = "${pkgs.system}";
