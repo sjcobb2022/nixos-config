@@ -7,23 +7,23 @@ Massive props to @Misterio77, his packages, example configurations, and personal
 ## Structure
 
 - `flake.nix`: Main flake that references all host and home configurations. Bootstrap with nix develop to add decessary packages to path for setup.
-- hosts
+- `hosts`
   - Host configurations. Each host has a configuration file that is referenced in the flake.
   - Each device can opt in or out of features: such as users, home-manager, etc.
-  - common
+  - `common`
     - `global`: Configuration options that are shared between all hosts.
     - `optional`: Optional configuration options.
   - `slaptop`: Personal laptop config
   - `velocity`: Stripped down server configuration. Used mainly for home lab stuff.
   - `iso`: A "machine" that is used to build custom iso images.
-- home-manager
-  - common
+- `home-manager`
+  - `common`
     - `global`: Global home manager config
     - `optional`: Optional home manager config files
   - `sjcobb`: Personal home-manager configuration. Uses most optional configurations.
   - `guest`: Guest home-manager configuration. Quite minimal. Use for gaming as well, so I don't get distracted by work stuff.
-- generators: Generators for creating custom configurations using nixos-generators. Can be accessed through nix build
-  - formats
+- `generators`: Generators for creating custom configurations using nixos-generators. Can be accessed through nix build
+  - `formats`
     - `gnome-iso`: configuration for a gnome iso image
     - `plasma-iso`: configuration for a plasma iso image
 - `pkgs`: Custom packages. Used to build packages that are not in nixpkgs (or need modification that can't be done through a overlay). Can be accessed as well through nix build
