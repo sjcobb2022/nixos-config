@@ -3,9 +3,13 @@
     enable = true;
 
     settings = {
-      no_fade_in = false;
-      grace = 0;
-      disable_loading_bar = true;
+
+      general = {
+        no_fade_in = false;
+        grace = 0;
+        disable_loading_bar = true;
+      };
+
 
       background = [
         {
@@ -29,7 +33,7 @@
           inner_color = "rgba(0, 0, 0, 0.5)";
           font_color = "rgb(200, 200, 200)";
           fade_on_empty = false;
-          font_family = "JetBrains Mono Nerd Font Mono";
+          # font_family = "JetBrains Mono Nerd Font Mono";
           placeholder_text = "<i><span foreground=\"##cdd6f4\">Input Password...</span></i>";
           hide_input = false;
           position = "0, -120";

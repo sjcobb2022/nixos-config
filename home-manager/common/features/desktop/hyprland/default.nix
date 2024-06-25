@@ -30,30 +30,35 @@
     wallpaper = ,${../common/assets/mountain.jpg}
   '';
 
+  home.file = { 
+    ".config/hypr/card".source = config.lib.file.mkOutOfStoreSymlink "/dev/dri/by-path/pci-0000:06:00.0-card";
+  };
+
   # home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    
     systemd = {
       enable = true;
       extraCommands = lib.mkBefore [
-        "systemctl --user stop graphical-session.target"
         "systemctl --user stop hyprland-session.target"
+        "systemctl --user stop graphical-session.target"
         "systemctl --user start graphical-session.target"
         "systemctl --user start hyprland-session.target"
         # "systemctl --user start hyprland-session.target"
         # WARNING: Not sure if this works.
       ];
     };
+
     xwayland.enable = true;
     settings = {
       env = [
-        # Prioritise 2nd card (which for me is the amd iGPU)
-        "WLR_DRM_DEVICES,/dev/dri/card2"
+        # Prioritise 1st card (which for me is the amd iGPU)
+        "WLR_DRM_DEVICES,/home/${config.home.username}/.config/hypr/card"
         "XDG_SESSION_TYPE,wayland"
         "MOZ_ENABLE_WAYLAND,1"
-        "WLR_NO_HARDWARE_CURSORS,1"
         # "LIBVA_DRIVER_NAME,nvidia"
         # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       ];
@@ -78,6 +83,10 @@
 
         sensitivity = 0;
       };
+
+      # cursor = {
+      #   no_hardware_cursor = true;
+      # };
 
       general = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -111,7 +120,7 @@
 
       master = {
         # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-        new_is_master = true;
+        # new_is_master = true;
       };
 
       misc = {
