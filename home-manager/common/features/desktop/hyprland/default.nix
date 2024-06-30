@@ -42,21 +42,21 @@
     
     systemd = {
       enable = true;
-      extraCommands = lib.mkBefore [
-        "systemctl --user stop hyprland-session.target"
-        "systemctl --user stop graphical-session.target"
-        "systemctl --user start graphical-session.target"
-        "systemctl --user start hyprland-session.target"
-        # "systemctl --user start hyprland-session.target"
-        # WARNING: Not sure if this works.
-      ];
+      # extraCommands = lib.mkBefore [
+      #   "systemctl --user stop hyprland-session.target"
+      #   "systemctl --user stop graphical-session.target"
+      #   "systemctl --user start graphical-session.target"
+      #   "systemctl --user start hyprland-session.target"
+      #   # "systemctl --user start hyprland-session.target"
+      #   # WARNING: Not sure if this works.
+      # ];
     };
 
     xwayland.enable = true;
     settings = {
       env = [
         # Prioritise 1st card (which for me is the amd iGPU)
-        "WLR_DRM_DEVICES,/home/${config.home.username}/.config/hypr/card"
+        "WLR_DRM_DEVICES,/dev/dri/by-path/pci-0000:06:00.0-card"
         "XDG_SESSION_TYPE,wayland"
         "MOZ_ENABLE_WAYLAND,1"
         # "LIBVA_DRIVER_NAME,nvidia"
