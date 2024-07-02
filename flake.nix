@@ -57,10 +57,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    nh = {
-      url = "github:viperML/nh?ref=fe4a96a0b0b0662dba7c186b4a1746c70bbcad03";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
