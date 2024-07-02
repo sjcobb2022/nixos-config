@@ -30,10 +30,6 @@
     wallpaper = ,${../common/assets/mountain.jpg}
   '';
 
-  home.file = { 
-    ".config/hypr/card".source = config.lib.file.mkOutOfStoreSymlink "/dev/dri/by-path/pci-0000:06:00.0-card";
-  };
-
   # home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
   wayland.windowManager.hyprland = {
@@ -54,18 +50,9 @@
 
     xwayland.enable = true;
     settings = {
-      env = [
-        # Prioritise 1st card (which for me is the amd iGPU)
-        "WLR_DRM_DEVICES,/dev/dri/by-path/pci-0000:06:00.0-card"
-        "XDG_SESSION_TYPE,wayland"
-        "MOZ_ENABLE_WAYLAND,1"
-        # "LIBVA_DRIVER_NAME,nvidia"
-        # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-      ];
 
-      exec-once = with pkgs; [
-        "${inputs.hyprpaper.packages.${system}.hyprpaper}/bin/hyprpaper"
-      ];
+      # general env variables
+      # env = []
 
       monitor = ",highres,auto,auto";
 
@@ -160,7 +147,7 @@
         wofi = lib.getExe pkgs.wofi;
         alacritty = lib.getExe pkgs.alacritty;
         firefox = lib.getExe pkgs.firefox;
-        thunar = lib.getExe pkgs.thunar;
+        thunar = lib.getExe pkgs.xfce.thunar;
         grimblast = lib.getExe inputs.hyprwm-contrib.packages.${pkgs.system}.grimblast;
         workspaces = ["1" "2" "3" "4" "5" "6" "7" "8" "9"];
       in
@@ -168,7 +155,7 @@
           "$mod,Return,exec,${alacritty}"
           "$mod,Q,killactive,"
           "$mod SHIFT,W,exec,${firefox}"
-          "$mod,E,exec,thunar"
+          "$mod,E,exec,${thunar}"
           "$mod,V,togglefloating,"
           "$mod,D,exec,pkill wofi || ${wofi} -S drun"
           "$mod,P,pseudo,"
