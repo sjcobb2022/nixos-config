@@ -14,7 +14,6 @@
   home.packages = with pkgs; [
     inputs.hyprwm-contrib.packages.${system}.grimblast
     inputs.hyprkeys.packages.${system}.hyprkeys
-    pkgs.brightnessctl
   ];
 
   xdg.portal = with pkgs; {
@@ -23,19 +22,10 @@
     xdgOpenUsePortal = true;
   };
 
-  xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = ${../common/assets/mountain.jpg}
-    preload = ${../common/assets/wave.png}
-    preload = ${../common/assets/rocks.jpg}
-    wallpaper = ,${../common/assets/mountain.jpg}
-  '';
-
-  # home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
-
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    
+
     systemd = {
       enable = true;
       # extraCommands = lib.mkBefore [
@@ -50,7 +40,6 @@
 
     xwayland.enable = true;
     settings = {
-
       # general env variables
       # env = []
 

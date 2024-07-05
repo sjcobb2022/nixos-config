@@ -8,6 +8,7 @@
     # ./swaylock.nix
     ./hypridle.nix
     ./hyprlock.nix
+    ./hyprpaper.nix
     ./waybar.nix
     ./polkit-gnome-authentication-agent.nix
     ./wofi.nix

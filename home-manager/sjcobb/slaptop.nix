@@ -23,12 +23,12 @@
 
   # Laptop specific configuration
 
-  # home.file = { 
-  #   ".config/hypr/card".source = config.lib.file.mkOutOfStoreSymlink "/dev/dri/by-path/pci-0000:06:00.0-card";
-  # };
+  home.file = {
+    ".config/hypr/card".source = config.lib.file.mkOutOfStoreSymlink "/dev/dri/by-path/pci-0000:06:00.0-card";
+  };
 
   wayland.windowManager.hyprland.settings.env = [
-    "WLR_DRM_DEVICES,/dev/dri/by-path/pci-0000:06:00.0-card"
+    "WLR_DRM_DEVICES,/home/${config.home.username}/.config/hypr/card"
     "XDG_SESSION_TYPE,wayland"
     "MOZ_ENABLE_WAYLAND,1"
   ];

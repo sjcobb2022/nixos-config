@@ -56,7 +56,6 @@
       url = "github:hyprland-community/hyprkeys";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
   };
 
   outputs = {
