@@ -32,22 +32,8 @@
 
   xdg.configFile = {
     "nvim".source = builtins.fetchGit {
-      url = "https://github.com/AstroNvim/AstroNvim.git";
-      ref = "refs/tags/v3.32.0";
-      rev = "43d458135a534beead8f32158c1d9293adb202dc";
-      shallow = true;
-    };
-
-    # "nvim".source = builtins.fetchGit {
-    #   url = "https://github.com/LazyVim/starter";
-    #   rev = "92b2689e6f11004e65376e84912e61b9e6c58827";
-    # };
-
-    "astronvim/lua/user".source = builtins.fetchGit {
-      url = "https://github.com/sjcobb2022/astro_config.git";
-      ref = "main";
-      rev = "f0fb451c9d3198674a6255e3d43ef90b9a681415";
-      shallow = true;
+      url = "https://github.com/sjcobb2022/lazy.git";
+      rev = "ba25fb72fd6fc3c092fc07b6c96d6ac946f4e471";
     };
   };
 }

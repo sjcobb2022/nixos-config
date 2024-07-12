@@ -6,6 +6,12 @@ in {
     enable = true;
     settings = {
       theme = "onedarker";
+
+      keys.normal = {
+        space.w = ":w";
+        space.q = ":q";
+      };
+
       editor = {
         color-modes = true;
         line-number = "relative";

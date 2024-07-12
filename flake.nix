@@ -18,13 +18,13 @@
     impermanence.url = "github:nix-community/impermanence";
 
     nix-colors.url = "github:misterio77/nix-colors";
-
+  
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
-
+     
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     nixos-generators = {
