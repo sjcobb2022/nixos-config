@@ -56,6 +56,12 @@
       url = "github:hyprland-community/hyprkeys";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    neovim-config = {
+      url = "github:sjcobb2022/lazy";
+      flake = false;
+    };
+
   };
 
   outputs = {
