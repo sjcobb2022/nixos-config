@@ -32,13 +32,12 @@
     ../common/optional/virt-manager.nix
     ../common/optional/steam-hardware.nix
     ../common/optional/android.nix
-
-    ../common/optional/cloudflare.nix
   ];
 
   networking = {
     networkmanager = {
       enable = lib.mkDefault true;
+      insertNameservers = ["1.1.1.1" "1.0.0.1"];
     };
     hostName = "slaptop";
   };
