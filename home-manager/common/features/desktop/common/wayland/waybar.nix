@@ -46,8 +46,24 @@
           format-alt = "{:%Y-%m-%d %H:%M:%S}";
           on-click-left = "mode";
           tooltip-format = ''
-            <big>{:%Y %B}</big>
-            <tt><small>{calendar}</small></tt>'';
+            <big>{:%Y %d %B}</big>
+            <tt><small>{calendar}</small></tt>
+          '';
+          calendar = {
+            mode = "month";
+            mode-mon-col = 3;
+            week-pos = "right";
+            on-scroll = 1;
+            format = let
+              inherit (config.colorscheme) palette;
+            in {
+              months = "<span color='#${palette.base02}'><b>{}</b></span>";
+              days = "<span color='#${palette.base03}'><b>{}</b></span>";
+              weeks = "<span color='#${palette.base04}'><b>W{}</b></span>";
+              weekdays = "<span color='#${palette.base05}'><b>{}</b></span>";
+              today = "<span color='#${palette.base06}'><b><u>{}</u></b></span>";
+            };
+          };
         };
 
         cpu = {

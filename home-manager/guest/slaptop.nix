@@ -29,7 +29,6 @@
     username = lib.mkDefault "guest";
   };
 
-
   home.file = {
     ".config/hypr/card".source = config.lib.file.mkOutOfStoreSymlink "/dev/dri/by-path/pci-0000:06:00.0-card";
   };
