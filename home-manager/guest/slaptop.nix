@@ -13,7 +13,7 @@
     inputs.nix-colors.homeManagerModule
     ../common/global
     ../common/features/desktop/common
-    ../common/features/desktop/hyprland
+    # ../common/features/desktop/hyprland
     ../common/features/games
     # If you want to use modules your own flake exports (from modules/home-manager):
     # outputs.homeManagerModules.example
@@ -29,8 +29,13 @@
     username = lib.mkDefault "guest";
   };
 
+
+  home.file = {
+    ".config/hypr/card".source = config.lib.file.mkOutOfStoreSymlink "/dev/dri/by-path/pci-0000:06:00.0-card";
+  };
+
   wayland.windowManager.hyprland.settings.env = [
-    "WLR_DRM_DEVICES,/dev/dri/by-path/pci-0000:06:00.0-card"
+    "WLR_DRM_DEVICES,/home/${config.home.username}/.config/hypr/card"
     "XDG_SESSION_TYPE,wayland"
     "MOZ_ENABLE_WAYLAND,1"
   ];
