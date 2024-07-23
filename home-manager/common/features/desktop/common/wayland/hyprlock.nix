@@ -1,6 +1,8 @@
-{config, ...}: {
+{config, pkgs, ...}: {
   programs.hyprlock = {
     enable = true;
+
+    package = pkgs.unstable.hyprlock;
 
     settings = {
       general = {

@@ -11,6 +11,7 @@
 in {
   services.hypridle = {
     enable = true;
+    package = pkgs.unstable.hypridle;
     settings = {
       general = {
         after_sleep_cmd = "${hyprctl} dispatch dpms on"; # turn on display after resume.
