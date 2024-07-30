@@ -8,7 +8,12 @@
     inheritParentConfig = true;
     configuration = {
       environment.etc."specialisation".text = "gnome";
-      hardware.xone.enable = true;
+      
+      hardware = { 
+        xone.enable = true;
+      };
+
+      services.joycond.enable = true;
 
       system.autoUpgrade.enable = lib.mkForce false;
 

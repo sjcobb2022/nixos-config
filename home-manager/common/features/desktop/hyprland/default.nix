@@ -73,6 +73,10 @@
         layout = "dwindle";
       };
 
+      debug = {
+        disable_logs = false;
+      };
+
       animations = {
         enabled = true;
         # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more

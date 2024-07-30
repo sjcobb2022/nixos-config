@@ -1,5 +1,10 @@
 # This file defines overlays
-{inputs, ...}: {
+{inputs, ...}: let
+  addPatches = pkg: patches:
+    pkg.overrideAttrs (oldAttrs: {
+      patches = (oldAttrs.patches or []) ++ patches;
+    });
+in {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs {pkgs = final;};
 
@@ -23,6 +28,10 @@
     #     outputHash = "";
     #   });
     # });
+
+    # inputs.hyprland.aquamarine.package = addPatches inputs.hyprland.aquamarine.package [
+    #   ./hyprland_aquamarine_patch.patch
+    # ];
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

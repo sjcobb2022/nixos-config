@@ -36,10 +36,17 @@
     # Unstable
     ###
 
+    aquamarine-patched = {
+      url = "github:hyprwm/aquamarine";
+    };
+
     hyprland = {
-      # url = "github:hyprwm/hyprland?ref=af0c8e299bbbf1726cecfde683137cfd4a6b8642";
-      url = "git+https://github.com/hyprwm/hyprland?submodules=1";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      type = "git";
+      url = "https://github.com/hyprwm/hyprland";
+      # rev = "f642fb97df5c69267a03452533de383ff8023570";
+      submodules = true;
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.aquamarine.follows = "aquamarine-patched";
     };
 
     hyprwm-contrib = {
