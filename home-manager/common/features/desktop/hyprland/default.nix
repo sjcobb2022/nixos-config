@@ -13,7 +13,6 @@
 
   home.packages = with pkgs; [
     inputs.hyprwm-contrib.packages.${system}.grimblast
-    inputs.hyprkeys.packages.${system}.hyprkeys
   ];
 
   xdg.portal = with pkgs; {
@@ -146,6 +145,7 @@
         workspaces = ["1" "2" "3" "4" "5" "6" "7" "8" "9"];
       in
         [
+          "$mod,M,exit,"
           "$mod,Return,exec,${alacritty}"
           "$mod,Q,killactive,"
           "$mod SHIFT,W,exec,${firefox}"

@@ -4,6 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -17,7 +18,9 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    nix-colors.url = "github:misterio77/nix-colors";
+    nix-colors = {
+      url = "github:misterio77/nix-colors";
+    }; 
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -36,8 +39,9 @@
     # Unstable
     ###
 
-    aquamarine-patched = {
+    aquamarine = {
       url = "github:hyprwm/aquamarine";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
@@ -45,8 +49,8 @@
       url = "https://github.com/hyprwm/hyprland";
       # rev = "f642fb97df5c69267a03452533de383ff8023570";
       submodules = true;
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.aquamarine.follows = "aquamarine-patched";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.aquamarine.follows = "aquamarine";
     };
 
     hyprwm-contrib = {
