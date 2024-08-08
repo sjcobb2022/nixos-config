@@ -9,5 +9,6 @@
   home.sessionVariables = {
     XCURSOR_THEME = "Adwaita";
     XCURSOR_SIZE = 18;
+    # HYPRCURSOR_SIZE = 18;
   };
 }

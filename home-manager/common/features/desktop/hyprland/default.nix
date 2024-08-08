@@ -11,6 +11,12 @@
     # inputs.hyprland.homeManagerModules.default
   ];
 
+  # services.udev.extraRules = ''
+  #   # Your rule goes here
+  #   # SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+=""
+  #   # SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+=""
+  # '';
+  #
   home.packages = with pkgs; [
     inputs.hyprwm-contrib.packages.${system}.grimblast
   ];
@@ -27,20 +33,10 @@
 
     systemd = {
       enable = true;
-      # extraCommands = lib.mkBefore [
-      #   "systemctl --user stop hyprland-session.target"
-      #   "systemctl --user stop graphical-session.target"
-      #   "systemctl --user start graphical-session.target"
-      #   "systemctl --user start hyprland-session.target"
-      #   # "systemctl --user start hyprland-session.target"
-      #   # WARNING: Not sure if this works.
-      # ];
     };
 
     xwayland.enable = true;
     settings = {
-      # general env variables
-      # env = []
 
       monitor = ",highres,auto,auto";
 

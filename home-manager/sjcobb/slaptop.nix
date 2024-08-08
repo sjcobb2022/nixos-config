@@ -15,6 +15,7 @@
     ../common/features/nvim
     ../common/features/helix
     ../common/features/desktop/hyprland
+    ../common/features/desktop/wayland/wireplumber.nix
   ];
 
   home = {
