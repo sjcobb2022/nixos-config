@@ -15,7 +15,8 @@
     ../common/features/nvim
     ../common/features/helix
     ../common/features/desktop/hyprland
-    ../common/features/desktop/wayland/wireplumber.nix
+    # TODO: Remove when this bug is fixed. Disables libcamera
+    ../common/features/desktop/common/wireplumber.nix
   ];
 
   home = {
