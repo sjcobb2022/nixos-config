@@ -16,7 +16,6 @@
     ../common/features/helix
     ../common/features/desktop/hyprland
     # TODO: Remove when this bug is fixed. Disables libcamera
-    ../common/features/desktop/common/wireplumber.nix
   ];
 
   home = {
