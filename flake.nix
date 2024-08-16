@@ -20,7 +20,9 @@
 
     nix-colors = {
       url = "github:misterio77/nix-colors";
-    }; 
+    };
+
+    stylix.url = "github:danth/stylix";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
