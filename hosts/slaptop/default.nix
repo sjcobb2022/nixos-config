@@ -25,13 +25,15 @@
     ../common/optional/thunar.nix
     ../common/optional/tlp.nix
     ../common/optional/wireless.nix
-    # ../common/optional/swaylock.nix
+
     ../common/optional/hyprlock.nix
     ../common/optional/docker.nix
     ../common/optional/upower.nix
     ../common/optional/virt-manager.nix
     ../common/optional/steam-hardware.nix
     ../common/optional/android.nix
+
+    ../common/optional/stylix.nix
   ];
 
   networking = {
