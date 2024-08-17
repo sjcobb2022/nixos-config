@@ -5,7 +5,7 @@ in {
   programs.helix = {
     enable = true;
     settings = {
-      theme = "onedarker";
+      # theme = "onedarker";
 
       keys.normal = {
         space.w = ":w";
