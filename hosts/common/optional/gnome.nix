@@ -8,8 +8,8 @@
     inheritParentConfig = true;
     configuration = {
       environment.etc."specialisation".text = "gnome";
-      
-      hardware = { 
+
+      hardware = {
         xone.enable = true;
       };
 

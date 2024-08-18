@@ -37,7 +37,6 @@
 
     xwayland.enable = true;
     settings = {
-
       monitor = ",highres,auto,auto";
 
       input = {

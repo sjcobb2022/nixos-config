@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ./discord.nix
     ./firefox.nix
@@ -12,8 +12,10 @@
     ./wpa-gui.nix
     ./adwaita.nix
     ./cursor.nix
-    ./stylix.nix
+    # ./stylix.nix
   ];
+
+  home.packages = with pkgs.unstable; [keypunch];
 
   xdg.mimeApps.enable = true;
   xdg.configFile."mimeapps.list".force = true;

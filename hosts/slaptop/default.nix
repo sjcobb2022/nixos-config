@@ -32,8 +32,6 @@
     ../common/optional/virt-manager.nix
     ../common/optional/steam-hardware.nix
     ../common/optional/android.nix
-
-    ../common/optional/stylix.nix
   ];
 
   networking = {

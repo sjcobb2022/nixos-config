@@ -120,9 +120,9 @@
     devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
 
     nixosConfigurations = {
-      slaptop = mkNixos [ ./hosts/slaptop ];
-      velocity = mkNixos [ ./hosts/velocity ];
-      iso = mkNixos [ ./hosts/iso ];
+      slaptop = mkNixos [./hosts/slaptop];
+      velocity = mkNixos [./hosts/velocity];
+      iso = mkNixos [./hosts/iso];
     };
 
     homeConfigurations = {
