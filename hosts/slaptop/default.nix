@@ -55,7 +55,7 @@
     };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_6_9;
+  # boot.kernelPackages = pkgs.linuxPackages_6_9;
 
   programs.hyprland.enable = true;
 
