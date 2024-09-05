@@ -12,6 +12,9 @@
   imports = [
     inputs.nix-colors.homeManagerModule
     ../common/global
+    ../common/global/impermanence.nix
+    ../common/features/cli/gh.nix
+    ../common/features/cli/ssh.nix
     ../common/features/nvim
     ../common/features/helix
     ../common/features/desktop/hyprland
@@ -37,6 +40,8 @@
     "XDG_SESSION_TYPE,wayland"
     "MOZ_ENABLE_WAYLAND,1"
   ];
+  
+  systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
