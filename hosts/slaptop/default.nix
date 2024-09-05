@@ -42,7 +42,7 @@
     hostName = "slaptop";
   };
 
-  nix.gx.dates = "daily";
+  nix.gc.dates = "daily";
 
   time.timeZone = "Europe/London";
 
