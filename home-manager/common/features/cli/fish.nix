@@ -83,14 +83,6 @@ in {
         bind \ee edit_command_buffer
       ''
       +
-      # kitty integration
-      ''
-        set --global KITTY_INSTALLATION_DIR "${pkgs.kitty}/lib/kitty"
-        set --global KITTY_SHELL_INTEGRATION enabled
-        source "$KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_conf.d/kitty-shell-integration.fish"
-        set --prepend fish_complete_path "$KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_completions.d"
-      ''
-      +
       # Use vim bindings and cursors
       ''
         fish_vi_key_bindings

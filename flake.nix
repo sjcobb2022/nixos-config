@@ -16,6 +16,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     impermanence.url = "github:nix-community/impermanence";
 
     nix-colors = {
@@ -82,10 +85,11 @@
     nixpkgs,
     nixos-hardware,
     home-manager,
+    nix-darwin,
     ...
   } @ inputs: let
     inherit (self) outputs;
-    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux"];
+    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-darwin"];
     forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
 
     mkNixos = modules:
@@ -98,6 +102,12 @@
       home-manager.lib.homeManagerConfiguration {
         inherit modules pkgs;
         extraSpecialArgs = {inherit inputs outputs;};
+      };
+
+    mkDarwin = modules: pkgs:
+      nix-darwin.lib.darwinSystem {
+        inherit modules pkgs;
+        specialArgs = {inherit inputs outputs;};
       };
   in {
     nixosModules = import ./modules/nixos;
@@ -130,6 +140,11 @@
       "sjcobb@slaptop" = mkHome [./home-manager/sjcobb/slaptop.nix] nixpkgs.legacyPackages."x86_64-linux";
       "sjcobb@velocity" = mkHome [./home-manager/sjcobb/velocity.nix] nixpkgs.legacyPackages."x86_64-linux";
       "guest@slaptop" = mkHome [./home-manager/guest/slaptop.nix] nixpkgs.legacyPackages."x86_64-linux";
+      "sjcobb@Samuels-MacBook-Pro" = mkHome [./home-manager/sjcobb/mactop.nix] nixpkgs.legacyPackages."aarch64-darwin";
+    };
+
+    darwinConfigurations = {
+      "mactop" = mkDarwin [./hosts/mactop] nixpkgs.legacyPackages."aarch64-darwin";
     };
   };
 }

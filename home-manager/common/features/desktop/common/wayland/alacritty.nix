@@ -13,6 +13,9 @@ in {
           family = "Fira Mono";
         };
       };
+
+      shell = "${pkgs.fish}/bin/fish";
+
       cursor = {
         style = {
           shape = "Block";
