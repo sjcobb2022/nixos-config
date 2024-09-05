@@ -25,4 +25,6 @@
     username = lib.mkDefault "sjcobb";
     homeDirectory = lib.mkForce "/Users/sjcobb";
   };
+
+  home.packages = with pkgs; [ spotify ];
 }

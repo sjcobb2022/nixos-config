@@ -15,7 +15,6 @@
     };
     gc = {
       automatic = true;
-      dates = "daily";
       # Delete older generations too
       options = "--delete-older-than 3d";
     };

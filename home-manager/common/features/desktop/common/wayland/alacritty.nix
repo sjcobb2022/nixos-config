@@ -50,13 +50,13 @@ in {
         };
         bright = {
           black = "0x${palette.base03}";
-          red = "0x${palette.base09}";
-          green = "0x${palette.base01}";
-          yellow = "0x${palette.base02}";
-          blue = "0x${palette.base04}";
-          magenta = "0x${palette.base06}";
-          cyan = "0x${palette.base0F}";
-          white = "0x${palette.base07}";
+          red = "0x${palette.base08}";
+          green = "0x${palette.base0B}";
+          yellow = "0x${palette.base0A}";
+          blue = "0x${palette.base0D}";
+          magenta = "0x${palette.base0E}";
+          cyan = "0x${palette.base0C}";
+          white = "0x${palette.base06}";
         };
       };
     };
