@@ -46,7 +46,10 @@ in {
   
   nix.gc.interval.Day = 1;
 
-  fonts.packages = [ pkgs.fira-code-nerdfont pkgs.nerdfonts ];
+  fonts.packages = with pkgs; [
+     recursive (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
+   ];
+
 
   programs.zsh.enable = true;  # default shell on catalina
   services.nix-daemon.enable = true;
@@ -55,6 +58,7 @@ in {
 
   environment.variables = {
     SHELL = "${pkgs.fish}/bin/fish";
+    XDG_RUNTIME = "/tmp";
   };
 
   # system.stateVersion = "23.05";

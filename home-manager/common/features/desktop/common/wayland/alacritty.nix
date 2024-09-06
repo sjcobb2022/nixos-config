@@ -56,7 +56,7 @@ in {
           blue = "0x${palette.base0D}";
           magenta = "0x${palette.base0E}";
           cyan = "0x${palette.base0C}";
-          white = "0x${palette.base06}";
+          white = "0x${palette.base07}";
         };
       };
     };
