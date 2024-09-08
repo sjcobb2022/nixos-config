@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   ...
@@ -6,7 +7,7 @@
   programs.hyprlock = {
     enable = true;
 
-    package = pkgs.unstable.hyprlock;
+    package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
 
     settings = {
       general = {

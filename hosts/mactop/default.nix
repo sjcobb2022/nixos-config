@@ -8,11 +8,13 @@
 }: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  imports = [
-    inputs.home-manager.darwinModules.home-manager
-    ../common/global/nix.nix
-    ../common/global/fish.nix
-  ]  ++ (builtins.attrValues outputs.nixosModules);
+  imports =
+    [
+      inputs.home-manager.darwinModules.home-manager
+      ../common/global/nix.nix
+      ../common/global/fish.nix
+    ]
+    ++ (builtins.attrValues outputs.nixosModules);
 
   networking = {
     hostName = "mactop";
@@ -38,26 +40,27 @@ in {
       pkgs.home-manager
     ];
   };
-  
+
   home-manager = {
-    users.sjcobb = import ../../home-manager/sjcobb/${config.networking.hostName}.nix;   
+    users.sjcobb = import ../../home-manager/sjcobb/${config.networking.hostName}.nix;
     extraSpecialArgs = {inherit inputs outputs;};
   };
-  
+
   nix.gc.interval.Day = 1;
 
   fonts.packages = with pkgs; [
-     recursive (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
-   ];
+    recursive
+    (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode"];})
+  ];
 
-
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh.enable = true; # default shell on catalina
   services.nix-daemon.enable = true;
 
-  environment.systemPackages = with pkgs; [ alacritty ];
+  environment.systemPackages = with pkgs; [alacritty];
 
   environment.variables = {
     SHELL = "${pkgs.fish}/bin/fish";
+    # Hack to get shellcolord to work.
     XDG_RUNTIME = "/tmp";
   };
 

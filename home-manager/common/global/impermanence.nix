@@ -6,9 +6,8 @@
   config,
   ...
 }: {
- 
   imports = [
-      inputs.impermanence.nixosModules.home-manager.impermanence
+    inputs.impermanence.nixosModules.home-manager.impermanence
   ];
 
   home = {
@@ -29,5 +28,4 @@
       };
     };
   };
-
 }

@@ -22,5 +22,5 @@
     homeDirectory = lib.mkForce "/Users/sjcobb";
   };
 
-  home.packages = with pkgs; [ spotify dotnet-sdk_7 ];
+  home.packages = with pkgs; [spotify dotnet-sdk_7];
 }

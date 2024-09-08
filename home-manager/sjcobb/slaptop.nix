@@ -40,7 +40,7 @@
     "XDG_SESSION_TYPE,wayland"
     "MOZ_ENABLE_WAYLAND,1"
   ];
-  
+
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

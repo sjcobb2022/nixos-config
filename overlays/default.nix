@@ -12,26 +12,20 @@ in {
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    # wezterm-nightly = prev.wezterm.overrideAttrs (oldAttrs: rec {
-    #   version = "main";
-    #
-    #   src = prev.fetchFromGitHub {
-    #     owner = "wez";
-    #     repo = "wezterm";
-    #     rev = "600652583594e9f6195a6427d1fabb09068622a7";
-    #     hash = "";
+    # hyprland = prev.hyprland.override {
+    #   aquamarine = prev.aquamarine.override {
+    #     libinput = prev.libinput.overrideAttrs (self: super: {
+    #       version = "1.26.0";
+    #       src = final.fetchFromGitLab {
+    #         domain = "gitlab.freedesktop.org";
+    #         owner = "libinput";
+    #         repo = "libinput";
+    #         rev = self.version;
+    #         hash = "sha256-mlxw4OUjaAdgRLFfPKMZDMOWosW9yKAkzDccwuLGCwQ=";
+    #       };
+    #     });
     #   };
-    #
-    #   cargoDeps = oldAttrs.cargoDeps.overrideAttrs (prev.lib.const {
-    #     name = "wezterm.tar.gz";
-    #     inherit src;
-    #     outputHash = "";
-    #   });
-    # });
-
-    # inputs.hyprland.aquamarine.package = addPatches inputs.hyprland.aquamarine.package [
-    #   ./hyprland_aquamarine_patch.patch
-    # ];
+    # };
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
