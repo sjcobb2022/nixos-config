@@ -143,7 +143,7 @@
       "sjcobb@slaptop" = mkHome [./home-manager/sjcobb/slaptop.nix] nixpkgs.legacyPackages."x86_64-linux";
       "sjcobb@velocity" = mkHome [./home-manager/sjcobb/velocity.nix] nixpkgs.legacyPackages."x86_64-linux";
       "guest@slaptop" = mkHome [./home-manager/guest/slaptop.nix] nixpkgs.legacyPackages."x86_64-linux";
-      "sjcobb@Samuels-MacBook-Pro" = mkHome [./home-manager/sjcobb/mactop.nix] nixpkgs.legacyPackages."aarch64-darwin";
+      "sjcobb@mactop" = mkHome [./home-manager/sjcobb/mactop.nix] nixpkgs.legacyPackages."aarch64-darwin";
     };
 
     darwinConfigurations = {
