@@ -4,8 +4,6 @@ NixOS configuration files. WIP.
 
 Massive props to @Misterio77, his packages, example configurations, and personal configurations have been a huge help in getting this setup.
 
-8b9e385943d1a9fd0f8c6070fa1eae507ae26145
-
 ## Structure
 
 - `flake.nix`: Main flake that references all host and home configurations. Bootstrap with nix develop to add decessary packages to path for setup.

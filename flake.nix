@@ -46,19 +46,20 @@
     ###
 
 
-    # aquamarine = {
-    #   type = "git";
-    #   url = "https://github.com/sjcobb2022/aquamarine-patched";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    aquamarine = {
+       type = "git";
+       url = "https://github.com/hyprwm/aquamarine";
+       ref = "refs/tags/v0.3.3";
+       inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/hyprland";
-      rev = "8b9e385";
+      ref = "refs/tags/v0.42.0";
       submodules = true;
       inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.aquamarine.follows = "aquamarine";
+      inputs.aquamarine.follows = "aquamarine";
     };
 
     hyprlock = {

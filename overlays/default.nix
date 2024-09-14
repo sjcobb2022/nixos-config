@@ -4,6 +4,7 @@
     pkg.overrideAttrs (oldAttrs: {
       patches = (oldAttrs.patches or []) ++ patches;
     });
+
 in {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs {pkgs = final;};
@@ -12,9 +13,35 @@ in {
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
+    # aquamarine = prev.aquamarine.override {
+    #   libinput = prev.libinput.overrideAttrs (self: {
+    #     name = "libinput";
+    #     version = "1.26.0";
+    #     src = final.fetchFromGitLab {
+    #       domain = "gitlab.freedesktop.org";
+    #       owner = "libinput";
+    #       repo = "libinput";
+    #       rev = self.version;
+    #       hash = "sha256-mlxw4OUjaAdgRLFfPKMZDMOWosW9yKAkzDccwuLGCwQ=";
+    #     };
+    #   });
+    # };
+
+      # libinput = prev.libinput.overrideAttrs (self: {
+      #   name = "libinput";
+      #   version = "1.26.0";
+      #   src = final.fetchFromGitLab {
+      #     domain = "gitlab.freedesktop.org";
+      #     owner = "libinput";
+      #     repo = "libinput";
+      #     rev = self.version;
+      #     hash = "sha256-mlxw4OUjaAdgRLFfPKMZDMOWosW9yKAkzDccwuLGCwQ=";
+      #   };
+      # });
+
     # hyprland = prev.hyprland.override {
     #   aquamarine = prev.aquamarine.override {
-    #     libinput = prev.libinput.overrideAttrs (self: super: {
+    #     libinput = prev.libinput.overrideAttrs (self: {
     #       version = "1.26.0";
     #       src = final.fetchFromGitLab {
     #         domain = "gitlab.freedesktop.org";

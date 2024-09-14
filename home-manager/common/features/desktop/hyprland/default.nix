@@ -4,7 +4,21 @@
   config,
   pkgs,
   ...
-}: {
+}: 
+let
+libinput = pkgs.libinput.overrideAttrs (self: {
+  name = "libinput";
+  version = "1.26.0";
+  src = pkgs.fetchFromGitLab {
+    domain = "gitlab.freedesktop.org";
+    owner = "libinput";
+    repo = "libinput";
+    rev = self.version;
+    hash = "sha256-mlxw4OUjaAdgRLFfPKMZDMOWosW9yKAkzDccwuLGCwQ=";
+  };
+});
+in 
+{
   imports = [
     ../common
     ../common/wayland
@@ -29,7 +43,12 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland.override {
+      aquamarine = inputs.hyprland.inputs.aquamarine.packages.${pkgs.system}.aquamarine.override {
+        libinput = libinput;
+      };
+      libinput = libinput;
+    };
 
     systemd = {
       enable = true;
