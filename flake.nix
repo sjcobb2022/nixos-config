@@ -26,6 +26,7 @@
     };
 
     stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -44,14 +45,17 @@
     # Unstable
     ###
 
-    aquamarine = {
-      url = "github:hyprwm/aquamarine";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    # aquamarine = {
+    #   type = "git";
+    #   url = "https://github.com/sjcobb2022/aquamarine-patched";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/hyprland";
+      rev = "8b9e385";
       submodules = true;
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.aquamarine.follows = "aquamarine";
