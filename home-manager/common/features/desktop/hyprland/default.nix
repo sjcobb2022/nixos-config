@@ -4,21 +4,19 @@
   config,
   pkgs,
   ...
-}: 
-let
-libinput = pkgs.libinput.overrideAttrs (self: {
-  name = "libinput";
-  version = "1.26.0";
-  src = pkgs.fetchFromGitLab {
-    domain = "gitlab.freedesktop.org";
-    owner = "libinput";
-    repo = "libinput";
-    rev = self.version;
-    hash = "sha256-mlxw4OUjaAdgRLFfPKMZDMOWosW9yKAkzDccwuLGCwQ=";
-  };
-});
-in 
-{
+}: let
+  libinput = pkgs.libinput.overrideAttrs (self: {
+    name = "libinput";
+    version = "1.26.0";
+    src = pkgs.fetchFromGitLab {
+      domain = "gitlab.freedesktop.org";
+      owner = "libinput";
+      repo = "libinput";
+      rev = self.version;
+      hash = "sha256-mlxw4OUjaAdgRLFfPKMZDMOWosW9yKAkzDccwuLGCwQ=";
+    };
+  });
+in {
   imports = [
     ../common
     ../common/wayland
@@ -37,19 +35,13 @@ in
 
   xdg.portal = with pkgs; {
     extraPortals = [inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland];
-    configPackages = [inputs.hyprland.packages.${system}.hyprland];
+    configPackages = [wayland.windowManager.hyprland.package];
     xdgOpenUsePortal = true;
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland.override {
-      aquamarine = inputs.hyprland.inputs.aquamarine.packages.${pkgs.system}.aquamarine.override {
-        libinput = libinput;
-      };
-      libinput = libinput;
-    };
-
+    package = pkgs.hyprland-patched;
     systemd = {
       enable = true;
     };

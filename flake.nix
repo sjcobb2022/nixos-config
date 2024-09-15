@@ -45,18 +45,17 @@
     # Unstable
     ###
 
-
     aquamarine = {
-       type = "git";
-       url = "https://github.com/hyprwm/aquamarine";
-       ref = "refs/tags/v0.3.3";
-       inputs.nixpkgs.follows = "nixpkgs";
+      type = "git";
+      url = "https://github.com/hyprwm/aquamarine";
+      ref = "refs/tags/v0.4.1";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/hyprland";
-      ref = "refs/tags/v0.42.0";
+      ref = "refs/tags/v0.43.0";
       submodules = true;
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.aquamarine.follows = "aquamarine";
