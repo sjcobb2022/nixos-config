@@ -5,9 +5,7 @@
   config,
   lib,
   ...
-}: let
-  ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in {
+}: {
   imports =
     [
       inputs.home-manager.darwinModules.home-manager
@@ -56,7 +54,9 @@ in {
   programs.zsh.enable = true; # default shell on catalina
   services.nix-daemon.enable = true;
 
-  environment.systemPackages = with pkgs; [alacritty];
+  environment.systemPackages = with pkgs; [ alacritty ];
+
+  nix.registry = lib.mkForce (lib.mapAttrs (_: value: {flake = value;}) inputs);
 
   environment.variables = {
     SHELL = "${pkgs.fish}/bin/fish";
@@ -64,5 +64,5 @@ in {
     XDG_RUNTIME = "/tmp";
   };
 
-  # system.stateVersion = "23.05";
+  system.stateVersion = 5;
 }

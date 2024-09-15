@@ -4,19 +4,7 @@
   config,
   pkgs,
   ...
-}: let
-  libinput = pkgs.libinput.overrideAttrs (self: {
-    name = "libinput";
-    version = "1.26.0";
-    src = pkgs.fetchFromGitLab {
-      domain = "gitlab.freedesktop.org";
-      owner = "libinput";
-      repo = "libinput";
-      rev = self.version;
-      hash = "sha256-mlxw4OUjaAdgRLFfPKMZDMOWosW9yKAkzDccwuLGCwQ=";
-    };
-  });
-in {
+}: {
   imports = [
     ../common
     ../common/wayland
