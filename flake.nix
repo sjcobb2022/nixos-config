@@ -44,6 +44,9 @@
     ###
     # Unstable
     ###
+    
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
 
     aquamarine = {
       type = "git";
@@ -105,6 +108,17 @@
         specialArgs = {inherit inputs outputs;};
       };
 
+    mkAnywhere = modules: name: 
+      nixpkgs.lib.nixosSystem {
+        inherit modules;
+        specialArgs = {
+            inherit inputs outputs;
+            meta = {
+              hostName = name;
+            };
+          };
+      };
+
     mkHome = modules: pkgs:
       home-manager.lib.homeManagerConfiguration {
         inherit modules pkgs;
@@ -141,6 +155,7 @@
       slaptop = mkNixos [./hosts/slaptop];
       velocity = mkNixos [./hosts/velocity];
       iso = mkNixos [./hosts/iso];
+      homelab-0 = mkAnywhere [./hosts/anywhere] "homelab-0";
     };
 
     homeConfigurations = {
