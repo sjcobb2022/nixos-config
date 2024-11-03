@@ -10,16 +10,15 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1725753098,
-        "narHash": "sha256-/NO/h/qD/eJXAQr/fHA4mdDgYsNT9thHQ+oT6KPi2ac=",
-        "ref": "refs/tags/v0.4.1",
-        "rev": "e4a13203112a036fc7f437d391c7810f3dd5ab52",
-        "revCount": 215,
+        "lastModified": 1729527199,
+        "narHash": "sha256-D5/YksfRga8Akd04ZtIkuYSIOjXVrAzQIQBSeplokzU=",
+        "ref": "refs/heads/main",
+        "rev": "8d732fa8aff8b12ef2b1e2f00fc8153e41312b72",
+        "revCount": 226,
         "type": "git",
         "url": "https://github.com/hyprwm/aquamarine"
       },
       "original": {
-        "ref": "refs/tags/v0.4.1",
         "type": "git",
         "url": "https://github.com/hyprwm/aquamarine"
       }

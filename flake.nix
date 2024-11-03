@@ -40,18 +40,18 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    ###
-    # Unstable
-    ###
     
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
+    ###
+    # Unstable
+    ###
+
     aquamarine = {
       type = "git";
       url = "https://github.com/hyprwm/aquamarine";
-      ref = "refs/tags/v0.4.1";
+      # ref = "refs/tags/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -155,7 +155,7 @@
       slaptop = mkNixos [./hosts/slaptop];
       velocity = mkNixos [./hosts/velocity];
       iso = mkNixos [./hosts/iso];
-      homelab-0 = mkAnywhere [./hosts/anywhere] "homelab-0";
+      # homelab-0 = mkAnywhere [./hosts/anywhere] "homelab-0";
     };
 
     homeConfigurations = {
