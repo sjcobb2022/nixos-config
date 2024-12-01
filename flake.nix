@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example
@@ -12,7 +12,7 @@
 
     # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -31,7 +31,6 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -47,12 +46,18 @@
     ###
     # Unstable
     ###
+    
+    hyprutils = {
+      url = "github:hyprwm/hyprutils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     aquamarine = {
       type = "git";
       url = "https://github.com/hyprwm/aquamarine";
       # ref = "refs/tags/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.hyprutils.follows = "hyprutils";
     };
 
     hyprland = {
@@ -62,6 +67,7 @@
       submodules = true;
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.aquamarine.follows = "aquamarine";
+      inputs.hyprutils.follows = "hyprutils";
     };
 
     hyprlock = {
@@ -108,7 +114,7 @@
         specialArgs = {inherit inputs outputs;};
       };
 
-    mkAnywhere = modules: name: 
+    mkAnywhere = name: modules: 
       nixpkgs.lib.nixosSystem {
         inherit modules;
         specialArgs = {
@@ -155,7 +161,7 @@
       slaptop = mkNixos [./hosts/slaptop];
       velocity = mkNixos [./hosts/velocity];
       iso = mkNixos [./hosts/iso];
-      # homelab-0 = mkAnywhere [./hosts/anywhere] "homelab-0";
+      # homelab-0 = (mkAnywhere [./hosts/anywhere ]) "homelab-0";
     };
 
     homeConfigurations = {

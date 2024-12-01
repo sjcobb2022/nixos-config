@@ -14,7 +14,7 @@ in {
         };
       };
 
-      shell = "${pkgs.fish}/bin/fish";
+      terminal.shell = "${pkgs.fish}/bin/fish";
 
       cursor = {
         style = {

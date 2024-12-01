@@ -16,7 +16,7 @@
     enable = false;
     fallbackToWPA2 = false;
     # Declarative
-    environmentFile = config.sops.secrets.wireless.path;
+    secretsFile = config.sops.secrets.wireless.path;
     networks = {
       "VM4866900" = {
         psk = "@VM4866900_PASS@";

@@ -33,11 +33,10 @@
     wireless.enable = false;
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    extraPackages = with pkgs; [libvdpau-va-gl vaapiVdpau];
+    enable32Bit = true;
+    extraPackages32 = with pkgs; [libvdpau-va-gl vaapiVdpau];
   };
 
   services.logind = {

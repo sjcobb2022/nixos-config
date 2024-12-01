@@ -25,8 +25,8 @@
       services.xserver.displayManager.gdm.enable = lib.mkForce true;
       services.xserver.desktopManager.gnome.enable = lib.mkForce true;
 
-      environment.systemPackages = with pkgs; [gnomeExtensions.appindicator gnome.adwaita-icon-theme];
-      services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+      environment.systemPackages = with pkgs; [gnomeExtensions.appindicator adwaita-icon-theme];
+      services.udev.packages = with pkgs; [gnome-settings-daemon];
 
       environment.gnome.excludePackages =
         (with pkgs; [
@@ -34,7 +34,7 @@
           gnome-tour
           gedit
         ])
-        ++ (with pkgs.gnome; [
+        ++ (with pkgs; [
           cheese # webcam tool
           gnome-music
           epiphany # web browser
