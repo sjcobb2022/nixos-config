@@ -52,22 +52,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    aquamarine = {
-      type = "git";
-      url = "https://github.com/hyprwm/aquamarine";
-      # ref = "refs/tags/v0.4.1";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.hyprutils.follows = "hyprutils";
-    };
+    # aquamarine = {
+    #   type = "git";
+    #   url = "https://github.com/hyprwm/aquamarine";
+    #   # ref = "refs/tags/v0.4.1";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #   inputs.hyprutils.follows = "hyprutils";
+    # };
 
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/hyprland";
-      ref = "refs/tags/v0.43.0";
       submodules = true;
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.aquamarine.follows = "aquamarine";
-      inputs.hyprutils.follows = "hyprutils";
     };
 
     hyprlock = {

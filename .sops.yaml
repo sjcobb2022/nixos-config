@@ -1,7 +1,7 @@
 keys:
   # Users
   - &users:
-    - &sjcobb age16ph0xq7xqfe8pmcwtgpvsw4sgeeclmajx0mln28ffrh8nrly7vnqscf559
+    - &sjcobb age1qcrgm4maymy44cws6p0qcfhrjqpra75zdwkwh9hvvvzg7vs4uudq5x4j7n
   # Hosts
   - &hosts:
     - &slaptop age1ygqez4yjlggfekj8sgtsfda4v5up3x5946u5yn8e82elrr5rvdzqt3n7z6

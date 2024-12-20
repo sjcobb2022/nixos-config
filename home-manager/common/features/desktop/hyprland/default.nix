@@ -29,9 +29,10 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.hyprland-patched;
+    # package = pkgs.hyprland-patched;
     systemd = {
       enable = true;
+      variables = ["--all"];
     };
 
     xwayland.enable = true;
@@ -106,7 +107,7 @@
       };
 
       decoration = {
-        drop_shadow = false;
+        shadow.enabled = false;
       };
 
       xwayland = {

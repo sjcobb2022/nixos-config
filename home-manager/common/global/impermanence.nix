@@ -23,6 +23,7 @@
           "Public"
           ".local/bin"
           ".local/share/nix"
+          ".config/sops/age"
         ];
         allowOther = true;
       };

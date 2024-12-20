@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   inputs,
   outputs,
   ...
@@ -30,6 +31,28 @@
   environment.profileRelativeSessionVariables = {
     QT_PLUGIN_PATH = ["/lib/qt-6/plugins"];
   };
+
+  networking = {
+    networkmanager = {
+      enable = lib.mkDefault true;
+      insertNameservers = ["1.1.1.1" "1.0.0.1"];
+    };
+  };
+
+  # Configure keymap in X11
+  # use US keyboard because laptop is in US keyboard layout
+  services.xserver = {
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
+  };
+
+  nix.gc.dates = "daily";
+
+  time.timeZone = "Europe/London";
+
+  i18n.defaultLocale = "en_GB.UTF-8";
 
   environment.enableAllTerminfo = true;
 }
