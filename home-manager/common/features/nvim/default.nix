@@ -19,7 +19,6 @@
     unzip
     gnumake
     gcc
-    nodejs
     rustc
     cargo
     python3

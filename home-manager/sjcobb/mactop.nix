@@ -16,11 +16,31 @@
   ];
 
   programs.alacritty.settings.font.normal.family = lib.mkForce "FiraCode Nerd Font";
+  programs.alacritty.settings.shell = lib.mkForce "${pkgs.fish}/bin/fish";
+  programs.alacritty.settings.terminal = lib.mkForce {};
 
   home = {
     username = lib.mkDefault "sjcobb";
     homeDirectory = lib.mkForce "/Users/sjcobb";
   };
 
-  home.packages = with pkgs; [spotify dotnet-sdk_7];
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "dotnet-sdk-7.0.410"
+      ];
+    };
+  };
+
+  home.packages = with pkgs; [
+    spotify 
+    (with dotnetCorePackages; combinePackages [
+      dotnet-sdk_8
+      dotnet-sdk_7
+    ])
+    nodejs
+    (unstable.yarn.override { nodejs = nodePackages_latest.nodejs; })
+    stripe-cli
+  ];
 }

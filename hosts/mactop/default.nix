@@ -51,6 +51,14 @@
     (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode"];})
   ];
 
+  homebrew = {
+    enable = true;
+    onActivation.cleanup = "uninstall";
+    taps = [];
+    brews = [];
+    casks = [ "redisinsight" "dbeaver-community" "openvpn-connect" "yubico-yubikey-manager" ];
+  };
+
   programs.zsh.enable = true; # default shell on catalina
   services.nix-daemon.enable = true;
 

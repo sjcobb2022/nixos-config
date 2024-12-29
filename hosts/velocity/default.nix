@@ -48,8 +48,6 @@
     allowedTCPPorts = [3000 5173 4173 80 443 1522 27017];
   };
 
-  nix.settings.auto-optimise-store = false;
-
   time.timeZone = "Europe/London";
 
   i18n.defaultLocale = "en_GB.UTF-8";
