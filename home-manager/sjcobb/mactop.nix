@@ -24,6 +24,10 @@
     homeDirectory = lib.mkForce "/Users/sjcobb";
   };
 
+  programs.gh.enable = true;
+
+  home.sessionVariables.LIBRARY_PATH = ''${lib.makeLibraryPath [pkgs.libiconv]}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
+
   nixpkgs = {
     config = {
       allowUnfree = true;
