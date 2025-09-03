@@ -3,7 +3,7 @@
     enable = true;
     monospace = {
       family = "FiraCode Nerd Font";
-      package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+      package = pkgs.nerd-fonts.fira-code;
     };
     regular = {
       family = "Fira Sans";
@@ -17,6 +17,7 @@
     noto-fonts
     source-han-sans
     source-han-serif
-    (nerdfonts.override {fonts = ["BigBlueTerminal" "JetBrainsMono"];})
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.bigblue-terminal
   ];
 }

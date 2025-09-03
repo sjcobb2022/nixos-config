@@ -1,22 +1,21 @@
 keys:
   # Users
   - &users:
-    - &sjcobb age1qcrgm4maymy44cws6p0qcfhrjqpra75zdwkwh9hvvvzg7vs4uudq5x4j7n
+    - &sjcobb 01B6B355D152BCF82C1E231020F5849E2397D1F3
   # Hosts
   - &hosts:
-    - &slaptop age1ygqez4yjlggfekj8sgtsfda4v5up3x5946u5yn8e82elrr5rvdzqt3n7z6
-    - &velocity age1a4yag0568a423nf2vg8nzpp46nxxz08stl63veqz06k52husa5cqju04vl 
-
+    - &slaptop age10h6u7gyke6tg9g5up2rd4zprfcsnewhxt8kgprm0cufe3he4zvps2pv53u
 creation_rules:
   - path_regex: hosts/slaptop/secrets.ya?ml$
     key_groups:
+    - pgp:
+      - *sjcobb
     - age:
       - *slaptop
-      - *sjcobb
 
   - path_regex: hosts/common/secrets.ya?ml$
     key_groups:
+    - pgp:
+      - *sjcobb
     - age:
       - *slaptop
-      - *velocity
-      - *sjcobb

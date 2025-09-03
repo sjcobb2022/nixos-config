@@ -60,6 +60,7 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [3000 5173 4173 1522 27017];
+    checkReversePath = false;
   };
 
   swapDevices = [

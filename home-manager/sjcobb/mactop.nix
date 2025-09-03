@@ -34,13 +34,14 @@
   };
 
   home.packages = with pkgs; [
-    spotify 
-    (with dotnetCorePackages; combinePackages [
-      dotnet-sdk_8
-      dotnet-sdk_7
-    ])
+    spotify
+    (with dotnetCorePackages;
+      combinePackages [
+        dotnet-sdk_8
+        dotnet-sdk_7
+      ])
     nodejs
-    (unstable.yarn.override { nodejs = nodePackages_latest.nodejs; })
+    (unstable.yarn.override {nodejs = nodePackages_latest.nodejs;})
     stripe-cli
   ];
 }

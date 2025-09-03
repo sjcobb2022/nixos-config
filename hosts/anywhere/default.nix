@@ -1,4 +1,11 @@
-{ inputs, config, lib, pkgs, meta, ... }: {
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  meta,
+  ...
+}: {
   # imports = [
   #  inputs.disko.nixosModules.disko
   #   ./hardware-configuration.nix

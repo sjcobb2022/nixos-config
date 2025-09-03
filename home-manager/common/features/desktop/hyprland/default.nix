@@ -16,20 +16,17 @@
   #   # SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+=""
   #   # SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+=""
   # '';
-  #
-  home.packages = with pkgs; [
-    inputs.hyprwm-contrib.packages.${system}.grimblast
-  ];
 
-  xdg.portal = with pkgs; {
-    extraPortals = [inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland];
-    configPackages = [wayland.windowManager.hyprland.package];
-    xdgOpenUsePortal = true;
-  };
+  home.packages = with pkgs; [
+    grimblast
+  ];
 
   wayland.windowManager.hyprland = {
     enable = true;
     # package = pkgs.hyprland-patched;
+    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+
     systemd = {
       enable = true;
       variables = ["--all"];
@@ -136,7 +133,7 @@
         alacritty = lib.getExe pkgs.alacritty;
         firefox = lib.getExe pkgs.firefox;
         thunar = lib.getExe pkgs.xfce.thunar;
-        grimblast = lib.getExe inputs.hyprwm-contrib.packages.${pkgs.system}.grimblast;
+        grimblast = lib.getExe pkgs.grimblast;
         workspaces = ["1" "2" "3" "4" "5" "6" "7" "8" "9"];
       in
         [

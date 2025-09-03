@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example
@@ -12,7 +12,7 @@
 
     # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -39,47 +39,28 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     ###
     # Unstable
     ###
-    
-    hyprutils = {
-      url = "github:hyprwm/hyprutils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
-    # aquamarine = {
-    #   type = "git";
-    #   url = "https://github.com/hyprwm/aquamarine";
-    #   # ref = "refs/tags/v0.4.1";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    #   inputs.hyprutils.follows = "hyprutils";
+    # hyprlock = {
+    #   url = "github:hyprwm/hyprlock";
+    #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/hyprland";
-      submodules = true;
-    };
-
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprwm-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    hyprpaper = {
-      url = "github:hyprwm/hyprpaper";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    #
+    # hyprwm-contrib = {
+    #   url = "github:hyprwm/contrib";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
+    #
+    # hyprpaper = {
+    #   url = "github:hyprwm/hyprpaper";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
 
     hyprkeys = {
       url = "github:hyprland-community/hyprkeys";
@@ -110,15 +91,15 @@
         specialArgs = {inherit inputs outputs;};
       };
 
-    mkAnywhere = name: modules: 
+    mkAnywhere = name: modules:
       nixpkgs.lib.nixosSystem {
         inherit modules;
         specialArgs = {
-            inherit inputs outputs;
-            meta = {
-              hostName = name;
-            };
+          inherit inputs outputs;
+          meta = {
+            hostName = name;
           };
+        };
       };
 
     mkHome = modules: pkgs:

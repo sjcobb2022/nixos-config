@@ -4,7 +4,7 @@
   ...
 }: let
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
-  hyprland-session = "${pkgs.hyprland-patched}/share/wayland-sessions";
+  hyprland-session = "${pkgs.hyprland}/share/wayland-sessions";
 in {
   services.greetd = {
     enable = true;

@@ -5,18 +5,12 @@
 }: {
   # Wireless secrets stored through sops
 
-  sops.secrets.wireless = {
-    sopsFile = ../secrets.yaml;
-    neededForUsers = true;
-  };
-
   # networking.networkmanager.enable = false;
 
   networking.wireless = {
     enable = false;
     fallbackToWPA2 = false;
     # Declarative
-    secretsFile = config.sops.secrets.wireless.path;
     networks = {
       "VM4866900" = {
         psk = "@VM4866900_PASS@";

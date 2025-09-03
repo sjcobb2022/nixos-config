@@ -29,16 +29,17 @@ in {
       ];
 
     openssh.authorizedKeys.keys = [(builtins.readFile ../ssh.pub)];
-    hashedPasswordFile = config.sops.secrets.sjcobb-password.path;
+    hashedPassword = "$6$ldYLCjd.Zy8S0ro8$KvJ2GmDWfqiqPFANzHxq8shRcmZWdbLZisFeNwVSJK9mOD8BlDUTxJIJM6OV6gF9KrUQO2QNhmNrqIu1fysRw0";
+    # hashedPasswordFile = config.sops.secrets.sjcobb-password.path;
     packages = [
       pkgs.home-manager
     ];
   };
 
-  sops.secrets.sjcobb-password = {
-    sopsFile = ../../secrets.yaml;
-    neededForUsers = true;
-  };
+  # sops.secrets.sjcobb-password = {
+  #   sopsFile = ../../secrets.yaml;
+  #   neededForUsers = true;
+  # };
 
   home-manager.users.sjcobb = import ../../../../home-manager/sjcobb/${config.networking.hostName}.nix;
 

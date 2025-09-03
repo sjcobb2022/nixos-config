@@ -16,6 +16,7 @@
       ./sops.nix
       ./systemd-initrd.nix
       ./acme.nix
+      ./yubikey.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);
 

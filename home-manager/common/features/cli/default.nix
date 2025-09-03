@@ -9,6 +9,7 @@
     ./shellcolor.nix
     ./starship.nix
     ./zoxide.nix
+    ./gpg.nix
   ];
 
   home.packages = with pkgs; [

@@ -48,7 +48,8 @@
 
   fonts.packages = with pkgs; [
     recursive
-    (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode"];})
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
   ];
 
   homebrew = {
@@ -56,13 +57,13 @@
     onActivation.cleanup = "uninstall";
     taps = [];
     brews = [];
-    casks = [ "redisinsight" "dbeaver-community" "openvpn-connect" "yubico-yubikey-manager" ];
+    casks = ["redisinsight" "dbeaver-community" "openvpn-connect" "yubico-yubikey-manager"];
   };
 
   programs.zsh.enable = true; # default shell on catalina
   services.nix-daemon.enable = true;
 
-  environment.systemPackages = with pkgs; [ alacritty ];
+  environment.systemPackages = with pkgs; [alacritty];
 
   nix.registry = lib.mkForce (lib.mapAttrs (_: value: {flake = value;}) inputs);
 

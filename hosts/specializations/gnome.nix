@@ -8,7 +8,6 @@
   specialisation.gnome = {
     inheritParentConfig = false;
     configuration = {
-
       environment.etc."specialisation".text = "gnome";
 
       imports = [
@@ -37,14 +36,14 @@
         };
       };
 
-      users.users.guest.extraGroups = [ "wheel" ];
+      users.users.guest.extraGroups = ["wheel"];
 
       swapDevices = [
-       {
-         device = "/swapfile";
-         size = 16 * 1024;
-       }
-     ];
+        {
+          device = "/swapfile";
+          size = 16 * 1024;
+        }
+      ];
 
       hardware = {
         xone.enable = true;
@@ -52,7 +51,7 @@
 
       services.joycond.enable = true;
 
-      hardware.pulseaudio.enable = false;
+      services.pulseaudio.enable = false;
       services.xserver.enable = true;
       services.xserver.displayManager.gdm.enable = true;
       services.xserver.desktopManager.gnome.enable = true;
@@ -61,41 +60,39 @@
       services.udev.packages = with pkgs; [gnome-settings-daemon];
 
       hardware.nvidia = {
-          modesetting.enable = true;
-          powerManagement.enable = lib.mkForce false;
-          powerManagement.finegrained = lib.mkForce false;
-          open = lib.mkForce false;
-
-          
+        modesetting.enable = true;
+        powerManagement.enable = lib.mkForce false;
+        powerManagement.finegrained = lib.mkForce false;
+        open = lib.mkForce false;
       };
 
       environment.gnome.excludePackages = with pkgs; [
-          orca
-          evince
-          geary
-          gnome-backgrounds
-          gnome-tour # GNOME Shell detects the .desktop file on first log-in.
-          gnome-user-docs
-          baobab
-          epiphany
-          gnome-text-editor
-          gnome-calculator
-          gnome-calendar
-          gnome-characters
-          gnome-console
-          gnome-contacts
-          gnome-font-viewer
-          gnome-logs
-          gnome-maps
-          gnome-music
-          gnome-weather
-          gnome-connections
-          simple-scan
-          snapshot
-          totem
-          yelp
-          gnome-software
-        ];
+        orca
+        evince
+        geary
+        gnome-backgrounds
+        gnome-tour # GNOME Shell detects the .desktop file on first log-in.
+        gnome-user-docs
+        baobab
+        epiphany
+        gnome-text-editor
+        gnome-calculator
+        gnome-calendar
+        gnome-characters
+        gnome-console
+        gnome-contacts
+        gnome-font-viewer
+        gnome-logs
+        gnome-maps
+        gnome-music
+        gnome-weather
+        gnome-connections
+        simple-scan
+        snapshot
+        totem
+        yelp
+        gnome-software
+      ];
 
       system.stateVersion = "23.05";
     };

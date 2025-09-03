@@ -1,6 +1,6 @@
 {
+  pkgs,
   inputs,
-  lib,
   config,
   ...
 }: let
@@ -9,13 +9,10 @@
   keys = builtins.filter isEd25519 config.services.openssh.hostKeys;
 in {
   imports = [
-    inputs.sops-nix.nixosModules.sops
+    # inputs.sops-nix.nixosModules.sops
   ];
 
-  sops = {
-    age.sshKeyPaths = map getKeyPath keys;
-    age.keyFile = "/persist/home/sjcobb/.config/sops/age/keys.txt";
-  };
-
-
+  # sops = {
+  #   age.sshKeyPaths = map getKeyPath keys;
+  # };
 }
