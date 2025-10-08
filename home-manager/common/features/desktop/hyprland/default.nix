@@ -23,9 +23,6 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    # package = pkgs.hyprland-patched;
-    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
 
     systemd = {
       enable = true;
@@ -116,14 +113,6 @@
         workspace_swipe = true;
         workspace_swipe_fingers = 4;
       };
-
-      windowrulev2 = [
-        # "float,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
-        # "pin,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
-        # "noinitialfocus,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
-        # "size 76 31,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
-        # "move 0 0,class:^(firefox)$,title:^(Firefox — Sharing Indicator)$"
-      ];
 
       "$mod" = "SUPER";
 
