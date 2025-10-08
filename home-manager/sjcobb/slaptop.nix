@@ -40,6 +40,17 @@
     "MOZ_ENABLE_WAYLAND,1"
   ];
 
+  programs.vscode.enable = true;
+  programs.vscode.package = (pkgs.vscode.override {isInsiders = true;}).overrideAttrs (oldAttrs: rec {
+    src = builtins.fetchTarball {
+      url = "https://code.visualstudio.com/sha/download?build=insider&os=linux-x64";
+      sha256 = "0x353gh6cjran5fww61b2ll1c7j4p05393nkzz8ms97pssn1qk91";
+    };
+    version = "latest";
+
+    buildInputs = oldAttrs.buildInputs ++ [pkgs.krb5];
+  });
+
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
