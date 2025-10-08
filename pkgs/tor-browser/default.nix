@@ -63,6 +63,9 @@
   # Whether to disable multiprocess support
   disableContentSandbox ? false,
 
+  tor-version,
+  tor-hash,
+
   # Extra preferences
   extraPrefs ? "",
 }:
@@ -109,7 +112,7 @@ lib.warnIf (useHardenedMalloc != null)
         ++ lib.optionals mediaSupport [ ffmpeg ]
       );
 
-      version = "14.5.7";
+      version = tor-version;
 
       sources = {
         x86_64-linux = fetchurl {
@@ -119,17 +122,7 @@ lib.warnIf (useHardenedMalloc != null)
             "https://tor.eff.org/dist/torbrowser/${version}/tor-browser-linux-x86_64-${version}.tar.xz"
             "https://tor.calyxinstitute.org/dist/torbrowser/${version}/tor-browser-linux-x86_64-${version}.tar.xz"
           ];
-          hash = "sha256-ZQn4m4BnAaHXXXy4qnyqqNDEJDbk4uOlVp3wOKZxPzw=";
-        };
-
-        i686-linux = fetchurl {
-          urls = [
-            "https://archive.torproject.org/tor-package-archive/torbrowser/${version}/tor-browser-linux-i686-${version}.tar.xz"
-            "https://dist.torproject.org/torbrowser/${version}/tor-browser-linux-i686-${version}.tar.xz"
-            "https://tor.eff.org/dist/torbrowser/${version}/tor-browser-linux-i686-${version}.tar.xz"
-            "https://tor.calyxinstitute.org/dist/torbrowser/${version}/tor-browser-linux-i686-${version}.tar.xz"
-          ];
-          hash = "sha256-oJYtgqf4p3Mwrj9ew5qYo4h42rZXd5vqL4+iJZ4OLjo=";
+          hash = tor-hash;
         };
       };
 
@@ -149,6 +142,11 @@ lib.warnIf (useHardenedMalloc != null)
           policies.DisableAppUpdate = true;
         }
       );
+
+      fontDirName =
+        if builtins.compareVersions tor-version "14.5" == -1
+        then "fontconfig"
+        else "fonts";
     in
     stdenv.mkDerivation rec {
       pname = "tor-browser";
@@ -183,7 +181,7 @@ lib.warnIf (useHardenedMalloc != null)
           name = "torbrowser";
           exec = "tor-browser %U";
           icon = "tor-browser";
-          desktopName = "Tor Browser";
+          desktopName = "Tor Browser ${tor-version}";
           genericName = "Web Browser";
           comment = meta.description;
           categories = [
@@ -291,7 +289,7 @@ lib.warnIf (useHardenedMalloc != null)
         # FONTCONFIG_FILE is required to make fontconfig read the TBB
         # fonts.conf; upstream uses FONTCONFIG_PATH, but FC_DEBUG=1024
         # indicates the system fonts.conf being used instead.
-        FONTCONFIG_FILE=$TBB_IN_STORE/fonts/fonts.conf
+        FONTCONFIG_FILE=$TBB_IN_STORE/${fontDirName}/fonts.conf
         substituteInPlace "$FONTCONFIG_FILE" \
           --replace-fail '<dir prefix="cwd">fonts</dir>' "<dir>$TBB_IN_STORE/fonts</dir>"
 
