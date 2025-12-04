@@ -14,6 +14,7 @@
 in {
   services.openssh = {
     enable = true;
+
     settings = {
       # Harden
       PasswordAuthentication = false;
@@ -32,8 +33,8 @@ in {
     ];
   };
 
-  programs.ssh = {
-    # startAgent = true;
+  programs.ssh = lib.mkDefault {
+    startAgent = true;
     # Each hosts public key
     knownHosts =
       builtins.mapAttrs

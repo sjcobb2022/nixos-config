@@ -88,7 +88,7 @@
         };
 
         memory = {
-          format = "{icon} {}%";
+          format = "{icon} {0}%";
           format-icons = ["󰍛"];
           states = {
             "warning" = 70;

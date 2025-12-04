@@ -10,7 +10,6 @@
   patchelfUnstable, # have to use patchelfUnstable to support --no-clobber-old-sections
   wrapGAppsHook3,
   callPackage,
-
   atk,
   cairo,
   dbus,
@@ -30,124 +29,111 @@
   pango,
   pciutils,
   zlib,
-
   libnotifySupport ? stdenv.hostPlatform.isLinux,
   libnotify,
-
   waylandSupport ? stdenv.hostPlatform.isLinux,
   libxkbcommon,
   libdrm,
   libGL,
-
   mediaSupport ? true,
   ffmpeg,
-
   audioSupport ? mediaSupport,
-
   pipewireSupport ? audioSupport,
   pipewire,
-
   pulseaudioSupport ? audioSupport,
   libpulseaudio,
   apulse,
   alsa-lib,
-
   libvaSupport ? mediaSupport,
   libva,
-
   # Hardening
   graphene-hardened-malloc,
   # Whether to use graphene-hardened-malloc
   useHardenedMalloc ? null,
-
   # Whether to disable multiprocess support
   disableContentSandbox ? false,
-
   tor-version,
   tor-hash,
-
   # Extra preferences
   extraPrefs ? "",
 }:
-
 lib.warnIf (useHardenedMalloc != null)
-  "tor-browser: useHardenedMalloc is deprecated and enabling it can cause issues"
+"tor-browser: useHardenedMalloc is deprecated and enabling it can cause issues"
+(
+  let
+    libPath = lib.makeLibraryPath (
+      [
+        alsa-lib
+        atk
+        cairo
+        dbus
+        dbus-glib
+        fontconfig
+        freetype
+        gdk-pixbuf
+        glib
+        gtk3
+        libxcb
+        libX11
+        libXext
+        libXrender
+        libXt
+        libXtst
+        libgbm
+        pango
+        pciutils
+        stdenv.cc.cc
+        stdenv.cc.libc
+        zlib
+      ]
+      ++ lib.optionals libnotifySupport [libnotify]
+      ++ lib.optionals waylandSupport [
+        libxkbcommon
+        libdrm
+        libGL
+      ]
+      ++ lib.optionals pipewireSupport [pipewire]
+      ++ lib.optionals pulseaudioSupport [libpulseaudio]
+      ++ lib.optionals libvaSupport [libva]
+      ++ lib.optionals mediaSupport [ffmpeg]
+    );
 
-  (
-    let
-      libPath = lib.makeLibraryPath (
-        [
-          alsa-lib
-          atk
-          cairo
-          dbus
-          dbus-glib
-          fontconfig
-          freetype
-          gdk-pixbuf
-          glib
-          gtk3
-          libxcb
-          libX11
-          libXext
-          libXrender
-          libXt
-          libXtst
-          libgbm
-          pango
-          pciutils
-          stdenv.cc.cc
-          stdenv.cc.libc
-          zlib
-        ]
-        ++ lib.optionals libnotifySupport [ libnotify ]
-        ++ lib.optionals waylandSupport [
-          libxkbcommon
-          libdrm
-          libGL
-        ]
-        ++ lib.optionals pipewireSupport [ pipewire ]
-        ++ lib.optionals pulseaudioSupport [ libpulseaudio ]
-        ++ lib.optionals libvaSupport [ libva ]
-        ++ lib.optionals mediaSupport [ ffmpeg ]
-      );
+    version = tor-version;
 
-      version = tor-version;
-
-      sources = {
-        x86_64-linux = fetchurl {
-          urls = [
-            "https://archive.torproject.org/tor-package-archive/torbrowser/${version}/tor-browser-linux-x86_64-${version}.tar.xz"
-            "https://dist.torproject.org/torbrowser/${version}/tor-browser-linux-x86_64-${version}.tar.xz"
-            "https://tor.eff.org/dist/torbrowser/${version}/tor-browser-linux-x86_64-${version}.tar.xz"
-            "https://tor.calyxinstitute.org/dist/torbrowser/${version}/tor-browser-linux-x86_64-${version}.tar.xz"
-          ];
-          hash = tor-hash;
-        };
+    sources = {
+      x86_64-linux = fetchurl {
+        urls = [
+          "https://archive.torproject.org/tor-package-archive/torbrowser/${version}/tor-browser-linux-x86_64-${version}.tar.xz"
+          "https://dist.torproject.org/torbrowser/${version}/tor-browser-linux-x86_64-${version}.tar.xz"
+          "https://tor.eff.org/dist/torbrowser/${version}/tor-browser-linux-x86_64-${version}.tar.xz"
+          "https://tor.calyxinstitute.org/dist/torbrowser/${version}/tor-browser-linux-x86_64-${version}.tar.xz"
+        ];
+        hash = tor-hash;
       };
+    };
 
-      distributionIni = writeText "distribution.ini" (
-        lib.generators.toINI { } {
-          # Some light branding indicating this build uses our distro preferences
-          Global = {
-            id = "nixos";
-            version = "1.0";
-            about = "Tor Browser for NixOS";
-          };
-        }
-      );
+    distributionIni = writeText "distribution.ini" (
+      lib.generators.toINI {} {
+        # Some light branding indicating this build uses our distro preferences
+        Global = {
+          id = "nixos";
+          version = "1.0";
+          about = "Tor Browser for NixOS";
+        };
+      }
+    );
 
-      policiesJson = writeText "policies.json" (
-        builtins.toJSON {
-          policies.DisableAppUpdate = true;
-        }
-      );
+    policiesJson = writeText "policies.json" (
+      builtins.toJSON {
+        policies.DisableAppUpdate = true;
+      }
+    );
 
-      fontDirName =
-        if builtins.compareVersions tor-version "14.5" == -1
-        then "fontconfig"
-        else "fonts";
-    in
+    fontDirName =
+      if builtins.compareVersions tor-version "14.5" == -1
+      then "fontconfig"
+      else "fonts";
+  in
     stdenv.mkDerivation rec {
       pname = "tor-browser";
       inherit version;
@@ -171,7 +157,7 @@ lib.warnIf (useHardenedMalloc != null)
       ];
 
       # Firefox uses "relrhack" to manually process relocations from a fixed offset
-      patchelfFlags = [ "--no-clobber-old-sections" ];
+      patchelfFlags = ["--no-clobber-old-sections"];
 
       preferLocalBuild = true;
       allowSubstitutes = false;
@@ -267,18 +253,21 @@ lib.warnIf (useHardenedMalloc != null)
 
         // Optionally disable multiprocess support.  We always set this to ensure that
         // toggling the pref takes effect.
-        lockPref("browser.tabs.remote.autostart.2", ${if disableContentSandbox then "false" else "true"});
+        lockPref("browser.tabs.remote.autostart.2", ${
+          if disableContentSandbox
+          then "false"
+          else "true"
+        });
 
         // Allow sandbox access to sound devices if using ALSA directly
         ${
-          if (audioSupport && !pulseaudioSupport) then
-            ''
-              pref("security.sandbox.content.write_path_whitelist", "/dev/snd/");
-            ''
-          else
-            ''
-              clearPref("security.sandbox.content.write_path_whitelist");
-            ''
+          if (audioSupport && !pulseaudioSupport)
+          then ''
+            pref("security.sandbox.content.write_path_whitelist", "/dev/snd/");
+          ''
+          else ''
+            clearPref("security.sandbox.content.write_path_whitelist");
+          ''
         }
 
         ${lib.optionalString (extraPrefs != "") ''
@@ -306,10 +295,10 @@ lib.warnIf (useHardenedMalloc != null)
 
         makeWrapper "$TBB_IN_STORE/firefox" "$out/bin/tor-browser" \
           --prefix LD_PRELOAD : "${
-            lib.optionalString (
-              useHardenedMalloc == true
-            ) "${graphene-hardened-malloc}/lib/libhardened_malloc.so"
-          }" \
+          lib.optionalString (
+            useHardenedMalloc == true
+          ) "${graphene-hardened-malloc}/lib/libhardened_malloc.so"
+        }" \
           --prefix LD_LIBRARY_PATH : "$libPath" \
           --set FONTCONFIG_FILE "$FONTCONFIG_FILE" \
           --set-default MOZ_ENABLE_WAYLAND 1
@@ -373,7 +362,7 @@ lib.warnIf (useHardenedMalloc != null)
           lgpl3Plus
           free
         ];
-        sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
+        sourceProvenance = with lib.sourceTypes; [binaryNativeCode];
       };
     }
-  )
+)

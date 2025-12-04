@@ -57,7 +57,7 @@
     onActivation.cleanup = "uninstall";
     taps = [];
     brews = ["libiconv"];
-    casks = [ "redisinsight" "dbeaver-community" "openvpn-connect" "yubico-yubikey-manager" "postman" ];
+    casks = ["redisinsight" "dbeaver-community" "openvpn-connect" "yubico-yubikey-manager" "postman"];
   };
 
   programs.zsh.enable = true; # default shell on catalina

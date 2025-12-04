@@ -29,6 +29,8 @@
 
       programs.steam.enable = true;
 
+      services.gnome.gcr-ssh-agent.enable = false;
+
       networking = {
         networkmanager = {
           enable = lib.mkDefault true;
@@ -52,9 +54,8 @@
       services.joycond.enable = true;
 
       services.pulseaudio.enable = false;
-      services.xserver.enable = true;
-      services.xserver.displayManager.gdm.enable = true;
-      services.xserver.desktopManager.gnome.enable = true;
+      services.displayManager.gdm.enable = true;
+      services.desktopManager.gnome.enable = true;
 
       environment.systemPackages = with pkgs; [gnomeExtensions.appindicator adwaita-icon-theme];
       services.udev.packages = with pkgs; [gnome-settings-daemon];

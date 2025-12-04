@@ -1,9 +1,12 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
+
+  powerManagement.enable = true;
 
   hardware.nvidia = {
     # Modesetting is required.
@@ -14,7 +17,7 @@
     powerManagement.enable = true;
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
+    powerManagement.finegrained = true;
 
     # Enable dynamic power management.
     # Dynamic Boost balances power between the CPU and the GPU for improved
@@ -45,6 +48,6 @@
     extraPackages = with pkgs; [
       nvidia-vaapi-driver
     ];
-    extraPackages32 = with pkgs; [libvdpau-va-gl vaapiVdpau];
+    extraPackages32 = with pkgs; [libvdpau-va-gl libva-vdpau-driver];
   };
 }

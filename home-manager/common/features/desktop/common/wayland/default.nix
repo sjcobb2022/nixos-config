@@ -30,7 +30,7 @@
     waypipe
     wf-recorder
     wl-clipboard
-    libsForQt5.kdenlive
+    kdePackages.kdenlive
     # wl-mirror
     # wl-mirror-pick
     # ydotool

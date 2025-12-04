@@ -35,9 +35,7 @@
     ../specializations/gnome.nix
   ];
 
-  services.logind = {
-    lidSwitch = "suspend";
-  };
+  services.logind.settings.Login.HandleLidSwitch = "suspend";
 
   networking.hostName = "slaptop";
 
@@ -50,6 +48,7 @@
       };
     };
     plymouth.enable = false;
+    binfmt.emulatedSystems = ["aarch64-linux"];
   };
 
   programs = {

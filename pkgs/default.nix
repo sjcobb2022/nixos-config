@@ -10,10 +10,16 @@
     tor-hash = "sha256-f6bKRWirHuOe2BnCYegZi1j58Ou3p6Syw++NVLGUGdU=";
   };
 
-  tor-14_5 = pkgs.callPackage ./tor-browser {
-    tor-version = "14.5";
-    tor-hash = "sha256-wSxmNPPJsLRjDVimc2Rp1rBcIgYp/CtPKuU6+gZfVmw=";
+  tor-13_5_7 = pkgs.callPackage ./tor-browser {
+    tor-version = "13.5.7";
+    tor-hash = "sha256-w+W3J07+7/DERDsX0EubHKZfCr9Bc3dKmnS33UA3sdU=";
   };
+
+  tor-14_0 = pkgs.callPackage ./tor-browser {
+    tor-version = "14.0";
+    tor-hash = "sha256-RNsTj8/HP10ElIjutYCqp50gN7W7Kz+DA94rkkU/VaI=";
+  };
+
   # wezterm-nightly = pkgs.callPackage ./wezterm-nightly { };
   # iso = pkgs.callPackage ./iso { inherit inputs pkgs; };
 }

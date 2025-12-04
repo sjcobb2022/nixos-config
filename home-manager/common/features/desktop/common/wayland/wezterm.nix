@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  stdenv,
   ...
 }: let
   inherit (config) colorscheme;
@@ -9,7 +10,7 @@
 in {
   programs.wezterm = {
     enable = true;
-    package = inputs.wezterm.packages.${pkgs.system}.default;
+    package = inputs.wezterm.packages.${stdenv.hostPlatform.system}.default;
     colorSchemes = {
       "${colorscheme.slug}" = {
         foreground = "#${palette.base05}";

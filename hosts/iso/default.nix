@@ -36,7 +36,7 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages32 = with pkgs; [libvdpau-va-gl vaapiVdpau];
+    extraPackages32 = with pkgs; [libvdpau-va-gl libva-vdpau-driver];
   };
 
   services.logind = {
