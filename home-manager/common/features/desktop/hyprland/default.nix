@@ -11,12 +11,6 @@
     # inputs.hyprland.homeManagerModules.default
   ];
 
-  # services.udev.extraRules = ''
-  #   # Your rule goes here
-  #   # SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+=""
-  #   # SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+=""
-  # '';
-
   home.packages = with pkgs; [
     grimblast
   ];
@@ -108,11 +102,7 @@
         force_zero_scaling = true;
       };
 
-      gestures = {
-        # See https://wiki.hyprland.org/Configuring/Variables/ for more
-        workspace_swipe = true;
-        workspace_swipe_fingers = 4;
-      };
+      gesture = ["4, horizontal, workspace"];
 
       "$mod" = "SUPER";
 
