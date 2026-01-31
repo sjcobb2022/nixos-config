@@ -27,15 +27,14 @@ in {
 
     hostKeys = [
       {
-        path = "/etc/ssh/ssh_host_ed25519_key";
+        path = "${lib.optionalString hasOptinPersistence "/persist"}/etc/ssh/ssh_host_ed25519_key";
         type = "ed25519";
       }
     ];
   };
 
   programs.ssh = lib.mkDefault {
-    startAgent = true;
-    # Each hosts public key
+    #   # Each hosts public key
     knownHosts =
       builtins.mapAttrs
       (name: _: {
@@ -45,7 +44,4 @@ in {
       })
       hosts;
   };
-
-  # Passwordless sudo when SSH'ing with keys
-  # security.pam.sshAgentAuth.enable = true;
 }

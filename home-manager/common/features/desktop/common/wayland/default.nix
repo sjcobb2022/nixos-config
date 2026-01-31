@@ -1,11 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    #./hyprland-vnc.nix
-    #./kitty.nix
-    # ./wezterm.nix
     ./mako.nix
-    # ./swayidle.nix
-    # ./swaylock.nix
     ./hypridle.nix
     ./hyprlock.nix
     ./hyprpaper.nix
@@ -23,17 +18,9 @@
   ];
 
   home.packages = with pkgs; [
-    # grim
-    # mimeo
-    # pulseaudio
-    # slurp
     waypipe
     wf-recorder
     wl-clipboard
-    kdePackages.kdenlive
-    # wl-mirror
-    # wl-mirror-pick
-    # ydotool
   ];
 
   home.sessionVariables = {

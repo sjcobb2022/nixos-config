@@ -1,31 +1,26 @@
-{
-  pkgs,
-  inputs,
-  outputs,
-  lib,
-  config,
-  ...
-}: {
-  imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
-  ];
-
+_: {
   home = {
     persistence = {
-      "/persist/home/${config.home.username}" = {
+      "/persist" = {
         directories = [
-          "Documents"
-          "Pictures"
-          "Videos"
-          "Music"
           "Downloads"
-          "Templates"
-          "Public"
-          ".local/bin"
-          ".local/share/nix"
-          ".config/sops/age"
+          "Music"
+          "Pictures"
+          "Documents"
+          "Videos"
+          {
+            directory = ".gnupg";
+            mode = "0700";
+          }
+          {
+            directory = ".local/share/keyrings";
+            mode = "0700";
+          }
+          {
+            directory = ".config/sops/age";
+            mode = "0700";
+          }
         ];
-        allowOther = true;
       };
     };
   };

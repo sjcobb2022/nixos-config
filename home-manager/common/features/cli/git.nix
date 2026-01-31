@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
@@ -22,6 +17,6 @@
         init.defaultBranch = "main";
       };
     };
-    ignores = [".direnv" "result"];
+    ignores = [".direnv" "result" "target"];
   };
 }

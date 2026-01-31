@@ -30,13 +30,13 @@ in {
   };
 
   services.kdeconnect = {
-    enable = true;
+    enable = false;
     indicator = true;
   };
 
   # home.packages = with pkgs; [ valent ];
 
   home.persistence = {
-    "/persist/home/${config.home.username}".directories = [".config/kdeconnect"];
+    "/persist".directories = [".config/kdeconnect"];
   };
 }

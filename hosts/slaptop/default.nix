@@ -10,6 +10,7 @@
     inputs.nixos-hardware.nixosModules.omen-15-en1007sa
     # outputs.nixosModules.slaptop
     ./hardware-configuration.nix
+    # ./disko.nix
 
     ../common/global
     ../common/users/sjcobb
@@ -27,13 +28,36 @@
     ../common/optional/hyprlock.nix
     ../common/optional/docker.nix
     ../common/optional/upower.nix
-    ../common/optional/virt-manager.nix
     ../common/optional/steam-hardware.nix
-    ../common/optional/android.nix
     ../common/optional/nvidia.nix
 
     ../specializations/gnome.nix
   ];
+
+  # boot.initrd.postResumeCommands = lib.mkAfter ''
+  #   mkdir /btrfs_tmp
+  #   mount /dev/root_vg/root /btrfs_tmp
+  #   if [[ -e /btrfs_tmp/root ]]; then
+  #       mkdir -p /btrfs_tmp/old_roots
+  #       timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+  #       mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+  #   fi
+  #
+  #   delete_subvolume_recursively() {
+  #       IFS=$'\n'
+  #       for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+  #           delete_subvolume_recursively "/btrfs_tmp/$i"
+  #       done
+  #       btrfs subvolume delete "$1"
+  #   }
+  #
+  #   for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+  #       delete_subvolume_recursively "$i"
+  #   done
+  #
+  #   btrfs subvolume create /btrfs_tmp/root
+  #   umount /btrfs_tmp
+  # '';
 
   services.logind.settings.Login.HandleLidSwitch = "suspend";
 
@@ -58,7 +82,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [3000 5173 4173 1522 27017];
+    allowedTCPPorts = [];
     checkReversePath = false;
   };
 

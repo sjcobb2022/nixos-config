@@ -2,7 +2,6 @@
   imports = [
     ./bash.nix
     ./bat.nix
-    ./direnv.nix
     ./fish.nix
     ./git.nix
     ./pnpm.nix
@@ -21,7 +20,6 @@
     diffsitter # Better diff
     jq # JSON pretty printer and manipulator
   ];
-
   # home.packages = with pkgs.unstable; [
   #   eza # better ls, temporary whilst as eza is not on stable yet
   # ]

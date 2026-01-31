@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+{pkgs, ...}: let
   steam-with-pkgs = pkgs.steam.override {
     extraPkgs = pkgs:
       with pkgs; [
@@ -27,15 +22,9 @@ in {
   ];
 
   home.persistence = {
-    "/persist/home/${config.home.username}" = {
-      allowOther = true;
+    "/persist" = {
       directories = [
-        {
-          # A couple of games don't play well with bindfs
-          directory = ".local/share/Steam";
-          method = "symlink";
-        }
-        #TODO: find game directories
+        ".local/share/Steam"
       ];
     };
   };

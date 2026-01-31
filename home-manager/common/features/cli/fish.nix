@@ -16,6 +16,9 @@
   hasKitty = config.programs.kitty.enable;
   shellcolor = "${pkgs.shellcolord}/bin/shellcolor";
 in {
+  home.shell.enableFishIntegration = true;
+  home.shell.enableBashIntegration = true;
+
   programs.fish = {
     enable = true;
     shellAbbrs = rec {

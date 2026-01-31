@@ -4,7 +4,7 @@
   ...
 }: {
   plasma-iso = inputs.nixos-generators.nixosGenerate {
-    system = "${pkgs.system}";
+    inherit (pkgs) system;
     format = "iso";
     customFormats = {iso = import ./formats/plasma-iso.nix;};
     modules = [
@@ -13,7 +13,7 @@
   };
 
   gnome-iso = inputs.nixos-generators.nixosGenerate {
-    system = "${pkgs.system}";
+    inherit (pkgs) system;
     format = "iso";
     customFormats = {iso = import ./formats/gnome-iso.nix;};
     modules = [
@@ -22,7 +22,7 @@
   };
 
   hyprland-iso = inputs.nixos-generators.nixosGenerate {
-    system = "${pkgs.system}";
+    inherit (pkgs) system;
     format = "iso";
     customFormats = {iso = import ./formats/hyprland-iso.nix;};
     modules = [
@@ -38,7 +38,7 @@
   };
 
   minimal-iso = inputs.nixos-generators.nixosGenerate {
-    system = "${pkgs.system}";
+    inherit (pkgs) system;
     format = "iso";
     modules = [
       ../hosts/iso

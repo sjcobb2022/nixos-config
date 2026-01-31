@@ -1,14 +1,8 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = [pkgs.prismlauncher];
 
   home.persistence = {
-    "/persist/home/${config.home.username}" = {
-      allowOther = true;
+    "/persist" = {
       directories = [".local/share/PrismLauncher"];
     };
   };

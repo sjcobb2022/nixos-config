@@ -35,7 +35,6 @@
   home = {
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
     stateVersion = "23.05";
-    sessionPath = ["$HOME/.local/bin"];
   };
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;

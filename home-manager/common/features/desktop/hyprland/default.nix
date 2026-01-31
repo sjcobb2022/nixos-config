@@ -1,14 +1,11 @@
 {
   lib,
-  inputs,
-  config,
   pkgs,
   ...
 }: {
   imports = [
     ../common
     ../common/wayland
-    # inputs.hyprland.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [
