@@ -141,8 +141,25 @@
       filetree = {
         neo-tree = {
           enable = true;
+          setupOpts = {
+            mappings = {
+              n = {
+                "<leader>e" = {};
+                "<leader>o" = {};
+              };
+            };
+          };
         };
       };
+
+      # TODO: FIX
+      # binds.whichKey.register = {
+      #   n = {
+      #     "<leader>e" = {};
+      #     "<leader>o" = {};
+      #     "<leader>qq" = ":qall";
+      #   };
+      # };
 
       tabline = {
         nvimBufferline.enable = true;
