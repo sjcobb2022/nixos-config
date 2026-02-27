@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    unstable.r2modman
-  ];
+  # home.packages = with pkgs; [
+  #   unstable.r2modman
+  # ];
 }

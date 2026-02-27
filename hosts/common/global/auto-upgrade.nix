@@ -9,7 +9,7 @@
   isClean = inputs.self ? rev;
 in {
   system.autoUpgrade = {
-    enable = isClean;
+    enable = false;
     dates = "hourly";
     flags = [
       "--refresh"

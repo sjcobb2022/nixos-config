@@ -1,9 +1,9 @@
 {pkgs, ...}: {
-  home.packages = [pkgs.prismlauncher];
-
-  home.persistence = {
-    "/persist" = {
-      directories = [".local/share/PrismLauncher"];
-    };
-  };
+  # home.packages = [pkgs.prismlauncher];
+  #
+  # home.persistence = {
+  #   "/persist" = {
+  #     directories = [".local/share/PrismLauncher"];
+  #   };
+  # };
 }
