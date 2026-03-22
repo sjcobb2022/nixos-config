@@ -31,7 +31,7 @@
     ../common/optional/steam-hardware.nix
     ../common/optional/nvidia.nix
 
-    # ../specializations/gnome.nix
+    ../specializations/gnome.nix
   ];
 
   # boot.initrd.postResumeCommands = lib.mkAfter ''
@@ -64,12 +64,6 @@
   networking.hostName = "slaptop";
 
   boot = {
-    kernelPatches = [
-      {
-        name = "fixup-hp-omen-led-patch";
-        patch = ./hp-mute-led.patch;
-      }
-    ];
     # we love grub!
     loader = {
       efi = {
@@ -84,6 +78,12 @@
   programs = {
     light.enable = true;
     dconf.enable = true;
+  };
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
   };
 
   networking.firewall = {

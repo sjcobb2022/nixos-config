@@ -10,11 +10,11 @@
       warn-dirty = false;
       system-features = ["big-parallel" "nixos-test" "kvm"];
     };
-    gc = {
-      automatic = true;
-      # Delete older generations too
-      options = "--delete-older-than 3d";
-    };
+    # gc = {
+    #   automatic = true;
+    #   # Delete older generations too
+    #   options = "--delete-older-than 3d";
+    # };
 
     # Add each flake input as a registry
     # To make nix3 commands consistent with the flake

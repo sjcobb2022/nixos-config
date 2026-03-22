@@ -220,7 +220,7 @@
       assistant = {
         chatgpt.enable = false;
         copilot = {
-          enable = true;
+          enable = false;
         };
         codecompanion-nvim.enable = false;
       };
