@@ -15,7 +15,7 @@
     # ./stylix.nix
   ];
 
-  home.packages = with pkgs.unstable; [keypunch protonvpn-gui];
+  home.packages = with pkgs.unstable; [keypunch proton-vpn];
 
   xdg.mimeApps.enable = true;
   xdg.configFile."mimeapps.list".force = true;

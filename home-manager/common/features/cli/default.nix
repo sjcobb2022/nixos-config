@@ -4,7 +4,6 @@
     ./bat.nix
     ./fish.nix
     ./git.nix
-    ./pnpm.nix
     ./shellcolor.nix
     ./starship.nix
     ./zoxide.nix

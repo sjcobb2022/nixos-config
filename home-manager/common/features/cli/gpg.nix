@@ -45,10 +45,10 @@
 
   services.gpg-agent = {
     enable = true;
-    enableSshSupport = true;
+    # enableSshSupport = true;
 
     enableExtraSocket = true;
-    sshKeys = ["B957C3C7D95104D42DD4E4E114E2CB59D8BA773E"];
+    # sshKeys = ["B957C3C7D95104D42DD4E4E114E2CB59D8BA773E"];
 
     # https://github.com/drduh/config/blob/master/gpg-agent.conf
     defaultCacheTtl = 60;

@@ -71,6 +71,11 @@
 
         nix.enable = true;
         markdown.enable = true;
+        tex.enable = true;
+        svelte.enable = true;
+        html.enable = true;
+        typescript.enable = true;
+        astro.enable = true;
 
         rust = {
           enable = true;
@@ -166,6 +171,13 @@
       };
 
       treesitter.context.enable = true;
+      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+        typescript
+        svelte
+        css
+        html
+        astro
+      ];
 
       binds = {
         whichKey.enable = true;
@@ -246,37 +258,4 @@
       };
     };
   };
-
-  # programs.neovim = {
-  #   enable = true;
-  #   package = pkgs.unstable.neovim-unwrapped;
-  #   plugins = with pkgs; [
-  #     vimPlugins.nvim-treesitter
-  #     vimPlugins.nvim-treesitter.withAllGrammars
-  #   ];
-  # };
-  #
-  # home.packages = with pkgs; [
-  #   unzip
-  #   gnumake
-  #   gcc
-  #   rustc
-  #   cargo
-  #   python3
-  #   php
-  #   phpPackages.composer
-  #   stylua
-  #   luajitPackages.luarocks-nix
-  #   alejandra
-  #   deadnix
-  #   statix
-  # ];
-
-  # xdg.configFile = {
-  #   "nvim".source = inputs.neovim-config.outPath;
-  #   # "nvim".source = builtins.fetchGit {
-  #   #   url = "https://github.com/sjcobb2022/lazy.git";
-  #   #   rev = "57839624ad511af7ac2ef18990c82dfc7e0912db";
-  #   # };
-  # };
 }

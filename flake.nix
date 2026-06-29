@@ -47,39 +47,18 @@
     # Unstable
     ###
 
-    # hyprlock = {
-    #   url = "github:hyprwm/hyprlock";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    #
-    # hyprwm-contrib = {
-    #   url = "github:hyprwm/contrib";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
-    #
-    # hyprpaper = {
-    #   url = "github:hyprwm/hyprpaper";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
-
     hyprkeys = {
       url = "github:hyprland-community/hyprkeys";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    neovim-config = {
-      url = "github:sjcobb2022/lazy";
-      flake = false;
-    };
-
     nvf.url = "github:notashelf/nvf";
-    nvf.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nvf.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
     self,
     nixpkgs,
-    nixos-hardware,
     home-manager,
     nix-darwin,
     ...
@@ -92,17 +71,6 @@
       nixpkgs.lib.nixosSystem {
         inherit modules;
         specialArgs = {inherit inputs outputs;};
-      };
-
-    mkAnywhere = name: modules:
-      nixpkgs.lib.nixosSystem {
-        inherit modules;
-        specialArgs = {
-          inherit inputs outputs;
-          meta = {
-            hostName = name;
-          };
-        };
       };
 
     mkHome = modules: pkgs:
