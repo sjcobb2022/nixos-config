@@ -92,6 +92,11 @@
     checkReversePath = false;
   };
 
+  environment.systemPackages = [pkgs.unstable.mise];
+  nixpkgs.config.permittedInsecurePackages = [
+    "docker-28.5.2"
+  ];
+
   swapDevices = [
     {
       device = "/swapfile";

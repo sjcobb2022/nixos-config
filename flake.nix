@@ -52,8 +52,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    nvf.url = "github:notashelf/nvf";
-    nvf.inputs.nixpkgs.follows = "nixpkgs";
+    nvf.url = "github:notashelf/nvf/v26.07";
   };
 
   outputs = {

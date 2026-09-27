@@ -6,7 +6,7 @@
   home.sessionVariables.EDITOR = "nvim";
 
   imports = [
-    inputs.nvf.homeManagerModules.default
+    (hmArgs: inputs.nvf.homeManagerModules.default (hmArgs // {pkgs = pkgs.unstable;}))
   ];
 
   programs.nvf = {
@@ -14,6 +14,7 @@
     settings.vim = {
       viAlias = false;
       vimAlias = true;
+      package = pkgs.unstable.neovim-unwrapped;
 
       clipboard = {
         enable = true;
@@ -44,6 +45,8 @@
         enable = true;
       };
 
+      mini.comment.enable = true;
+
       lsp = {
         enable = true;
 
@@ -67,54 +70,54 @@
       languages = {
         enableFormat = true;
         enableTreesitter = true;
-        enableExtraDiagnostics = true;
+        # enableExtraDiagnostics = true;
 
         nix.enable = true;
         markdown.enable = true;
         tex.enable = true;
         svelte.enable = true;
         html.enable = true;
-        typescript.enable = true;
-        astro.enable = true;
+        toml.enable = true;
+        java.enable = true;
+        # typescript.enable = true;
+        # astro.enable = true;
 
         rust = {
           enable = true;
+          lsp.enable = true;
           extensions.crates-nvim.enable = true;
           # crates.enable = true;
-          lsp.package = pkgs.rust-analyzer;
-          lsp.opts = ''
-            ['rust-analyzer'] = {
-              cargo = {
-                allFeature = true,
-                loadOutDirsFromCheck = true,
-                buildScripts = {
-                    enable = true,
-                },
-              },
-              checkOnSave = true,
-              procMacro = {
-                enable = true,
-                ignored = {
-                    ["async-trait"] = { "async_trait" },
-                    ["napi-derive"] = { "napi" },
-                    ["async-recursion"] = { "async_recursion" },
-                },
-              },
-              files = {
-                excludeDirs = {
-                    ".direnv",
-                    ".git",
-                    ".github",
-                    ".gitlab",
-                    "bin",
-                    "node_modules",
-                    "target",
-                    "venv",
-                    ".venv",
-                },
-              },
-            },
-          '';
+          #   lsp.opts = ''
+          #     ['rust-analyzer'] = {
+          #       cargo = {
+          #         allFeature = true,
+          #         loadOutDirsFromCheck = true,
+          #         buildScripts = {
+          #             enable = true,
+          #         },
+          #       },
+          #       checkOnSave = true,
+          #       procMacro = {
+          #         enable = true,
+          #         ignored = {
+          #             ["async-trait"] = { "async_trait" },
+          #             ["napi-derive"] = { "napi" },
+          #             ["async-recursion"] = { "async_recursion" },
+          #         },
+          #       },
+          #       files = {
+          #         excludeDirs = {
+          #             ".direnv",
+          #             ".git",
+          #             ".github",
+          #             ".gitlab",
+          #             "node_modules",
+          #             "venv",
+          #             ".venv",
+          #         },
+          #       },
+          #     },
+          #   '';
         };
       };
 
@@ -149,8 +152,8 @@
           setupOpts = {
             mappings = {
               n = {
-                "<leader>e" = {};
-                "<leader>o" = {};
+                "<leader>e" = ":Neotree focus<CR>";
+                "<leader>o" = ":Neotree toggle<CR>";
               };
             };
           };
@@ -170,14 +173,7 @@
         nvimBufferline.enable = true;
       };
 
-      treesitter.context.enable = true;
-      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-        typescript
-        svelte
-        css
-        html
-        astro
-      ];
+      # treesitter.context.enable = true;
 
       binds = {
         whichKey.enable = true;
